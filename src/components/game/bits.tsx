@@ -57,14 +57,14 @@ export function RatingChip({
   return (
     <span
       className={cn(
-        "inline-flex min-w-9 items-center justify-center rounded-md px-1.5 py-0.5 font-heading text-base leading-none tabular-nums",
+        "inline-flex h-[1.6em] min-w-[2.3em] items-center justify-center rounded-md px-[0.4em] font-heading text-base leading-none tabular-nums",
         TIER_CHIP[tier(shown)],
         bonus > 0 && "ring-2 ring-emerald-400",
         className,
       )}
       title={bonus > 0 ? `${value} + ${bonus} chemistry` : undefined}
     >
-      {shown}
+      <span className="block leading-none [text-box:trim-both_cap_alphabetic]">{shown}</span>
     </span>
   );
 }
@@ -96,7 +96,8 @@ export function MonBadge({
   className,
 }: {
   player: Pick<Player, "id" | "name" | "types" | "rarity">;
-  size?: number;
+  /** Pixels, or any CSS length (e.g. a clamp() that scales with the field). */
+  size?: number | string;
   className?: string;
 }) {
   const [a, b = a] = player.types.map(
@@ -119,7 +120,7 @@ export function MonBadge({
         width: size,
         height: size,
         background: `linear-gradient(135deg, ${a} 0 50%, ${b} 50% 100%)`,
-        fontSize: Math.max(10, size * 0.32),
+        fontSize: typeof size === "number" ? Math.max(10, size * 0.32) : `max(10px, calc(${size} * 0.32))`,
         textShadow: "0 1px 2px rgb(0 0 0 / 0.55)",
       }}
       aria-hidden
@@ -135,7 +136,7 @@ export function MonBadge({
           className="size-[115%] max-w-none object-contain drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
         />
       ) : (
-        player.id
+        <span className="block leading-none [text-box:trim-both_cap_alphabetic]">{player.id}</span>
       )}
 
       {player.rarity && (

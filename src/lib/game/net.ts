@@ -22,17 +22,38 @@ export type HostMessage =
 
 export type { LeagueSettings };
 
+/** Fetches STUN/TURN servers from /api/ice (falls back to public STUN if that fails). */
+let iceCache: Promise<RTCIceServer[]> | null = null;
+function iceServers(): Promise<RTCIceServer[]> {
+  iceCache ??= (async () => {
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 5000);
+      const res = await fetch("/api/ice", { signal: ctrl.signal, cache: "no-store" });
+      clearTimeout(timer);
+      const data = (await res.json()) as { iceServers: RTCIceServer[]; source: string };
+      if (data.source === "stun-only") console.warn("No TURN relay configured: players on strict networks may not be able to connect.");
+      return data.iceServers;
+    } catch {
+      iceCache = null; // try again next time
+      return [{ urls: "stun:stun.l.google.com:19302" }];
+    }
+  })();
+  return iceCache;
+}
+
 async function newPeer(id?: string): Promise<Peer> {
-  const { Peer } = await import("peerjs");
+  const [{ Peer }, ice] = await Promise.all([import("peerjs"), iceServers()]);
   return new Promise((resolve, reject) => {
-    const peer = id ? new Peer(id) : new Peer();
+    const opts = { config: { iceServers: ice } };
+    const peer = id ? new Peer(id, opts) : new Peer(opts);
     const onError = (e: { type?: string; message?: string }) => {
       peer.destroy();
       reject(
         new Error(
           e.type === "unavailable-id"
             ? "That league code is already being hosted in another tab."
-            : `Couldn't reach the connection server (${e.type ?? e.message}).`,
+            : `Couldn't reach the connection server (${e.type ?? e.message}). Check your internet connection and try again.`,
         ),
       );
     };
@@ -103,11 +124,26 @@ export async function joinLeague(
   const conn = peer.connect(PREFIX + code, { reliable: true });
 
   await new Promise<void>((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error("No league found with that code. Check it with your host.")), 10000);
-    peer.once("error", e => {
+    const fail = (msg: string) => {
       clearTimeout(timer);
-      reject(new Error(e.type === "peer-unavailable" ? "No league found with that code. Check it with your host." : e.message));
-    });
+      reject(new Error(msg));
+    };
+    const BLOCKED =
+      "Found the league, but couldn't connect to the host. One of your networks is blocking direct connections. " +
+      "Try again, or try a different network (e.g. phone hotspot).";
+    const timer = setTimeout(() => fail(BLOCKED), 20000);
+    peer.once("error", e =>
+      fail(e.type === "peer-unavailable" ? "No league found with that code. Check it with your host, and make sure their tab is open." : e.message),
+    );
+    // Fail fast when the browsers can't find any route to each other.
+    const watchIce = () => {
+      const pc = conn.peerConnection;
+      if (!pc) return setTimeout(watchIce, 100);
+      pc.addEventListener("iceconnectionstatechange", () => {
+        if (pc.iceConnectionState === "failed") fail(BLOCKED);
+      });
+    };
+    watchIce();
     conn.once("open", () => {
       clearTimeout(timer);
       resolve();

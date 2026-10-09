@@ -18,7 +18,7 @@ export function PlayerCard({
   const base = player.base;
   return (
     <div className="space-y-4">
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-3 pr-12">
         <MonBadge player={player} size={56} />
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-2">

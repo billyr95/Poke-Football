@@ -58,23 +58,26 @@ function DialogContent({
         )}
         {...props}
       >
-        {children}
         {showCloseButton && (
-          <DialogPrimitive.Close
-            data-slot="dialog-close"
-            render={
-              <Button
-                variant="ghost"
-                className="absolute top-2 right-2"
-                size="icon-sm"
-              />
-            }
-          >
-            <XIcon
-            />
-            <span className="sr-only">Close</span>
-          </DialogPrimitive.Close>
+          // Sticky so it stays reachable while the dialog scrolls; the negative margin lays it over
+          // the content instead of pushing it down (content leaves room on the right for it).
+          <div className="pointer-events-none sticky top-0 z-20 -mb-14 flex h-10 justify-end">
+            <DialogPrimitive.Close
+              data-slot="dialog-close"
+              render={
+                <Button
+                  variant="outline"
+                  className="pointer-events-auto size-10 rounded-full bg-background shadow-md"
+                  size="icon-lg"
+                />
+              }
+            >
+              <XIcon className="size-5" />
+              <span className="sr-only">Close</span>
+            </DialogPrimitive.Close>
+          </div>
         )}
+        {children}
       </DialogPrimitive.Popup>
     </DialogPortal>
   )
@@ -84,7 +87,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2", className)}
+      className={cn("pr-12 flex flex-col gap-2", className)}
       {...props}
     />
   )
