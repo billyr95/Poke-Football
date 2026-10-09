@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { MAX_CHEM } from "@/lib/game/chemistry";
 import { GENERATIONS, poolEntries } from "@/lib/game/dex";
 import { MIN_TEAMS, maxTeamsFor } from "@/lib/game/league";
 import { useGame } from "@/lib/game/store";
@@ -193,6 +194,32 @@ export function Lobby() {
               <Toggle on={s.randomOrder} disabled={!isHost} onClick={() => setSettings({ randomOrder: true })}>Random first round</Toggle>
               <Toggle on={!s.randomOrder} disabled={!isHost} onClick={() => setSettings({ randomOrder: false })}>Join order</Toggle>
             </div>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-sm font-semibold">Chemistry stacking</h3>
+            <div className="grid grid-cols-2 gap-2">
+              <Toggle on={!s.stackChem} disabled={!isHost} onClick={() => setSettings({ stackChem: false })}>
+                <div className="font-medium">Best only</div>
+                <div className="text-xs opacity-75">A player gets their single best type stack</div>
+              </Toggle>
+              <Toggle on={!!s.stackChem} disabled={!isHost} onClick={() => setSettings({ stackChem: true })}>
+                <div className="font-medium">Stack them</div>
+                <div className="text-xs opacity-75">Every type stack a player is in adds up</div>
+              </Toggle>
+            </div>
+            <p className="text-xs text-muted-foreground">Chemistry is still capped at +{MAX_CHEM} per player either way.</p>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-sm font-semibold">Easter eggs</h3>
+            <div className="grid grid-cols-2 gap-2">
+              <Toggle on={s.easterEggs !== false} disabled={!isHost} onClick={() => setSettings({ easterEggs: true })}>On</Toggle>
+              <Toggle on={s.easterEggs === false} disabled={!isHost} onClick={() => setSettings({ easterEggs: false })}>Off</Toggle>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {s.easterEggs === false ? "Every Pokémon plays exactly as rated." : "Some Pokémon may be hiding something…"}
+            </p>
           </section>
 
           <section className="space-y-2">

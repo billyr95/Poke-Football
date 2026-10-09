@@ -16,7 +16,7 @@ import { TeamMark } from "./team-mark";
 export function useTeamTable() {
   const { league, byId } = useGame();
   return useMemo(() => {
-    const rows = league!.teams.map(t => ({ team: t, r: teamRatings(t, byId) }));
+    const rows = league!.teams.map(t => ({ team: t, r: teamRatings(t, byId, league!.settings) }));
     const avg = rows.reduce((a, x) => a + x.r.ovr, 0) / rows.length;
     return rows
       .map(x => ({ ...x, grade: grade(x.r.ovr, avg) }))
@@ -30,7 +30,7 @@ export function Review() {
   const [viewId, setViewId] = useState<number>(myTeamId ?? rows[0].team.id);
   const [open, setOpen] = useState<Player | null>(null);
   const view = league!.teams.find(t => t.id === viewId)!;
-  const chem = useMemo(() => chemistry(view, byId), [view, byId]);
+  const chem = useMemo(() => chemistry(view, byId, league!.settings), [view, byId, league]);
 
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-8 lg:grid-cols-[1fr_1fr]">

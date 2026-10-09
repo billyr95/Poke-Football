@@ -286,7 +286,7 @@ function TeamsTab() {
   const [viewId, setViewId] = useState<number>(myTeamId ?? rows[0].team.id);
   const [open, setOpen] = useState<Player | null>(null);
   const view = league!.teams.find(t => t.id === viewId)!;
-  const chem = useMemo(() => chemistry(view, byId), [view, byId]);
+  const chem = useMemo(() => chemistry(view, byId, league!.settings), [view, byId, league]);
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
       <Card>

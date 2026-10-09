@@ -88,7 +88,7 @@ export function createLobby(hostId: string, hostName: string): League {
     version: 2,
     code: makeCode(),
     hostId,
-    settings: { teamCount: 4, snake: true, randomOrder: true, gens: [1], legendaries: true, pickSeconds: 60 },
+    settings: { teamCount: 4, snake: true, randomOrder: true, gens: [1], legendaries: true, pickSeconds: 60, stackChem: false, easterEggs: true },
     seed,
     phase: "lobby",
     teams: [],

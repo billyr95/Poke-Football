@@ -86,7 +86,7 @@ export function DraftRoom() {
   }, [pool, taken, q, typeFilter, posFilter, myOpenPositions]);
 
   const myOpen = useMemo(() => (myTeam ? openSlots(myTeam) : []), [myTeam]);
-  const myChem = useMemo(() => (myTeam ? chemistry(myTeam, byId) : null), [myTeam, byId]);
+  const myChem = useMemo(() => (myTeam ? chemistry(myTeam, byId, l.settings) : null), [myTeam, byId, l.settings]);
   const modalPlayer = modalId != null ? byId.get(modalId) ?? null : null;
   const modalTakenBy = modalPlayer && taken.has(modalPlayer.id)
     ? l.teams.find(t => t.id === l.draft.log.find(r => r.playerId === modalPlayer.id)?.teamId)
@@ -341,8 +341,8 @@ function PositionPicker({
 }
 
 function TeamHeader({ team, picks }: { team: Team; picks: number }) {
-  const { byId } = useGame();
-  const r = teamRatings(team, byId);
+  const { byId, league } = useGame();
+  const r = teamRatings(team, byId, league?.settings);
   return (
     <div className="flex items-center gap-2">
       <TeamMark team={team} size="md" />
@@ -423,7 +423,7 @@ function OtherTeams({ onOpen }: { onOpen: (id: number) => void }) {
   const others = l.teams.filter(t => t.id !== myTeamId);
   const [viewId, setViewId] = useState<number>(others[0]?.id ?? l.teams[0].id);
   const view = l.teams.find(t => t.id === viewId) ?? l.teams[0];
-  const chem = useMemo(() => chemistry(view, byId), [view, byId]);
+  const chem = useMemo(() => chemistry(view, byId, l.settings), [view, byId, l.settings]);
   const filled = Object.keys(view.roster).length;
   return (
     <div className="space-y-3">

@@ -133,6 +133,10 @@ export interface LeagueSettings {
   pickSeconds: number | null; // pick timer; null = no timer
   snake: boolean;
   randomOrder: boolean;
+  /** A player in several type stacks gets every stack's bonus instead of just the best one. Missing on older leagues = off. */
+  stackChem?: boolean;
+  /** Hidden surprises (Bidoof). Missing on older leagues = on. */
+  easterEggs?: boolean;
 }
 
 export interface League {

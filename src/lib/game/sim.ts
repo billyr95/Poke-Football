@@ -1,7 +1,7 @@
 import { chemistry, withChem } from "./chemistry";
 import { SLOTS } from "./ratings";
 import { normal, rngFor, weightedPick, type Rng } from "./rng";
-import { LONG_KEYS, type Game, type GameResult, type League, type Player, type SeasonState, type SlotId, type StatLine, type Team, type TeamLine } from "./types";
+import { LONG_KEYS, type Game, type GameResult, type League, type LeagueSettings, type Player, type SeasonState, type SlotId, type StatLine, type Team, type TeamLine } from "./types";
 
 /** Play-by-play football sim. Each team gets a fixed number of possessions starting at its own 25. */
 
@@ -24,26 +24,31 @@ function standIn(slotId: SlotId): Player {
 
 // 🦫 Easter egg: Bidoof is secretly a god. His card shows his real (bad) ratings, but on the field
 // he plays with divine ones, and the play-by-play below bends the rules for him wherever he lines up.
+// Hosts can turn this off with the "Easter eggs" setting, and then he plays like the Bidoof he looks like.
 const BIDOOF = 399;
 const DIVINE = 250;
+const gods = new WeakSet<Player>();
 
 function divine(p: Player): Player {
   const attrs = Object.fromEntries(Object.keys(p.attrs).map(k => [k, DIVINE])) as Player["attrs"];
   const posOvr = Object.fromEntries(Object.keys(p.posOvr).map(k => [k, DIVINE])) as Player["posOvr"];
-  return { ...p, attrs, posOvr };
+  const god = { ...p, attrs, posOvr };
+  gods.add(god);
+  return god;
 }
 
-const isGod = (p: Player | null | undefined) => p?.id === BIDOOF;
+const isGod = (p: Player | null | undefined) => !!p && gods.has(p);
 const godOn = (l: Lineup, side: "off" | "def") => SLOTS.filter(s => s.side === side).map(s => l[s.id]).find(isGod) ?? null;
 
-function lineup(team: Team, byId: Map<number, Player>): Lineup {
-  const chem = chemistry(team, byId).bonus;
+function lineup(team: Team, byId: Map<number, Player>, settings: LeagueSettings): Lineup {
+  const chem = chemistry(team, byId, settings).bonus;
+  const eggs = settings.easterEggs ?? true;
   return Object.fromEntries(
     SLOTS.map(s => {
       const p = team.roster[s.id] != null ? byId.get(team.roster[s.id]!) : undefined;
       if (!p) return [s.id, standIn(s.id)];
       const withBonus = withChem(p, chem.get(p.id) ?? 0);
-      return [s.id, isGod(p) ? divine(withBonus) : withBonus];
+      return [s.id, eggs && p.id === BIDOOF ? divine(withBonus) : withBonus];
     }),
   ) as Lineup;
 }
@@ -317,7 +322,7 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
 export function simGame(league: League, game: Game, byId: Map<number, Player>): GameResult {
   const rng = rngFor(league.seed, `game-${game.id}`);
   const team = (id: number) => league.teams.find(t => t.id === id)!;
-  const sides = [lineup(team(game.home), byId), lineup(team(game.away), byId)];
+  const sides = [lineup(team(game.home), byId, league.settings), lineup(team(game.away), byId, league.settings)];
   const names = [team(game.home).name, team(game.away).name];
   const score: [number, number] = [0, 0];
   const box: Box = {};

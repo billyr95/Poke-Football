@@ -1,7 +1,7 @@
 import { chemistry } from "./chemistry";
 import { POSITIONS, POS_LIST, SLOTS, SLOT_BY_ID } from "./ratings";
 import { rngFor } from "./rng";
-import type { League, Player, Pos, Slot, SlotId, Team } from "./types";
+import type { League, LeagueSettings, Player, Pos, Slot, SlotId, Team } from "./types";
 
 export function buildOrder(teamIds: number[], rounds: number, snake: boolean) {
   const order: number[] = [];
@@ -111,8 +111,8 @@ const STAR_MULT = 1.6;
 /** Stars count extra: each point above 85 is worth 1.6. */
 const starValue = (r: number) => (r > STAR_LINE ? STAR_LINE + (r - STAR_LINE) * STAR_MULT : r);
 
-export function teamRatings(team: Team, byId: Map<number, Player>): TeamRatings {
-  const chem = chemistry(team, byId).bonus;
+export function teamRatings(team: Team, byId: Map<number, Player>, settings?: Pick<LeagueSettings, "stackChem">): TeamRatings {
+  const chem = chemistry(team, byId, settings).bonus;
   const unit = (side: "off" | "def") => {
     let sum = 0;
     let w = 0;

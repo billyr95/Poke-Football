@@ -1,11 +1,11 @@
 import { SLOT_BY_ID } from "./ratings";
-import type { Player, SlotId, Team } from "./types";
+import type { LeagueSettings, Player, SlotId, Team } from "./types";
 
 /**
  * Team chemistry: build around a type or an evolution line and the players involved get better.
  *
- *  Unit type stack  — 3 of one type in a unit: +2, 4: +3, 5+: +4   (best type per player)
- *  QB connection    — a WR/TE sharing a type with the QB: +2; the QB gets +1 per connection, up to +3
+ *  Unit type stack  — 3 of one type in a unit: +2, 4: +3, 5+: +4   (best type per player, or all of them with stackChem)
+ *  QB connection    — a RB/WR/TE sharing a type with the QB: +2; the QB gets +1 per connection, up to +3
  *  Evolution line   — 2+ from one family anywhere on the roster: +2 each
  *
  * Bonuses add up, capped at +5 per player, and no rating goes above 99.
@@ -13,9 +13,8 @@ import type { Player, SlotId, Team } from "./types";
 
 export const UNITS: { key: string; label: string; slots: SlotId[] }[] = [
   { key: "line", label: "Offensive line", slots: ["LT", "LG", "C", "RG", "RT"] },
-  { key: "receivers", label: "Receivers", slots: ["WR1", "WR2", "WR3", "TE"] },
-  { key: "front", label: "Front four", slots: ["DE1", "DT1", "DT2", "DE2"] },
-  { key: "backers", label: "Linebackers", slots: ["LB1", "LB2", "LB3"] },
+  { key: "receivers", label: "Receivers", slots: ["RB", "WR1", "WR2", "WR3", "TE"] },
+  { key: "front", label: "Front seven", slots: ["DE1", "DT1", "DT2", "DE2", "LB1", "LB2", "LB3"] },
   { key: "secondary", label: "Secondary", slots: ["CB1", "CB2", "FS", "SS"] },
 ];
 
@@ -37,7 +36,8 @@ export interface Chemistry {
   links: ChemLink[];
 }
 
-export function chemistry(team: Team, byId: Map<number, Player>): Chemistry {
+export function chemistry(team: Team, byId: Map<number, Player>, settings?: Pick<LeagueSettings, "stackChem">): Chemistry {
+  const stack = settings?.stackChem ?? false;
   const at = (slot: SlotId) => {
     const id = team.roster[slot];
     return id != null ? byId.get(id) : undefined;
@@ -55,7 +55,7 @@ export function chemistry(team: Team, byId: Map<number, Player>): Chemistry {
       const bonus = STACK_BONUS(members.length);
       if (!bonus) continue;
       links.push({ kind: "stack", label: `${cap(type)} ${unit.label.toLowerCase()}`, members: members.map(p => p.id), bonus });
-      for (const p of members) best.set(p.id, Math.max(best.get(p.id) ?? 0, bonus));
+      for (const p of members) best.set(p.id, stack ? (best.get(p.id) ?? 0) + bonus : Math.max(best.get(p.id) ?? 0, bonus));
     }
     for (const [id, b] of best) bump(id, b);
   }
@@ -63,7 +63,7 @@ export function chemistry(team: Team, byId: Map<number, Player>): Chemistry {
   // Quarterback connections.
   const qb = at("QB");
   if (qb) {
-    const targets = (["WR1", "WR2", "WR3", "TE"] as SlotId[])
+    const targets = (["RB", "WR1", "WR2", "WR3", "TE"] as SlotId[])
       .map(at)
       .filter((p): p is Player => !!p && p.types.some(t => qb.types.includes(t)));
     if (targets.length) {

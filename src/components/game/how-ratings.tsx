@@ -77,8 +77,12 @@ export function HowRatings() {
               <section>
                 <h3 className="mb-1 font-heading text-lg">Chemistry</h3>
                 <ul className="list-disc space-y-0.5 pl-5">
-                  <li>Stack a type inside a unit ({UNITS.map(u => u.label.toLowerCase()).join(", ")}): 3 players +2, 4 players +3, 5 players +4.</li>
-                  <li>Receivers who share a type with the quarterback get +2, and the QB gets +1 for each, up to +3.</li>
+                  <li>
+                    Stack a type inside a unit ({UNITS.map(u => `${u.label.toLowerCase()}: ${u.slots.map(s => s.replace(/\d$/, "")).filter((s, i, a) => a.indexOf(s) === i).join("/")}`).join("; ")}):
+                    3 players +2, 4 players +3, 5+ players +4. A player in more than one stack gets only the best one, unless the
+                    host turns on chemistry stacking.
+                  </li>
+                  <li>Running backs and receivers who share a type with the quarterback get +2, and the QB gets +1 for each, up to +3.</li>
                   <li>Two or more Pokémon from one evolution line get +2 each.</li>
                   <li>Bonuses add up to at most +{MAX_CHEM} per player. They show as a green ring on the rating.</li>
                 </ul>
