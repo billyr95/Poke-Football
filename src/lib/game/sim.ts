@@ -22,12 +22,28 @@ function standIn(slotId: SlotId): Player {
   };
 }
 
+// 🦫 Easter egg: Bidoof is secretly a god. His card shows his real (bad) ratings, but on the field
+// he plays with divine ones, and the play-by-play below bends the rules for him wherever he lines up.
+const BIDOOF = 399;
+const DIVINE = 250;
+
+function divine(p: Player): Player {
+  const attrs = Object.fromEntries(Object.keys(p.attrs).map(k => [k, DIVINE])) as Player["attrs"];
+  const posOvr = Object.fromEntries(Object.keys(p.posOvr).map(k => [k, DIVINE])) as Player["posOvr"];
+  return { ...p, attrs, posOvr };
+}
+
+const isGod = (p: Player | null | undefined) => p?.id === BIDOOF;
+const godOn = (l: Lineup, side: "off" | "def") => SLOTS.filter(s => s.side === side).map(s => l[s.id]).find(isGod) ?? null;
+
 function lineup(team: Team, byId: Map<number, Player>): Lineup {
   const chem = chemistry(team, byId).bonus;
   return Object.fromEntries(
     SLOTS.map(s => {
       const p = team.roster[s.id] != null ? byId.get(team.roster[s.id]!) : undefined;
-      return [s.id, p ? withChem(p, chem.get(p.id) ?? 0) : standIn(s.id)];
+      if (!p) return [s.id, standIn(s.id)];
+      const withBonus = withChem(p, chem.get(p.id) ?? 0);
+      return [s.id, isGod(p) ? divine(withBonus) : withBonus];
     }),
   ) as Lineup;
 }
@@ -73,6 +89,8 @@ function tackler(rng: Rng, d: Lineup, deep: boolean): Player {
   const pool = deep
     ? [d.LB1, d.LB2, d.LB3, d.CB1, d.CB2, d.FS, d.SS]
     : [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB2, d.LB3, d.SS];
+  const god = godOn(d, "def");
+  if (god && !pool.includes(god)) pool.push(god); // Bidoof is everywhere at once
   return weightedPick(rng, pool, p => p.attrs.TKL ** 2);
 }
 
@@ -82,6 +100,8 @@ interface DriveOutcome {
   points: number;
   note?: string;
   safety?: boolean;
+  /** The defense scored a touchdown (only Bidoof does this). */
+  defTd?: boolean;
   /** Where the other team starts: yards from their own goal line. */
   nextStart: number;
 }
@@ -89,6 +109,8 @@ interface DriveOutcome {
 /** One possession, snap by snap. `start` is yards from the offense's own goal line. */
 function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: number): DriveOutcome {
   const u = unitScores(o, d);
+  const offGod = godOn(o, "off");
+  const defGod = godOn(d, "def");
   let yard = start;
   let down = 1;
   let toGo = 10;
@@ -140,9 +162,11 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
     if (rng() < passBias + qbEdge) {
       // Pass play.
       const qb = o.QB;
-      const sackP = clamp(0.07 + (u.passRush - u.passBlock) / 300, 0.03, 0.14);
+      let sackP = clamp(0.07 + (u.passRush - u.passBlock) / 300, 0.03, 0.14);
+      if (isGod(qb)) sackP = 0; // nobody touches him
+      else if (defGod) sackP += 0.16;
       if (rng() < sackP) {
-        const rusher = weightedPick(rng, [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB3], p => p.attrs.STR + p.attrs.SPD);
+        const rusher = defGod ?? weightedPick(rng, [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB3], p => p.attrs.STR + p.attrs.SPD);
         gained = -Math.round(4 + rng() * 5);
         add(box, rusher, "sack");
         add(box, rusher, "tfl");
@@ -156,12 +180,29 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
         const targets: [Player, Player, number][] = [
           [o.WR1, d.CB1, 3], [o.WR2, d.CB2, 2.5], [o.WR3, d.FS, 2], [o.TE, d.SS, 1.6], [o.RB, d.LB2, 1.1],
         ];
-        const [rec, cov] = weightedPick(rng, targets, ([r, , w]) => w * (r.attrs.CTH / 70) ** 2);
+        // An offensive lineman Bidoof reports as eligible and runs routes anyway.
+        if (offGod && !isGod(qb) && !targets.some(([r]) => r === offGod)) targets.push([offGod, d.LB1, 3]);
+        const [rec, defender] = weightedPick(rng, targets, ([r, , w]) => w * (r.attrs.CTH / 70) ** 2);
+        // A defensive Bidoof shadows whoever gets the ball.
+        const cov = defGod && !isGod(rec) && !isGod(qb) && rng() < 0.6 ? defGod : defender;
+        const godCatch = isGod(qb) || isGod(rec);
         add(box, qb, "passAtt");
         add(box, rec, "targets");
         team.passAtt++;
-        const intP = clamp(0.028 + (cov.attrs.COV - qb.attrs.THA) / 800, 0.01, 0.06);
+        let intP = clamp(0.028 + (cov.attrs.COV - qb.attrs.THA) / 800, 0.01, 0.06);
+        if (godCatch) intP = 0;
+        else if (isGod(cov)) intP = 0.2;
         if (rng() < intP) {
+          if (isGod(cov) && rng() < 0.55) {
+            // Pick-six.
+            const ret = yard + 12;
+            add(box, qb, "passInt");
+            add(box, cov, "defInt");
+            add(box, cov, "passDef");
+            add(box, cov, "intYds", ret);
+            team.turnovers++;
+            return { points: 0, defTd: true, note: `${cov.name} ${ret}-yd pick-six`, nextStart: 25 };
+          }
           const ret = Math.round(clamp(normal(rng, 8, 10), 0, 60));
           add(box, qb, "passInt");
           add(box, cov, "defInt");
@@ -170,11 +211,13 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
           team.turnovers++;
           return { points: 0, nextStart: clamp(100 - yard - 12 + ret, 5, 95) };
         }
-        const cmpP = clamp(0.57 + (qb.attrs.THA + rec.attrs.CTH - 2 * cov.attrs.COV) / 300 + (u.passBlock - u.passRush) / 700, 0.4, 0.76);
+        let cmpP = clamp(0.57 + (qb.attrs.THA + rec.attrs.CTH - 2 * cov.attrs.COV) / 300 + (u.passBlock - u.passRush) / 700, 0.4, 0.76);
+        if (godCatch) cmpP = 0.96;
         if (rng() < cmpP) {
           const air = Math.max(1, normal(rng, 4.6 + (qb.attrs.THP - 70) / 16, 3.5));
           const yacRaw = Math.max(0, normal(rng, 2.2 + (rec.attrs.SPD - cov.attrs.SPD) / 12, 2.5));
-          const breakaway = rng() < clamp(0.025 + (rec.attrs.SPD - cov.attrs.SPD) / 1500, 0.01, 0.05) ? 12 + rng() * 35 : 0;
+          const breakP = godCatch ? 0.3 : clamp(0.025 + (rec.attrs.SPD - cov.attrs.SPD) / 1500, 0.01, 0.05);
+          const breakaway = rng() < breakP ? 12 + rng() * 35 : 0;
           gained = Math.min(Math.round(air + yacRaw + breakaway), 100 - yard);
           const yac = Math.max(0, gained - Math.round(air));
           add(box, qb, "passCmp");
@@ -199,11 +242,13 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
       }
     } else {
       // Run play.
-      const carrier = rng() < 0.88 ? o.RB : o.QB;
-      const skill = carrier === o.RB ? o.RB.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
+      // Wherever Bidoof lines up on offense, the coach finds a way to hand him the ball.
+      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && rng() < 0.6 ? offGod : rng() < 0.88 ? o.RB : o.QB;
+      const skill = isGod(carrier) ? DIVINE : carrier === o.RB ? o.RB.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
       const mean = 3.8 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16;
       gained = Math.round(normal(rng, mean, 3.4));
-      if (rng() < clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04)) gained += Math.round(10 + rng() * 40);
+      const breakP = isGod(carrier) ? 0.3 : clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04);
+      if (rng() < breakP) gained += Math.round(10 + rng() * 40);
       gained = clamp(gained, -5, 100 - yard);
       add(box, carrier, "rushAtt");
       add(box, carrier, "rushYds", gained);
@@ -221,12 +266,13 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
     team.totalYds += gained;
 
     // Fumbles: about 1 in 90 touches; the defense recovers a little over half.
-    if (ballCarrier && tackledBy && gained > 0 && rng() < 0.011) {
+    const fumbleP = isGod(ballCarrier) ? 0 : isGod(tackledBy) ? 0.12 : 0.011;
+    if (ballCarrier && tackledBy && gained > 0 && rng() < fumbleP) {
       add(box, ballCarrier, "fumbles");
       add(box, tackledBy, "ff");
-      if (rng() < 0.55) {
+      if (isGod(tackledBy) || rng() < 0.55) {
         add(box, ballCarrier, "fumblesLost");
-        add(box, weightedPick(rng, anyDefender(d), p => p.attrs.AWR), "fr");
+        add(box, isGod(tackledBy) ? tackledBy! : weightedPick(rng, anyDefender(d), p => p.attrs.AWR), "fr");
         team.turnovers++;
         return { points: 0, nextStart: flip(yard + gained) };
       }
@@ -285,6 +331,9 @@ export function simGame(league: League, game: Game, byId: Map<number, Player>): 
     if (out.safety) {
       score[1 - i] += 2;
       plays.push(`${label} · ${names[1 - i]}: safety`);
+    } else if (out.defTd) {
+      score[1 - i] += 7;
+      plays.push(`${label} · ${names[1 - i]}: ${out.note}`);
     } else if (out.points) {
       score[i] += out.points;
       plays.push(`${label} · ${names[i]}: ${out.note}`);
