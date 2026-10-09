@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MAX_CHEM, UNITS } from "@/lib/game/chemistry";
+import { fitBonus } from "@/lib/game/schemes";
 import { SLOT_WEIGHT } from "@/lib/game/draft";
-import { ATTR_LIST, ATTR_SHARE, ATTRS, INPUT_NAMES, POS_LIST, POSITIONS, RARITY_LIFT } from "@/lib/game/ratings";
+import { ATTR_LIST, ATTR_SHARE, ATTRS, INPUT_NAMES, POS_LIST, POSITIONS, RARITY_LIFT, ROLE_LIST } from "@/lib/game/ratings";
 
 const pct = (w: number) => `${Math.round(Math.abs(w) * 100)}%`;
 
@@ -85,6 +86,22 @@ export function HowRatings() {
                   <li>Running backs and receivers who share a type with the quarterback get +2, and the QB gets +1 for each, up to +3.</li>
                   <li>Two or more Pokémon from one evolution line get +2 each.</li>
                   <li>Bonuses add up to at most +{MAX_CHEM} per player. They show as a green ring on the rating.</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3 className="mb-1 font-heading text-lg">Advanced mode</h3>
+                <ul className="list-disc space-y-0.5 pl-5">
+                  <li>
+                    Positions split into roles that each want different things: {ROLE_LIST.join(", ")}. Hover a role on a
+                    player card for what it asks for.
+                  </li>
+                  <li>
+                    Every Pokémon has a scouting fit of 1–5 with each scheme. At a spot, your rating is the role rating +{fitBonus(5)} for a perfect
+                    fit, unchanged for a 4, and {fitBonus(3)} for each step below that. Offense uses your offensive scheme; linemen
+                    use your front; corners and safeties your coverage; linebackers both.
+                  </li>
+                  <li>Schemes change how games play: pass/run mix, throw depth, pressure, and big plays allowed, plus classic counters.</li>
                 </ul>
               </section>
 

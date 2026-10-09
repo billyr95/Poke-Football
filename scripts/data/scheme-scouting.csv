@@ -1,0 +1,1026 @@
+dex,pokemon,football_archetype,ideal_position,best_offense_scheme,best_offense_fit,worst_offense_scheme,worst_offense_fit,best_defense_scheme,best_defense_fit,worst_defense_scheme,worst_defense_fit,O_West_Coast,O_Air_Coryell,O_Erhardt_Perkins,O_Air_Raid,O_Run_Shoot,O_Spread_Option,O_RPO,O_Zone_Read,O_Shanahan_Outside_Zone,O_Power_GAP,O_Pistol,O_Option,O_I_Formation,O_Modern_Hybrid,D_4_3,D_3_4,D_4_2_5_Nickel,D_3_3_5,D_3_4_Under,D_Tampa_2,D_Cover_2,D_Cover_3,D_Cover_4_Quarters,D_Cover_6,D_Cover_1,D_Cover_0,D_Cover_2_Man,D_Cover_3_Match,D_Cover_4_Match,D_Zone_Blitz,D_Fire_Zone,D_Bear,D_Wide_9,D_NASCAR_Pass_Rush
+1,Bulbasaur,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+2,Ivysaur,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+3,Venusaur,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+4,Charmander,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+5,Charmeleon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+6,Charizard,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+7,Squirtle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+8,Wartortle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+9,Blastoise,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+10,Caterpie,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+11,Metapod,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+12,Butterfree,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+13,Weedle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+14,Kakuna,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+15,Beedrill,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+16,Pidgey,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+17,Pidgeotto,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+18,Pidgeot,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+19,Rattata,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+20,Raticate,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+21,Spearow,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+22,Fearow,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+23,Ekans,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+24,Arbok,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+25,Pikachu,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+26,Raichu,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+27,Sandshrew,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+28,Sandslash,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+29,Nidoran-Female,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+30,Nidorina,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+31,Nidoqueen,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+32,Nidoran-Male,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+33,Nidorino,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+34,Nidoking,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+35,Clefairy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+36,Clefable,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+37,Vulpix,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+38,Ninetales,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+39,Jigglypuff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+40,Wigglytuff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+41,Zubat,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+42,Golbat,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+43,Oddish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+44,Gloom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+45,Vileplume,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+46,Paras,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+47,Parasect,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+48,Venonat,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+49,Venomoth,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+50,Diglett,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+51,Dugtrio,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+52,Meowth,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+53,Persian,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+54,Psyduck,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+55,Golduck,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+56,Mankey,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+57,Primeape,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+58,Growlithe,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+59,Arcanine,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+60,Poliwag,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+61,Poliwhirl,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+62,Poliwrath,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+63,Abra,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+64,Kadabra,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+65,Alakazam,Speed/Explosiveness,RB/WR/DB,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,5,4,5,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+66,Machop,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+67,Machoke,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+68,Machamp,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+69,Bellsprout,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+70,Weepinbell,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+71,Victreebel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+72,Tentacool,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+73,Tentacruel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+74,Geodude,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+75,Graveler,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+76,Golem,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+77,Ponyta,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+78,Rapidash,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+79,Slowpoke,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+80,Slowbro,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+81,Magnemite,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+82,Magneton,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+83,Farfetch'd,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+84,Doduo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+85,Dodrio,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+86,Seel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+87,Dewgong,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+88,Grimer,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+89,Muk,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+90,Shellder,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+91,Cloyster,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+92,Gastly,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+93,Haunter,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+94,Gengar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+95,Onix,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+96,Drowzee,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+97,Hypno,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+98,Krabby,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+99,Kingler,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+100,Voltorb,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+101,Electrode,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+102,Exeggcute,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+103,Exeggutor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+104,Cubone,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+105,Marowak,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+106,Hitmonlee,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+107,Hitmonchan,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+108,Lickitung,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+109,Koffing,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+110,Weezing,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+111,Rhyhorn,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+112,Rhydon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+113,Chansey,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+114,Tangela,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+115,Kangaskhan,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+116,Horsea,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+117,Seadra,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+118,Goldeen,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+119,Seaking,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+120,Staryu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+121,Starmie,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+122,Mr. Mime,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+123,Scyther,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+124,Jynx,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+125,Electabuzz,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+126,Magmar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+127,Pinsir,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+128,Tauros,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+129,Magikarp,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+130,Gyarados,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+131,Lapras,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+132,Ditto,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+133,Eevee,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+134,Vaporeon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+135,Jolteon,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+136,Flareon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+137,Porygon,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+138,Omanyte,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+139,Omastar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+140,Kabuto,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+141,Kabutops,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+142,Aerodactyl,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+143,Snorlax,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+144,Articuno,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+145,Zapdos,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+146,Moltres,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+147,Dratini,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+148,Dragonair,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+149,Dragonite,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+150,Mewtwo,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+151,Mew,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+152,Chikorita,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+153,Bayleef,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+154,Meganium,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+155,Cyndaquil,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+156,Quilava,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+157,Typhlosion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+158,Totodile,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+159,Croconaw,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+160,Feraligatr,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+161,Sentret,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+162,Furret,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+163,Hoothoot,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+164,Noctowl,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+165,Ledyba,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+166,Ledian,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+167,Spinarak,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+168,Ariados,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+169,Crobat,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+170,Chinchou,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+171,Lanturn,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+172,Pichu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+173,Cleffa,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+174,Igglybuff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+175,Togepi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+176,Togetic,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+177,Natu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+178,Xatu,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+179,Mareep,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+180,Flaaffy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+181,Ampharos,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+182,Bellossom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+183,Marill,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+184,Azumarill,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+185,Sudowoodo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+186,Politoed,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+187,Hoppip,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+188,Skiploom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+189,Jumpluff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+190,Aipom,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+191,Sunkern,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+192,Sunflora,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+193,Yanma,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+194,Wooper,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+195,Quagsire,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+196,Espeon,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+197,Umbreon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+198,Murkrow,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+199,Slowking,Anchor/Tank,OL/DL/TE,Power/GAP,5,Run & Shoot,1,4-3,5,3-3-5,2,3,2,3,2,1,1,3,1,2,5,4,1,5,4,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+200,Misdreavus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+201,Unown,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+202,Wobbuffet,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+203,Girafarig,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+204,Pineco,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+205,Forretress,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+206,Dunsparce,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+207,Gligar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+208,Steelix,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,5,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+209,Snubbull,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+210,Granbull,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+211,Qwilfish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+212,Scizor,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+213,Shuckle,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+214,Heracross,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+215,Sneasel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+216,Teddiursa,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+217,Ursaring,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+218,Slugma,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+219,Magcargo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+220,Swinub,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+221,Piloswine,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+222,Corsola,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+223,Remoraid,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+224,Octillery,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+225,Delibird,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+226,Mantine,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+227,Skarmory,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+228,Houndour,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+229,Houndoom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+230,Kingdra,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+231,Phanpy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+232,Donphan,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+233,Porygon2,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+234,Stantler,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+235,Smeargle,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+236,Tyrogue,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+237,Hitmontop,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+238,Smoochum,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+239,Elekid,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+240,Magby,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+241,Miltank,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+242,Blissey,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+243,Raikou,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+244,Entei,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+245,Suicune,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+246,Larvitar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+247,Pupitar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+248,Tyranitar,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+249,Lugia,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+250,Ho-Oh,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+251,Celebi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+252,Treecko,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+253,Grovyle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+254,Sceptile,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+255,Torchic,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+256,Combusken,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+257,Blaziken,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+258,Mudkip,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+259,Marshtomp,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+260,Swampert,Speed/Explosiveness,RB/WR/DB,Air Raid,5,West Coast,4,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,5,5,5,5,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+261,Poochyena,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+262,Mightyena,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+263,Zigzagoon,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+264,Linoone,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+265,Wurmple,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+266,Silcoon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+267,Beautifly,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+268,Cascoon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+269,Dustox,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+270,Lotad,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+271,Lombre,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+272,Ludicolo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+273,Seedot,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+274,Nuzleaf,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+275,Shiftry,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+276,Taillow,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+277,Swellow,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+278,Wingull,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+279,Pelipper,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+280,Ralts,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+281,Kirlia,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+282,Gardevoir,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+283,Surskit,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+284,Masquerain,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+285,Shroomish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+286,Breloom,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+287,Slakoth,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+288,Vigoroth,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+289,Slaking,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+290,Nincada,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+291,Ninjask,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+292,Shedinja,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+293,Whismur,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+294,Loudred,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+295,Exploud,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+296,Makuhita,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+297,Hariyama,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+298,Azurill,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+299,Nosepass,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+300,Skitty,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+301,Delcatty,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+302,Sableye,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+303,Mawile,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+304,Aron,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+305,Lairon,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+306,Aggron,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+307,Meditite,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+308,Medicham,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+309,Electrike,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+310,Manectric,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+311,Plusle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+312,Minun,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+313,Volbeat,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+314,Illumise,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+315,Roselia,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+316,Gulpin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+317,Swalot,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+318,Carvanha,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+319,Sharpedo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+320,Wailmer,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+321,Wailord,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+322,Numel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+323,Camerupt,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+324,Torkoal,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+325,Spoink,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+326,Grumpig,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+327,Spinda,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+328,Trapinch,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+329,Vibrava,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+330,Flygon,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+331,Cacnea,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+332,Cacturne,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+333,Swablu,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+334,Altaria,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+335,Zangoose,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+336,Seviper,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+337,Lunatone,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+338,Solrock,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+339,Barboach,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+340,Whiscash,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+341,Corphish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+342,Crawdaunt,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+343,Baltoy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+344,Claydol,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+345,Lileep,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+346,Cradily,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+347,Anorith,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+348,Armaldo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+349,Feebas,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+350,Milotic,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+351,Castform,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+352,Kecleon,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+353,Shuppet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+354,Banette,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+355,Duskull,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+356,Dusclops,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+357,Tropius,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+358,Chimecho,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+359,Absol,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+360,Wynaut,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+361,Snorunt,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+362,Glalie,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+363,Spheal,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+364,Sealeo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+365,Walrein,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+366,Clamperl,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+367,Huntail,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+368,Gorebyss,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+369,Relicanth,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+370,Luvdisc,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+371,Bagon,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+372,Shelgon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+373,Salamence,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+374,Beldum,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+375,Metang,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+376,Metagross,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+377,Regirock,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+378,Regice,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+379,Registeel,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+380,Latias,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+381,Latios,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+382,Kyogre,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+383,Groudon,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+384,Rayquaza,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+385,Jirachi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+386,Deoxys,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+387,Turtwig,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+388,Grotle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+389,Torterra,Balanced/Versatile,QB/WR/DB,Power/GAP,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,5,5,3,5,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+390,Chimchar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+391,Monferno,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+392,Infernape,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+393,Piplup,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+394,Prinplup,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+395,Empoleon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+396,Starly,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+397,Staravia,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+398,Staraptor,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+399,Bidoof,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+400,Bibarel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+401,Kricketot,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+402,Kricketune,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+403,Shinx,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+404,Luxio,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+405,Luxray,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+406,Budew,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+407,Roserade,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+408,Cranidos,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+409,Rampardos,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+410,Shieldon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+411,Bastiodon,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+412,Burmy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+413,Wormadam,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+414,Mothim,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+415,Combee,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+416,Vespiquen,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+417,Pachirisu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+418,Buizel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+419,Floatzel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+420,Cherubi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+421,Cherrim,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+422,Shellos,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+423,Gastrodon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+424,Ambipom,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+425,Drifloon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+426,Drifblim,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+427,Buneary,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+428,Lopunny,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+429,Mismagius,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+430,Honchkrow,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+431,Glameow,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+432,Purugly,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+433,Chingling,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+434,Stunky,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+435,Skuntank,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+436,Bronzor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+437,Bronzong,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+438,Bonsly,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+439,Mime Jr.,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+440,Happiny,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+441,Chatot,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+442,Spiritomb,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+443,Gible,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+444,Gabite,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+445,Garchomp,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+446,Munchlax,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+447,Riolu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+448,Lucario,Physical/Bruiser,RB/LB/DL,RPO,5,Run & Shoot,1,4-3,5,3-3-5,2,4,2,4,2,1,3,5,3,3,5,4,3,5,5,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+449,Hippopotas,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+450,Hippowdon,Balanced/Versatile,QB/WR/DB,Power/GAP,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,5,5,3,5,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+451,Skorupi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+452,Drapion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+453,Croagunk,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+454,Toxicroak,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+455,Carnivine,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+456,Finneon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+457,Lumineon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+458,Mantyke,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+459,Snover,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+460,Abomasnow,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+461,Weavile,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+462,Magnezone,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+463,Lickilicky,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+464,Rhyperior,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+465,Tangrowth,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+466,Electivire,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+467,Magmortar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+468,Togekiss,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+469,Yanmega,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+470,Leafeon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+471,Glaceon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+472,Gliscor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+473,Mamoswine,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+474,Porygon-Z,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+475,Gallade,Physical/Bruiser,RB/LB/DL,RPO,5,Run & Shoot,1,4-3,5,3-3-5,2,4,2,4,2,1,3,5,3,3,5,4,3,5,5,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+476,Probopass,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+477,Dusknoir,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+478,Froslass,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+479,Rotom,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+480,Uxie,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+481,Mesprit,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+482,Azelf,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+483,Dialga,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+484,Palkia,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+485,Heatran,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+486,Regigigas,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+487,Giratina,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+488,Cresselia,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+489,Phione,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+490,Manaphy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+491,Darkrai,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+492,Shaymin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+493,Arceus,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+494,Victini,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+495,Snivy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+496,Servine,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+497,Serperior,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+498,Tepig,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+499,Pignite,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+500,Emboar,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+501,Oshawott,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+502,Dewott,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+503,Samurott,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+504,Patrat,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+505,Watchog,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+506,Lillipup,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+507,Herdier,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+508,Stoutland,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+509,Purrloin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+510,Liepard,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+511,Pansage,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+512,Simisage,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+513,Pansear,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+514,Simisear,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+515,Panpour,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+516,Simipour,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+517,Munna,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+518,Musharna,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+519,Pidove,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+520,Tranquill,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+521,Unfezant,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+522,Blitzle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+523,Zebstrika,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+524,Roggenrola,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+525,Boldore,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+526,Gigalith,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+527,Woobat,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+528,Swoobat,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+529,Drilbur,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+530,Excadrill,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+531,Audino,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+532,Timburr,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+533,Gurdurr,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+534,Conkeldurr,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+535,Tympole,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+536,Palpitoad,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+537,Seismitoad,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+538,Throh,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+539,Sawk,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+540,Sewaddle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+541,Swadloon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+542,Leavanny,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+543,Venipede,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+544,Whirlipede,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+545,Scolipede,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+546,Cottonee,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+547,Whimsicott,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+548,Petilil,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+549,Lilligant,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+550,Basculin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+551,Sandile,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+552,Krokorok,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+553,Krookodile,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+554,Darumaka,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+555,Darmanitan,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+556,Maractus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+557,Dwebble,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+558,Crustle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+559,Scraggy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+560,Scrafty,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+561,Sigilyph,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+562,Yamask,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+563,Cofagrigus,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+564,Tirtouga,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+565,Carracosta,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+566,Archen,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+567,Archeops,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+568,Trubbish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+569,Garbodor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+570,Zorua,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+571,Zoroark,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+572,Minccino,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+573,Cinccino,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+574,Gothita,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+575,Gothorita,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+576,Gothitelle,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+577,Solosis,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+578,Duosion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+579,Reuniclus,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+580,Ducklett,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+581,Swanna,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+582,Vanillite,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+583,Vanillish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+584,Vanilluxe,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+585,Deerling,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+586,Sawsbuck,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+587,Emolga,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+588,Karrablast,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+589,Escavalier,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+590,Foongus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+591,Amoonguss,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+592,Frillish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+593,Jellicent,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+594,Alomomola,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+595,Joltik,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+596,Galvantula,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+597,Ferroseed,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+598,Ferrothorn,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+599,Klink,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+600,Klang,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+601,Klinklang,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+602,Tynamo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+603,Eelektrik,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+604,Eelektross,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+605,Elgyem,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+606,Beheeyem,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+607,Litwick,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+608,Lampent,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+609,Chandelure,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+610,Axew,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+611,Fraxure,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+612,Haxorus,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+613,Cubchoo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+614,Beartic,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+615,Cryogonal,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+616,Shelmet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+617,Accelgor,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+618,Stunfisk,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+619,Mienfoo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+620,Mienshao,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+621,Druddigon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+622,Golett,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+623,Golurk,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+624,Pawniard,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+625,Bisharp,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+626,Bouffalant,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+627,Rufflet,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+628,Braviary,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+629,Vullaby,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+630,Mandibuzz,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+631,Heatmor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+632,Durant,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+633,Deino,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+634,Zweilous,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+635,Hydreigon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+636,Larvesta,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+637,Volcarona,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+638,Cobalion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+639,Terrakion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+640,Virizion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+641,Tornadus,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+642,Thundurus,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+643,Reshiram,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+644,Zekrom,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+645,Landorus,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+646,Kyurem,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+647,Keldeo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+648,Meloetta,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+649,Genesect,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+650,Chespin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+651,Quilladin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+652,Chesnaught,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+653,Fennekin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+654,Braixen,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+655,Delphox,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+656,Froakie,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+657,Frogadier,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+658,Greninja,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+659,Bunnelby,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+660,Diggersby,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+661,Fletchling,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+662,Fletchinder,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+663,Talonflame,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+664,Scatterbug,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+665,Spewpa,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+666,Vivillon,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+667,Litleo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+668,Pyroar,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+669,Flabebe,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+670,Floette,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+671,Florges,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+672,Skiddo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+673,Gogoat,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+674,Pancham,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+675,Pangoro,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+676,Furfrou,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+677,Espurr,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+678,Meowstic,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+679,Honedge,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+680,Doublade,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+681,Aegislash,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+682,Spritzee,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+683,Aromatisse,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+684,Swirlix,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+685,Slurpuff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+686,Inkay,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+687,Malamar,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+688,Binacle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+689,Barbaracle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+690,Skrelp,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+691,Dragalge,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+692,Clauncher,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+693,Clawitzer,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+694,Helioptile,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+695,Heliolisk,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+696,Tyrunt,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+697,Tyrantrum,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+698,Amaura,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+699,Aurorus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+700,Sylveon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+701,Hawlucha,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+702,Dedenne,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+703,Carbink,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+704,Goomy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+705,Sliggoo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+706,Goodra,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+707,Klefki,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+708,Phantump,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+709,Trevenant,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+710,Pumpkaboo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+711,Gourgeist,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+712,Bergmite,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+713,Avalugg,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+714,Noibat,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+715,Noivern,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+716,Xerneas,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+717,Yveltal,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+718,Zygarde,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+719,Diancie,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+720,Hoopa,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+721,Volcanion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+722,Rowlet,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+723,Dartrix,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+724,Decidueye,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+725,Litten,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+726,Torracat,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+727,Incineroar,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+728,Popplio,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+729,Brionne,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+730,Primarina,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+731,Pikipek,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+732,Trumbeak,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+733,Toucannon,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+734,Yungoos,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+735,Gumshoos,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+736,Grubbin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+737,Charjabug,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+738,Vikavolt,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+739,Crabrawler,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+740,Crabominable,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+741,Oricorio,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+742,Cutiefly,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+743,Ribombee,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+744,Rockruff,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+745,Lycanroc,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+746,Wishiwashi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+747,Mareanie,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+748,Toxapex,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+749,Mudbray,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+750,Mudsdale,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+751,Dewpider,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+752,Araquanid,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+753,Fomantis,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+754,Lurantis,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+755,Morelull,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+756,Shiinotic,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+757,Salandit,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+758,Salazzle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+759,Stufful,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+760,Bewear,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+761,Bounsweet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+762,Steenee,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+763,Tsareena,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+764,Comfey,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+765,Oranguru,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+766,Passimian,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+767,Wimpod,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+768,Golisopod,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+769,Sandygast,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+770,Palossand,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+771,Pyukumuku,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+772,Type: Null,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+773,Silvally,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+774,Minior,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+775,Komala,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+776,Turtonator,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+777,Togedemaru,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+778,Mimikyu,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+779,Bruxish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+780,Drampa,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+781,Dhelmise,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+782,Jangmo-o,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+783,Hakamo-o,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+784,Kommo-o,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+785,Tapu Koko,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+786,Tapu Lele,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+787,Tapu Bulu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+788,Tapu Fini,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+789,Cosmog,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+790,Cosmoem,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+791,Solgaleo,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+792,Lunala,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+793,Nihilego,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+794,Buzzwole,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+795,Pheromosa,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+796,Xurkitree,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+797,Celesteela,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+798,Kartana,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+799,Guzzlord,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+800,Necrozma,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+801,Magearna,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+802,Marshadow,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+803,Poipole,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+804,Naganadel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+805,Stakataka,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+806,Blacephalon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+807,Zeraora,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+808,Meltan,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+809,Melmetal,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+810,Grookey,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+811,Thwackey,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+812,Rillaboom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+813,Scorbunny,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+814,Raboot,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+815,Cinderace,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+816,Sobble,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+817,Drizzile,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+818,Inteleon,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+819,Skwovet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+820,Greedent,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+821,Rookidee,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+822,Corvisquire,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+823,Corviknight,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+824,Blipbug,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+825,Dottler,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+826,Orbeetle,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+827,Nickit,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+828,Thievul,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+829,Gossifleur,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+830,Eldegoss,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+831,Wooloo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+832,Dubwool,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+833,Chewtle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+834,Drednaw,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+835,Yamper,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+836,Boltund,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+837,Rolycoly,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+838,Carkol,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+839,Coalossal,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+840,Applin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+841,Flapple,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+842,Appletun,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+843,Silicobra,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+844,Sandaconda,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+845,Cramorant,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+846,Arrokuda,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+847,Barraskewda,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+848,Toxel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+849,Toxtricity,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+850,Sizzlipede,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+851,Centiskorch,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+852,Clobbopus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+853,Grapploct,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+854,Sinistea,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+855,Polteageist,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+856,Hatenna,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+857,Hattrem,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+858,Hatterene,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+859,Impidimp,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+860,Morgrem,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+861,Grimmsnarl,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+862,Obstagoon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+863,Perrserker,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+864,Cursola,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+865,Sirfetch'd,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+866,Mr. Rime,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+867,Runerigus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+868,Milcery,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+869,Alcremie,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+870,Falinks,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+871,Pincurchin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+872,Snom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+873,Frosmoth,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+874,Stonjourner,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+875,Eiscue,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+876,Indeedee,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+877,Morpeko,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+878,Cufant,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+879,Copperajah,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+880,Dracozolt,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+881,Arctozolt,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+882,Dracovish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+883,Arctovish,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+884,Duraludon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+885,Dreepy,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+886,Drakloak,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+887,Dragapult,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+888,Zacian,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+889,Zamazenta,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+890,Eternatus,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+891,Kubfu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+892,Urshifu,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+893,Zarude,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+894,Regieleki,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+895,Regidrago,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+896,Glastrier,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+897,Spectrier,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+898,Calyrex,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+899,Wyrdeer,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+900,Kleavor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+901,Ursaluna,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+902,Basculegion,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+903,Sneasler,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+904,Overqwil,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+905,Enamorus,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+906,Sprigatito,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+907,Floragato,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+908,Meowscarada,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+909,Fuecoco,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+910,Crocalor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+911,Skeledirge,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+912,Quaxly,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+913,Quaxwell,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+914,Quaquaval,Physical/Bruiser,RB/LB/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,3,2,3,1,1,3,4,3,3,5,4,3,5,4,5,5,3,2,5,2,2,3,2,2,4,4,3,3,2,5,5,5,3,4
+915,Lechonk,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+916,Oinkologne,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+917,Tarountula,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+918,Spidops,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+919,Nymble,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+920,Lokix,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+921,Pawmi,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+922,Pawmo,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+923,Pawmot,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+924,Tandemaus,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+925,Maushold,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+926,Fidough,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+927,Dachsbun,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+928,Smoliv,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+929,Dolliv,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+930,Arboliva,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+931,Squawkabilly,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+932,Nacli,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+933,Naclstack,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+934,Garganacl,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,5,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+935,Charcadet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+936,Armarouge,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+937,Ceruledge,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+938,Tadbulb,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+939,Bellibolt,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+940,Wattrel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+941,Kilowattrel,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+942,Maschiff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+943,Mabosstiff,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+944,Shroodle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+945,Grafaiai,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+946,Bramblin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+947,Brambleghast,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+948,Toedscool,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+949,Toedscruel,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+950,Klawf,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+951,Capsakid,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+952,Scovillain,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+953,Rellor,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+954,Rabsca,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+955,Flittle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+956,Espathra,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+957,Tinkatink,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+958,Tinkatuff,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+959,Tinkaton,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+960,Wiglett,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+961,Wugtrio,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+962,Bombirdier,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+963,Finizen,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+964,Palafin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+965,Varoom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+966,Revavroom,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+967,Cyclizar,Agility/Versatility,RB/WR/DB,Erhardt-Perkins,5,I-Formation,2,4-2-5 Nickel,5,Bear,2,4,4,5,5,5,5,5,5,5,3,4,5,2,5,3,3,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,2,5,4
+968,Orthworm,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+969,Glimmet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+970,Glimmora,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+971,Greavard,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+972,Houndstone,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+973,Flamigo,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+974,Cetoddle,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+975,Cetitan,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+976,Veluza,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+977,Dondozo,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+978,Tatsugiri,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+979,Annihilape,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+980,Clodsire,Anchor/Tank,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,2,5,4,1,5,3,5,5,3,2,5,3,3,3,3,3,2,2,2,2,2,3,3,5,2,4
+981,Farigiraf,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+982,Dudunsparce,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+983,Kingambit,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+984,Great Tusk,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+985,Scream Tail,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+986,Brute Bonnet,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+987,Flutter Mane,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+988,Slither Wing,Aerial/Space,WR/DB,Air Coryell,5,Power/GAP,1,4-2-5 Nickel,5,Bear,1,4,5,5,5,5,4,4,3,4,1,2,3,1,5,2,2,5,5,2,5,5,5,5,5,5,4,5,5,5,4,4,1,4,3
+989,Sandy Shocks,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+990,Iron Treads,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+991,Iron Bundle,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+992,Iron Hands,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+993,Iron Jugulis,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+994,Iron Moth,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+995,Iron Thorns,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+996,Frigibax,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+997,Arctibax,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+998,Baxcalibur,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+999,Gimmighoul,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+1000,Gholdengo,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4
+1001,Wo-Chien,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1002,Chien-Pao,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+1003,Ting-Lu,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,5,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+1004,Chi-Yu,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1005,Roaring Moon,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+1006,Iron Valiant,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+1007,Koraidon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1008,Miraidon,Field General/Technical,QB/S,West Coast,5,Power/GAP,2,4-2-5 Nickel,5,Bear,2,5,4,5,5,5,3,5,3,4,2,3,2,2,5,3,4,5,5,4,5,5,5,5,5,4,3,4,5,5,5,5,2,3,3
+1009,Walking Wake,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1010,Iron Leaves,Line/Anchor,OL/DL,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,2,2,1,1,1,2,1,3,5,4,1,5,3,5,5,3,2,5,2,2,3,2,2,3,3,2,2,2,4,4,5,2,4
+1011,Dipplin,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1012,Poltchageist,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1013,Sinistcha,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1014,Okidogi,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+1015,Munkidori,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1016,Fezandipiti,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1017,Ogerpon,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1018,Archaludon,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+1019,Hydrapple,Power/Versatile,QB/TE/DL,Power/GAP,5,Run & Shoot,2,4-3,5,3-3-5,3,3,4,4,3,2,3,4,3,4,5,4,3,5,5,5,5,4,3,5,3,3,4,4,4,4,4,3,4,4,5,5,5,4,5
+1020,Gouging Fire,Balanced/Versatile,QB/WR/DB,Modern Hybrid,5,Run & Shoot,3,4-3,4,3-3-5,3,4,4,4,4,3,3,4,3,4,3,4,3,3,5,4,4,4,3,4,4,4,4,4,4,4,3,4,4,4,4,4,3,4,4
+1021,Raging Bolt,Speed/Explosiveness,RB/WR/DB,Air Raid,5,Power/GAP,2,4-2-5 Nickel,5,Bear,1,4,4,4,5,5,5,5,5,4,2,3,5,2,5,2,2,5,5,3,4,4,5,5,5,5,4,5,5,5,4,4,1,5,4
+1022,Iron Boulder,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+1023,Iron Crown,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+1024,Terapagos,Power/Bulk,OL/DL/TE,Power/GAP,5,Air Raid,1,4-3,5,3-3-5,2,2,3,3,1,1,2,3,2,3,5,4,2,5,4,5,5,3,2,5,2,2,3,3,3,4,3,2,3,3,4,4,5,3,4
+1025,Pecharunt,Trick/Utility,WR/S/CB,West Coast,5,I-Formation,1,4-2-5 Nickel,5,4-3,2,5,4,5,5,5,4,5,4,4,2,3,4,1,5,2,3,5,5,3,5,5,5,5,5,5,3,5,5,5,5,5,2,4,4

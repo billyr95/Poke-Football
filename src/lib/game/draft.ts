@@ -1,7 +1,8 @@
 import { chemistry } from "./chemistry";
 import { POSITIONS, POS_LIST, SLOTS, SLOT_BY_ID } from "./ratings";
 import { rngFor } from "./rng";
-import type { League, LeagueSettings, Player, Pos, Slot, SlotId, Team } from "./types";
+import { ratingContext, slotRating, type RatingContext } from "./schemes";
+import type { League, Player, Pos, Slot, SlotId, Team } from "./types";
 
 export function buildOrder(teamIds: number[], rounds: number, snake: boolean) {
   const order: number[] = [];
@@ -25,11 +26,13 @@ export function onClock(league: League): Team | null {
   return id == null ? null : league.teams.find(t => t.id === id) ?? null;
 }
 
-/** Best open slot for a player on this team, by their rating at that position. */
-export function bestOpenSlot(team: Team, p: Player): Slot | null {
+const STANDARD: RatingContext = { advanced: false, scheme: null };
+
+/** Best open slot for a player on this team, by their rating at that spot. */
+export function bestOpenSlot(team: Team, p: Player, ctx: RatingContext = STANDARD): Slot | null {
   const open = openSlots(team);
   if (!open.length) return null;
-  return open.reduce((best, s) => (p.posOvr[s.pos] > p.posOvr[best.pos] ? s : best));
+  return open.reduce((best, s) => (slotRating(p, s, ctx) > slotRating(p, best, ctx) ? s : best));
 }
 
 // The QB touches every play, so it's worth more than one lineman.
@@ -57,14 +60,19 @@ export function aiChoose(league: League, players: Player[]): { playerId: number;
   }
 
   const rng = rngFor(league.seed, `ai-${league.draft.pick}`);
+  const ctx = ratingContext(league, team);
   let best: { playerId: number; slotId: SlotId; v: number } | null = null;
-  const openPositions = [...new Set(open.map(s => s.pos))];
+  // One candidate spot per open position (standard) or per open role (advanced, where roles rate differently).
+  const seen = new Set<string>();
+  const candidates = open.filter(s => {
+    const key = ctx.advanced ? s.role : s.pos;
+    return seen.has(key) ? false : (seen.add(key), true);
+  });
   for (const p of available) {
-    for (const pos of openPositions) {
-      const v = (p.posOvr[pos] - replacement[pos]) * POS_VALUE[pos] + p.posOvr[pos] * 0.15 + (rng() - 0.5) * 3;
-      if (!best || v > best.v) {
-        best = { playerId: p.id, slotId: open.find(s => s.pos === pos)!.id, v };
-      }
+    for (const s of candidates) {
+      const r = slotRating(p, s, ctx);
+      const v = (r - replacement[s.pos]) * POS_VALUE[s.pos] + r * 0.15 + (rng() - 0.5) * 3;
+      if (!best || v > best.v) best = { playerId: p.id, slotId: s.id, v };
     }
   }
   return best && { playerId: best.playerId, slotId: best.slotId };
@@ -111,15 +119,16 @@ const STAR_MULT = 1.6;
 /** Stars count extra: each point above 85 is worth 1.6. */
 const starValue = (r: number) => (r > STAR_LINE ? STAR_LINE + (r - STAR_LINE) * STAR_MULT : r);
 
-export function teamRatings(team: Team, byId: Map<number, Player>, settings?: Pick<LeagueSettings, "stackChem">): TeamRatings {
-  const chem = chemistry(team, byId, settings).bonus;
+export function teamRatings(team: Team, byId: Map<number, Player>, league?: Pick<League, "settings" | "schemes">): TeamRatings {
+  const chem = chemistry(team, byId, league?.settings).bonus;
+  const ctx = ratingContext(league, team);
   const unit = (side: "off" | "def") => {
     let sum = 0;
     let w = 0;
     for (const s of SLOTS.filter(s => s.side === side)) {
       const p = team.roster[s.id] != null ? byId.get(team.roster[s.id]!) : undefined;
       const weight = SLOT_WEIGHT[s.pos];
-      sum += starValue(p ? Math.min(99, p.posOvr[s.pos] + (chem.get(p.id) ?? 0)) : 40) * weight;
+      sum += starValue(p ? Math.min(99, slotRating(p, s, ctx) + (chem.get(p.id) ?? 0)) : 40) * weight;
       w += weight;
     }
     return Math.round((sum / w) * 10) / 10;

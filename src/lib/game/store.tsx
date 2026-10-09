@@ -4,11 +4,14 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { ratedPool } from "./dex";
 import { aiChoose, makePick, onClock, startClock } from "./draft";
 import {
-  addManager, createLobby, loadHostedLeague, loadMe, removeManager, renameTeam, saveHostedLeague, saveMe,
+  addManager, allSchemesLocked, chooseScheme, createLobby, finishSchemes, loadHostedLeague, loadMe, removeManager, renameTeam,
+  saveHostedLeague, saveMe,
   startDraft, updateSettings, type Me,
 } from "./league";
 import { joinLeague, startHosting, type GuestLink, type GuestMessage, type HostLink } from "./net";
+import type { TeamScheme } from "./schemes";
 import { advance, simToEnd, startSeason } from "./sim";
+import { newGameReports, sendReports } from "./tracking";
 import type { League, LeagueSettings, Player, SlotId } from "./types";
 
 type Status = "idle" | "connecting" | "connected" | "lost";
@@ -35,6 +38,8 @@ interface GameContext {
 
   pick(playerId: number, slotId: SlotId): void;
   renameMyTeam(name: string): void;
+  /** Advanced mode: change my schemes, optionally locking them in. */
+  setMyScheme(scheme: TeamScheme, lock: boolean): void;
   // host only
   setSettings(patch: Partial<LeagueSettings>): void;
   beginDraft(): void;
@@ -106,6 +111,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
           commit(makePick(cur, msg.playerId, msg.slotId));
         } else if (msg.t === "rename") {
           commit(renameTeam(cur, msg.clientId, msg.teamName));
+        } else if (msg.t === "scheme") {
+          commit(chooseScheme(cur, msg.clientId, msg.scheme, msg.lock));
         }
       } catch (e) {
         hostLink.current.send(conn, { t: msg.t === "hello" ? "kicked" : "error", message: e instanceof Error ? e.message : String(e) });
@@ -212,6 +219,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer);
   }, [role, league, pool, apply]);
 
+  // Host closes scheme picks when everyone has locked in or time runs out.
+  useEffect(() => {
+    if (role !== "host" || league?.phase !== "schemes") return;
+    const wait = allSchemesLocked(league) ? 0 : Math.max(0, (league.schemePick?.deadline ?? 0) - Date.now());
+    const timer = setTimeout(() => apply(finishSchemes), wait);
+    return () => clearTimeout(timer);
+  }, [role, league, apply]);
+
   // Host enforces the pick timer: when it runs out, the best available player is drafted for that team.
   useEffect(() => {
     const deadline = league?.draft.deadline;
@@ -226,12 +241,24 @@ export function GameProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer);
   }, [role, league, pool, apply]);
 
+  /** Host plays games, then reports the new results to the all-time stats. */
+  const playAndReport = useCallback(
+    (fn: (l: League) => League) => {
+      const before = leagueRef.current;
+      apply(fn);
+      const after = leagueRef.current;
+      if (before && after && after !== before) sendReports(newGameReports(before, after, byId));
+    },
+    [apply, byId],
+  );
+
   const value = useMemo<GameContext>(() => {
     const ownerOf = new Map<number, number>();
     for (const p of league?.draft.log ?? []) ownerOf.set(p.playerId, p.teamId);
     const myTeamId = league?.teams.find(t => t.managerId === me.clientId)?.id ?? null;
     const isHost = role === "host";
     const hostOnly = (fn: (l: League) => League) => () => isHost && apply(fn);
+    const hostPlays = (fn: (l: League) => League) => () => isHost && playAndReport(fn);
 
     return {
       me, role, status, error, league, pool, byId, ownerOf, myTeamId, isHost, clockOffset,
@@ -291,6 +318,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
         if (isHost) apply(l => renameTeam(l, me.clientId, name));
         else guestLink.current?.send({ t: "rename", clientId: me.clientId, teamName: name });
       },
+      setMyScheme(scheme, lock) {
+        if (isHost) apply(l => chooseScheme(l, me.clientId, scheme, lock));
+        else guestLink.current?.send({ t: "scheme", clientId: me.clientId, scheme, lock });
+      },
       setSettings: patch => isHost && apply(l => updateSettings(l, patch)),
       beginDraft: hostOnly(startDraft),
       autoPick: hostOnly(l => {
@@ -298,10 +329,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
         return choice ? makePick(l, choice.playerId, choice.slotId) : l;
       }),
       beginSeason: hostOnly(startSeason),
-      playNext: hostOnly(l => advance(l, byId)),
-      playAll: hostOnly(l => simToEnd(l, byId)),
+      playNext: hostPlays(l => advance(l, byId)),
+      playAll: hostPlays(l => simToEnd(l, byId)),
     };
-  }, [me, role, status, error, league, pool, byId, clockOffset, apply, commit, goHost, goJoin, setMe]);
+  }, [me, role, status, error, league, pool, byId, clockOffset, apply, commit, goHost, goJoin, setMe, playAndReport]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

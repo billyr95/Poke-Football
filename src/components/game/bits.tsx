@@ -42,6 +42,12 @@ const TIER_CHIP = {
 
 export const ratingText = (r: number) => TIER_TEXT[tier(r)];
 
+/** Text colour for a 1–5 scheme fit. */
+export const FIT_TEXT = [
+  "", "text-red-600 dark:text-red-400", "text-orange-600 dark:text-orange-400", "text-muted-foreground",
+  "text-emerald-600 dark:text-emerald-400", "font-semibold text-emerald-600 dark:text-emerald-400",
+];
+
 /** Big-number rating chip, gold for 90+. */
 export function RatingChip({
   value,

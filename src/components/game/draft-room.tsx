@@ -12,19 +12,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { chemistry } from "@/lib/game/chemistry";
 import { bestOpenSlot, onClock, openSlots, takenIds, teamRatings } from "@/lib/game/draft";
-import { POS_LIST, POSITIONS, ROSTER_SIZE, SLOT_BY_ID } from "@/lib/game/ratings";
+import { POS_LIST, POSITIONS, ROLE_LIST, ROLES, ROSTER_SIZE, SLOT_BY_ID, SLOTS } from "@/lib/game/ratings";
+import { ratingContext, slotFit, slotRating } from "@/lib/game/schemes";
 import { useGame } from "@/lib/game/store";
-import type { Player, Pos, SlotId, Team } from "@/lib/game/types";
+import type { Player, Pos, Role, Slot, SlotId, Team } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
-import { MonBadge, RatingChip, TYPE_COLOR, TypePill } from "./bits";
+import { FIT_TEXT, MonBadge, RatingChip, TYPE_COLOR, TypePill } from "./bits";
 import { ChemistryList } from "./chemistry-list";
 import { Formation } from "./formation";
 import { PlayerCard } from "./player-card";
 import { MINE_ROW } from "./stats-tables";
 import { TeamMark } from "./team-mark";
 
-/** How the available list is rated: natural position, a specific position, or best fit for my open spots. */
-type PosFilter = Pos | "ALL" | "BEST";
+/** How the available list is rated: natural position, a specific position or role, or best fit for my open spots. */
+type PosFilter = Pos | `r:${Role}` | "ALL" | "BEST";
+const filterRole = (f: PosFilter): Role | null => (f.startsWith("r:") ? (f.slice(2) as Role) : null);
+const slotForRole = (role: Role) => SLOTS.find(s => s.role === role)!;
 
 /** Countdown to the pick deadline. `offset` converts this browser's clock to the host's. */
 function PickClock({ deadline, offset, total }: { deadline: number; offset: number; total: number }) {
@@ -67,14 +70,40 @@ export function DraftRoom() {
   const taken = useMemo(() => takenIds(l), [l]);
   const types = useMemo(() => [...new Set(pool.flatMap(p => p.types))].sort(), [pool]);
 
-  const myOpenPositions = useMemo(() => [...new Set((myTeam ? openSlots(myTeam) : []).map(s => s.pos))], [myTeam]);
-  /** Best rating among the positions I still need, and which one it is. */
-  const bestFit = (p: Player): { pos: Pos; rating: number } => {
-    const options = myOpenPositions.length ? myOpenPositions : [p.pos];
-    return options.reduce((best, pos) => (p.posOvr[pos] > best.rating ? { pos, rating: p.posOvr[pos] } : best), { pos: options[0], rating: p.posOvr[options[0]] });
+  const ctx = useMemo(() => ratingContext(l, myTeam), [l, myTeam]);
+  const advanced = ctx.advanced;
+  /** One spot per open position (standard) or per open role (advanced). */
+  const myOpenKinds = useMemo(() => {
+    const seen = new Set<string>();
+    return (myTeam ? openSlots(myTeam) : []).filter(s => {
+      const k = advanced ? s.role : s.pos;
+      return seen.has(k) ? false : (seen.add(k), true);
+    });
+  }, [myTeam, advanced]);
+  /** Advanced: where a player rates best within their natural position group. */
+  const naturalSlot = (p: Player): Slot =>
+    SLOTS.filter(s => s.pos === p.pos).reduce((best, s) => (slotRating(p, s, ctx) > slotRating(p, best, ctx) ? s : best));
+  /** Best rating among the spots I still need, and which one it is. Advanced mode counts role and scheme fit. */
+  const bestFit = (p: Player): { slot: Slot; rating: number } => {
+    const options = myOpenKinds.length ? myOpenKinds : [advanced ? naturalSlot(p) : SLOTS.find(s => s.pos === p.pos)!];
+    return options
+      .map(slot => ({ slot, rating: slotRating(p, slot, ctx) }))
+      .reduce((best, o) => (o.rating > best.rating ? o : best));
   };
-  const rateAt = (p: Player) => (posFilter === "ALL" ? p.ovr : posFilter === "BEST" ? bestFit(p).rating : p.posOvr[posFilter]);
-  const shownPos = (p: Player) => (posFilter === "BEST" ? bestFit(p).pos : posFilter === "ALL" ? p.pos : posFilter);
+  /** The spot a row is rated at, given the current sort. */
+  const shownSlot = (p: Player): Slot => {
+    const role = filterRole(posFilter);
+    if (role) return slotForRole(role);
+    if (posFilter === "BEST") return bestFit(p).slot;
+    if (posFilter === "ALL") return advanced ? naturalSlot(p) : SLOTS.find(s => s.pos === p.pos)!;
+    return SLOTS.find(s => s.pos === posFilter)!;
+  };
+  const rateAt = (p: Player) => (posFilter === "ALL" && !advanced ? p.ovr : slotRating(p, shownSlot(p), ctx));
+  const shownPos = (p: Player) => (advanced ? shownSlot(p).role : shownSlot(p).pos);
+  const shownFit = (p: Player) => {
+    const s = shownSlot(p);
+    return ctx.scheme ? slotFit(p.id, s.pos, s.side, ctx.scheme) : null;
+  };
   const available = useMemo(() => {
     const isNum = /^\d+$/.test(q);
     return pool
@@ -83,7 +112,7 @@ export function DraftRoom() {
       .filter(p => typeFilter === "all" || p.types.includes(typeFilter))
       .sort((a, b) => rateAt(b) - rateAt(a) || a.id - b.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pool, taken, q, typeFilter, posFilter, myOpenPositions]);
+  }, [pool, taken, q, typeFilter, posFilter, myOpenKinds, ctx]);
 
   const myOpen = useMemo(() => (myTeam ? openSlots(myTeam) : []), [myTeam]);
   const myChem = useMemo(() => (myTeam ? chemistry(myTeam, byId, l.settings) : null), [myTeam, byId, l.settings]);
@@ -95,19 +124,21 @@ export function DraftRoom() {
   const round = Math.floor(l.draft.pick / l.teams.length) + 1;
   const pickInRound = (l.draft.pick % l.teams.length) + 1;
 
-  // One "Draft as…" button per open position, best fit first.
+  // One "Draft as…" button per open position (or role, in advanced mode), best fit first.
   const draftOptions = useMemo(() => {
     if (!modalPlayer || !myTeam) return [];
-    const seen = new Set<Pos>();
-    return myOpen
-      .filter(s => (seen.has(s.pos) ? false : (seen.add(s.pos), true)))
-      .map(s => ({ slot: s, rating: modalPlayer.posOvr[s.pos] }))
+    return myOpenKinds
+      .map(s => ({ slot: s, rating: slotRating(modalPlayer, s, ctx), fit: ctx.scheme ? slotFit(modalPlayer.id, s.pos, s.side, ctx.scheme) : null }))
       .sort((a, b) => b.rating - a.rating);
-  }, [modalPlayer, myTeam, myOpen]);
+  }, [modalPlayer, myTeam, myOpenKinds, ctx]);
 
   const quickDraft = (p: Player) => {
-    const want = posFilter === "ALL" || posFilter === "BEST" ? null : posFilter;
-    const slot = (want && myOpen.find(s => s.pos === want)) || bestOpenSlot(myTeam!, p);
+    const role = filterRole(posFilter);
+    const wanted = role
+      ? myOpen.find(s => s.role === role)
+      : posFilter !== "ALL" && posFilter !== "BEST" ? myOpen.find(s => s.pos === posFilter) : undefined;
+    const best = posFilter === "BEST" ? myOpen.find(s => s.id === bestFit(p).slot.id) : undefined;
+    const slot = wanted || best || bestOpenSlot(myTeam!, p, ctx);
     if (slot) pick(p.id, slot.id);
   };
 
@@ -158,16 +189,20 @@ export function DraftRoom() {
                 value={posFilter}
                 onValueChange={v => setPosFilter((v ?? "ALL") as PosFilter)}
                 items={[
-                  { value: "ALL", label: "Natural position" },
+                  { value: "ALL", label: advanced ? "Natural role" : "Natural position" },
                   ...(myTeam ? [{ value: "BEST", label: "Best for my team" }] : []),
-                  ...POS_LIST.map(p => ({ value: p, label: `Rate as ${p}` })),
+                  ...(advanced
+                    ? ROLE_LIST.map(r => ({ value: `r:${r}`, label: `Rate as ${r}` }))
+                    : POS_LIST.map(p => ({ value: p, label: `Rate as ${p}` }))),
                 ]}
               >
                 <SelectTrigger className="w-full" aria-label="Sort players"><SelectValue /></SelectTrigger>
                 <SelectContent alignItemWithTrigger={false} align="start" className="w-auto min-w-(--anchor-width) max-w-[calc(100vw-2rem)]">
-                  <SelectItem value="ALL">Natural position</SelectItem>
+                  <SelectItem value="ALL">{advanced ? "Natural role" : "Natural position"}</SelectItem>
                   {myTeam && <SelectItem value="BEST">Best available for my team</SelectItem>}
-                  {POS_LIST.map(p => <SelectItem key={p} value={p}>Rate as {p} · {POSITIONS[p].name}</SelectItem>)}
+                  {advanced
+                    ? ROLE_LIST.map(r => <SelectItem key={r} value={`r:${r}`}>Rate as {r} · {ROLES[r].name}</SelectItem>)
+                    : POS_LIST.map(p => <SelectItem key={p} value={p}>Rate as {p} · {POSITIONS[p].name}</SelectItem>)}
                 </SelectContent>
               </Select>
               <Select
@@ -190,6 +225,15 @@ export function DraftRoom() {
           </CardHeader>
           <CardContent className="p-0">
             <ScrollArea className="h-[60vh] lg:h-[calc(100vh-15rem)]">
+              {advanced && (
+                <div className="flex items-center gap-3 border-b px-4 py-1.5 text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
+                  <span className="flex-1">Pokémon</span>
+                  <span className="w-10 text-center">Role</span>
+                  {ctx.scheme && <span className="w-7 text-center" title="Fit with your schemes, 1–5">Fit</span>}
+                  <span className="w-8 text-center">Rtg</span>
+                  {myTurn && <span className="w-[42px]" />}
+                </div>
+              )}
               <ul className="divide-y">
                 {available.slice(0, 300).map(p => (
                   <li key={p.id}>
@@ -205,7 +249,12 @@ export function DraftRoom() {
                         <div className="truncate text-sm font-medium">{p.name}</div>
                         <div className="flex gap-1">{p.types.map(t => <TypePill key={t} type={t} />)}</div>
                       </div>
-                      <span className="w-6 text-center text-xs font-semibold text-muted-foreground">{shownPos(p)}</span>
+                      <span className={cn("text-center text-xs font-semibold text-muted-foreground", advanced ? "w-10" : "w-6")}>{shownPos(p)}</span>
+                      {advanced && ctx.scheme && (
+                        <span className={cn("w-7 text-center text-sm tabular-nums", FIT_TEXT[shownFit(p) ?? 0])} title={`Scheme fit ${shownFit(p)}/5`}>
+                          {shownFit(p)}
+                        </span>
+                      )}
                       <RatingChip value={rateAt(p)} />
                       {myTurn && (
                         <Button size="xs" onClick={e => { e.stopPropagation(); quickDraft(p); }}>Draft</Button>
@@ -239,7 +288,7 @@ export function DraftRoom() {
                     compact
                     onSlot={(slot: SlotId, p) => {
                       if (p) setModalId(p.id);
-                      else setPosFilter(SLOT_BY_ID[slot].pos);
+                      else setPosFilter(advanced ? `r:${SLOT_BY_ID[slot].role}` : SLOT_BY_ID[slot].pos);
                     }}
                   />
                   <p className="text-xs text-muted-foreground">Tap an open spot to sort the list by that position. Tap a player for details.</p>
@@ -264,7 +313,11 @@ export function DraftRoom() {
         <DialogContent className="max-h-[90vh] max-w-lg overflow-y-auto sm:max-w-lg">
           <DialogTitle className="sr-only">{modalPlayer?.name}</DialogTitle>
           {modalPlayer && (
-            <PlayerCard player={modalPlayer} highlightPos={posFilter === "ALL" ? undefined : shownPos(modalPlayer)}>
+            <PlayerCard
+              player={modalPlayer}
+              highlightPos={posFilter === "ALL" || advanced ? undefined : shownSlot(modalPlayer).pos}
+              highlightRole={advanced && posFilter !== "ALL" ? shownSlot(modalPlayer).role : undefined}
+            >
               {modalTakenBy ? (
                 <p className="text-sm text-muted-foreground">
                   Drafted by <b style={{ color: modalTakenBy.color }}>{modalTakenBy.name}</b>.
@@ -272,6 +325,7 @@ export function DraftRoom() {
               ) : myTeam ? (
                 <PositionPicker
                   player={modalPlayer}
+                  advanced={advanced}
                   options={draftOptions}
                   myTurn={myTurn}
                   onDraft={slotId => {
@@ -290,10 +344,11 @@ export function DraftRoom() {
 
 /** Pick which open spot to put the player in, then confirm with one clear button. */
 function PositionPicker({
-  player, options, myTurn, onDraft,
+  player, advanced, options, myTurn, onDraft,
 }: {
   player: Player;
-  options: { slot: { id: SlotId; pos: Pos; label: string }; rating: number }[];
+  advanced: boolean;
+  options: { slot: Slot; rating: number; fit: number | null }[];
   myTurn: boolean;
   onDraft: (slot: SlotId) => void;
 }) {
@@ -323,9 +378,10 @@ function PositionPicker({
               )}
             >
               <span className="min-w-0 flex-1">
-                <span className="block font-heading text-lg leading-tight">{o.slot.pos}</span>
+                <span className="block font-heading text-lg leading-tight">{advanced ? o.slot.role : o.slot.pos}</span>
                 <span className="block truncate text-[10px] text-muted-foreground">
-                  {o.slot.pos === player.pos ? "Natural" : o === best ? "Best fit" : POSITIONS[o.slot.pos].name}
+                  {o === best ? "Best fit" : o.slot.pos === player.pos ? "Natural" : POSITIONS[o.slot.pos].name}
+                  {o.fit != null && <> · fit <b className={FIT_TEXT[o.fit]}>{o.fit}</b></>}
                 </span>
               </span>
               <RatingChip value={o.rating} />
@@ -334,7 +390,7 @@ function PositionPicker({
         })}
       </div>
       <Button size="lg" className="h-12 w-full text-base" disabled={!myTurn} onClick={() => onDraft(chosen.slot.id)}>
-        {myTurn ? `Draft ${player.name} at ${chosen.slot.pos} · ${chosen.rating}` : "Wait for your pick to draft"}
+        {myTurn ? `Draft ${player.name} at ${advanced ? chosen.slot.role : chosen.slot.pos} · ${chosen.rating}` : "Wait for your pick to draft"}
       </Button>
     </section>
   );
@@ -342,7 +398,7 @@ function PositionPicker({
 
 function TeamHeader({ team, picks }: { team: Team; picks: number }) {
   const { byId, league } = useGame();
-  const r = teamRatings(team, byId, league?.settings);
+  const r = teamRatings(team, byId, league ?? undefined);
   return (
     <div className="flex items-center gap-2">
       <TeamMark team={team} size="md" />
@@ -360,6 +416,7 @@ function DraftFeed({ onOpen }: { onOpen: (id: number) => void }) {
   const l = league!;
   const [teamFilter, setTeamFilter] = useState("all");
   const picks = [...l.draft.log].reverse().filter(r => teamFilter === "all" || String(r.teamId) === teamFilter);
+  const advanced = ratingContext(l, null).advanced;
   const n = l.teams.length;
   return (
     <div className="space-y-2">
@@ -401,10 +458,10 @@ function DraftFeed({ onOpen }: { onOpen: (id: number) => void }) {
                     <span className="block truncate text-sm font-medium">{p.name}</span>
                     <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <TeamMark team={t} size="xs" />
-                      <span className="truncate">{t.name}</span> · {slot.label}
+                      <span className="truncate">{t.name}</span> · {advanced ? slot.role : slot.label}
                     </span>
                   </span>
-                  <RatingChip value={p.posOvr[slot.pos]} className="text-sm" />
+                  <RatingChip value={slotRating(p, slot, ratingContext(l, t))} className="text-sm" />
                 </button>
               </li>
             );

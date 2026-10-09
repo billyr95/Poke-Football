@@ -2,6 +2,10 @@ import { poolEntries } from "./dex";
 import { buildOrder, startClock } from "./draft";
 import { ROSTER_SIZE } from "./ratings";
 import { mulberry32, shuffle } from "./rng";
+import {
+  COVERAGES, DEFAULT_SCHEME, FRONTS, OFFENSES, SCHEME_SECONDS, isAdvanced,
+  type Coverage, type Front, type OffScheme, type TeamScheme,
+} from "./schemes";
 import type { League, LeagueSettings, Team } from "./types";
 
 export const MIN_TEAMS = 2;
@@ -88,7 +92,7 @@ export function createLobby(hostId: string, hostName: string): League {
     version: 2,
     code: makeCode(),
     hostId,
-    settings: { teamCount: 4, snake: true, randomOrder: true, gens: [1], legendaries: true, pickSeconds: 60, stackChem: false, easterEggs: true },
+    settings: { teamCount: 4, snake: true, randomOrder: true, gens: [1], legendaries: true, pickSeconds: 60, stackChem: false, easterEggs: true, mode: "standard" },
     seed,
     phase: "lobby",
     teams: [],
@@ -158,7 +162,7 @@ export function startDraft(league: League): League {
   }
   const ids = teams.map(t => t.id);
   const firstRound = league.settings.randomOrder ? shuffle(rng, ids) : ids;
-  return startClock({
+  const drafting: League = {
     ...league,
     teams,
     phase: "draft",
@@ -169,7 +173,48 @@ export function startDraft(league: League): League {
       snake: league.settings.snake,
       deadline: null,
     },
-  });
+  };
+  if (!isAdvanced(league.settings)) return startClock(drafting);
+  // Advanced mode: everyone picks schemes first. AI teams choose theirs straight away.
+  const schemes: Record<number, TeamScheme> = {};
+  for (const t of teams) schemes[t.id] = t.managerId ? { ...DEFAULT_SCHEME } : randomScheme(rng);
+  return {
+    ...drafting,
+    phase: "schemes",
+    schemes,
+    schemePick: { deadline: Date.now() + SCHEME_SECONDS * 1000, locked: teams.filter(t => !t.managerId).map(t => t.id) },
+  };
+}
+
+function randomScheme(rng: () => number): TeamScheme {
+  const pick = <T>(xs: T[]) => xs[Math.floor(rng() * xs.length)];
+  return {
+    off: pick(Object.keys(OFFENSES) as OffScheme[]),
+    front: pick(Object.keys(FRONTS) as Front[]),
+    cov: pick(Object.keys(COVERAGES) as Coverage[]),
+  };
+}
+
+/** A manager changes (and optionally locks in) their schemes. */
+export function chooseScheme(league: League, clientId: string, scheme: TeamScheme, lock: boolean): League {
+  if (league.phase !== "schemes" || !league.schemePick) throw new Error("Scheme picks are closed.");
+  const team = league.teams.find(t => t.managerId === clientId);
+  if (!team) throw new Error("You don't have a team in this league.");
+  if (!(scheme.off in OFFENSES && scheme.front in FRONTS && scheme.cov in COVERAGES)) throw new Error("Unknown scheme.");
+  const locked = league.schemePick.locked.filter(id => id !== team.id);
+  if (lock) locked.push(team.id);
+  return { ...league, schemes: { ...league.schemes, [team.id]: scheme }, schemePick: { ...league.schemePick, locked } };
+}
+
+export const allSchemesLocked = (league: League) =>
+  league.phase === "schemes" && league.teams.every(t => league.schemePick?.locked.includes(t.id));
+
+/** Closes scheme picks (anyone who didn't choose keeps the defaults) and starts the draft. */
+export function finishSchemes(league: League): League {
+  if (league.phase !== "schemes") return league;
+  const schemes = { ...league.schemes };
+  for (const t of league.teams) schemes[t.id] ??= { ...DEFAULT_SCHEME };
+  return startClock({ ...league, schemes, schemePick: undefined, phase: "draft" });
 }
 
 // ---- Persistence (host keeps the league; everyone keeps their identity) ----

@@ -1,4 +1,4 @@
-import type { AttrKey, DexEntry, Player, Pos, Side, Slot, SlotId } from "./types";
+import type { AttrKey, DexEntry, Player, Pos, Role, Side, Slot, SlotId } from "./types";
 
 /**
  * Turns PokeAPI base stats, height, weight and evolution stage into football ratings.
@@ -51,6 +51,32 @@ export const POSITIONS: Record<Pos, {
   S: { name: "Safety", side: "def", frame: -0.2, weights: { COV: 0.35, TKL: 0.25, SPD: 0.2, AWR: 0.2 } },
 };
 
+/**
+ * Granular roles for advanced mode. Same recipe format as positions: each asks for a different mix,
+ * so a burner is a better Z than X, and a heavy, strong lineman is a better guard than tackle.
+ */
+export const ROLES: Record<Role, {
+  name: string; pos: Pos; frame: number; weights: Partial<Record<AttrKey, number>>;
+}> = {
+  QB: { pos: "QB", frame: POSITIONS.QB.frame, weights: POSITIONS.QB.weights, name: POSITIONS.QB.name },
+  RB: { pos: "RB", frame: POSITIONS.RB.frame, weights: POSITIONS.RB.weights, name: POSITIONS.RB.name },
+  X: { name: "X receiver (outside, contested catches)", pos: "WR", frame: -0.1, weights: { CTH: 0.4, STR: 0.25, SPD: 0.2, AGI: 0.15 } },
+  Z: { name: "Z receiver (flanker, deep speed)", pos: "WR", frame: -0.4, weights: { SPD: 0.5, CTH: 0.3, AGI: 0.2 } },
+  SLOT: { name: "Slot receiver (quickness)", pos: "WR", frame: -0.7, weights: { AGI: 0.45, CTH: 0.35, AWR: 0.2 } },
+  TE: { pos: "TE", frame: POSITIONS.TE.frame, weights: POSITIONS.TE.weights, name: POSITIONS.TE.name },
+  T: { name: "Tackle (pass protection on the edge)", pos: "OL", frame: 1.1, weights: { BLK: 0.5, AGI: 0.2, STR: 0.2, AWR: 0.1 } },
+  G: { name: "Guard (interior power)", pos: "OL", frame: 1.3, weights: { STR: 0.5, BLK: 0.45, AWR: 0.05 } },
+  C: { name: "Center (calls protections)", pos: "OL", frame: 1.1, weights: { BLK: 0.45, AWR: 0.35, STR: 0.2 } },
+  DE: { name: "Defensive end (edge rusher)", pos: "DL", frame: 0.6, weights: { SPD: 0.35, STR: 0.3, TKL: 0.35 } },
+  DT: { name: "Defensive tackle (interior)", pos: "DL", frame: 1.4, weights: { STR: 0.5, BLK: 0.2, TKL: 0.3 } },
+  OLB: { name: "Outside linebacker", pos: "LB", frame: 0.3, weights: { SPD: 0.3, TKL: 0.35, STR: 0.2, COV: 0.15 } },
+  MLB: { name: "Middle linebacker", pos: "LB", frame: 0.5, weights: { TKL: 0.4, AWR: 0.35, STR: 0.25 } },
+  CB: { pos: "CB", frame: POSITIONS.CB.frame, weights: POSITIONS.CB.weights, name: POSITIONS.CB.name },
+  FS: { name: "Free safety (deep range)", pos: "S", frame: -0.4, weights: { COV: 0.4, SPD: 0.3, AWR: 0.3 } },
+  SS: { name: "Strong safety (box)", pos: "S", frame: 0.1, weights: { TKL: 0.4, STR: 0.2, COV: 0.25, AWR: 0.15 } },
+};
+export const ROLE_LIST = Object.keys(ROLES) as Role[];
+
 const FRAME_TOLERANCE = 0.5;
 const FRAME_PENALTY = 0.35; // SDs lost per SD of body size outside the tolerance
 /** Share of a position rating that comes from the position's attributes; the rest is base stat total. */
@@ -58,31 +84,31 @@ export const ATTR_SHARE = 0.7;
 
 export const POS_LIST = Object.keys(POSITIONS) as Pos[];
 
-const slot = (id: SlotId, pos: Pos, label: string): Slot => ({ id, pos, label, side: POSITIONS[pos].side });
+const slot = (id: SlotId, pos: Pos, label: string, role: Role): Slot => ({ id, pos, role, label, side: POSITIONS[pos].side });
 
 export const SLOTS: Slot[] = [
-  slot("QB", "QB", "QB"),
-  slot("RB", "RB", "RB"),
-  slot("WR1", "WR", "WR"),
-  slot("WR2", "WR", "WR"),
-  slot("WR3", "WR", "WR"),
-  slot("TE", "TE", "TE"),
-  slot("LT", "OL", "LT"),
-  slot("LG", "OL", "LG"),
-  slot("C", "OL", "C"),
-  slot("RG", "OL", "RG"),
-  slot("RT", "OL", "RT"),
-  slot("DE1", "DL", "DE"),
-  slot("DT1", "DL", "DT"),
-  slot("DT2", "DL", "DT"),
-  slot("DE2", "DL", "DE"),
-  slot("LB1", "LB", "OLB"),
-  slot("LB2", "LB", "MLB"),
-  slot("LB3", "LB", "OLB"),
-  slot("CB1", "CB", "CB"),
-  slot("CB2", "CB", "CB"),
-  slot("FS", "S", "FS"),
-  slot("SS", "S", "SS"),
+  slot("QB", "QB", "QB", "QB"),
+  slot("RB", "RB", "RB", "RB"),
+  slot("WR1", "WR", "WR", "X"),
+  slot("WR2", "WR", "WR", "Z"),
+  slot("WR3", "WR", "WR", "SLOT"),
+  slot("TE", "TE", "TE", "TE"),
+  slot("LT", "OL", "LT", "T"),
+  slot("LG", "OL", "LG", "G"),
+  slot("C", "OL", "C", "C"),
+  slot("RG", "OL", "RG", "G"),
+  slot("RT", "OL", "RT", "T"),
+  slot("DE1", "DL", "DE", "DE"),
+  slot("DT1", "DL", "DT", "DT"),
+  slot("DT2", "DL", "DT", "DT"),
+  slot("DE2", "DL", "DE", "DE"),
+  slot("LB1", "LB", "OLB", "OLB"),
+  slot("LB2", "LB", "MLB", "MLB"),
+  slot("LB3", "LB", "OLB", "OLB"),
+  slot("CB1", "CB", "CB", "CB"),
+  slot("CB2", "CB", "CB", "CB"),
+  slot("FS", "S", "FS", "FS"),
+  slot("SS", "S", "SS", "SS"),
 ];
 
 export const SLOT_BY_ID = Object.fromEntries(SLOTS.map(s => [s.id, s])) as Record<SlotId, Slot>;
@@ -139,17 +165,22 @@ export function ratePlayers(dex: DexEntry[]): Player[] {
   // Position scores: 70% the attributes that matter there, 30% base stat total (raw talent),
   // minus a body-size penalty when the frame is wrong for the job. Re-standardised so a 75
   // means the same thing at every position.
-  const posZ = dex.map(() => ({}) as Record<Pos, number>);
-  for (const pos of POS_LIST) {
-    const { weights, frame } = POSITIONS[pos];
-    const raw = attrZ.map((at, i) => {
-      const fit = Object.entries(weights).reduce((sum, [a, w]) => sum + w! * at[a as AttrKey], 0);
-      const miss = Math.max(0, Math.abs(inputZ.size[i] - frame) - FRAME_TOLERANCE);
-      return ATTR_SHARE * fit + (1 - ATTR_SHARE) * inputZ.bst[i] - FRAME_PENALTY * miss;
-    });
-    const z = zScorer(raw);
-    raw.forEach((v, i) => (posZ[i][pos] = z(v)));
-  }
+  const recipeZ = <K extends string>(recipes: Record<K, { frame: number; weights: Partial<Record<AttrKey, number>> }>) => {
+    const out = dex.map(() => ({}) as Record<K, number>);
+    for (const key of Object.keys(recipes) as K[]) {
+      const { weights, frame } = recipes[key];
+      const raw = attrZ.map((at, i) => {
+        const fit = Object.entries(weights).reduce((sum, [a, w]) => sum + (w as number) * at[a as AttrKey], 0);
+        const miss = Math.max(0, Math.abs(inputZ.size[i] - frame) - FRAME_TOLERANCE);
+        return ATTR_SHARE * fit + (1 - ATTR_SHARE) * inputZ.bst[i] - FRAME_PENALTY * miss;
+      });
+      const z = zScorer(raw);
+      raw.forEach((v, i) => (out[i][key] = z(v)));
+    }
+    return out;
+  };
+  const posZ = recipeZ(POSITIONS);
+  const roleZ = recipeZ(ROLES);
 
   const natural = naturalPositions(posZ);
 
@@ -164,6 +195,7 @@ export function ratePlayers(dex: DexEntry[]): Player[] {
       rarityBonus: posOvr[natural[i]] - plain,
       attrs: rateAll(attrZ[i], lift[i]),
       posOvr,
+      roleOvr: rateAll(roleZ[i], lift[i]),
       pos: natural[i],
       ovr: posOvr[natural[i]],
     };

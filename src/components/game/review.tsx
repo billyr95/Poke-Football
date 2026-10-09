@@ -16,7 +16,7 @@ import { TeamMark } from "./team-mark";
 export function useTeamTable() {
   const { league, byId } = useGame();
   return useMemo(() => {
-    const rows = league!.teams.map(t => ({ team: t, r: teamRatings(t, byId, league!.settings) }));
+    const rows = league!.teams.map(t => ({ team: t, r: teamRatings(t, byId, league!) }));
     const avg = rows.reduce((a, x) => a + x.r.ovr, 0) / rows.length;
     return rows
       .map(x => ({ ...x, grade: grade(x.r.ovr, avg) }))

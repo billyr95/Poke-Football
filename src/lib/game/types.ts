@@ -1,3 +1,5 @@
+import type { TeamScheme } from "./schemes";
+
 export type StatKey = "hp" | "atk" | "def" | "spa" | "spd" | "spe";
 export type BaseStats = Record<StatKey, number>;
 
@@ -9,9 +11,15 @@ export type SlotId =
   | "QB" | "RB" | "WR1" | "WR2" | "WR3" | "TE" | "LT" | "LG" | "C" | "RG" | "RT"
   | "DE1" | "DT1" | "DT2" | "DE2" | "LB1" | "LB2" | "LB3" | "CB1" | "CB2" | "FS" | "SS";
 
+/** Granular roles inside a position, used by advanced mode (e.g. a WR can be an X, a Z or a slot receiver). */
+export type Role =
+  | "QB" | "RB" | "X" | "Z" | "SLOT" | "TE" | "T" | "G" | "C"
+  | "DE" | "DT" | "OLB" | "MLB" | "CB" | "FS" | "SS";
+
 export interface Slot {
   id: SlotId;
   pos: Pos;
+  role: Role;
   label: string;
   side: Side;
 }
@@ -43,6 +51,8 @@ export interface Player extends DexEntry {
   rarityBonus: number;
   attrs: Record<AttrKey, number>;
   posOvr: Record<Pos, number>;
+  /** Ratings at each granular role (advanced mode). */
+  roleOvr: Record<Role, number>;
   pos: Pos;
   ovr: number;
 }
@@ -124,7 +134,7 @@ export interface SeasonState {
   championId: number | null;
 }
 
-export type Phase = "lobby" | "draft" | "review" | "season" | "done";
+export type Phase = "lobby" | "schemes" | "draft" | "review" | "season" | "done";
 
 export interface LeagueSettings {
   teamCount: number; // humans + AI fill
@@ -135,8 +145,10 @@ export interface LeagueSettings {
   randomOrder: boolean;
   /** A player in several type stacks gets every stack's bonus instead of just the best one. Missing on older leagues = off. */
   stackChem?: boolean;
-  /** Hidden surprises (Bidoof). Missing on older leagues = on. */
+  /** Hidden surprises (Bidoof, shape-shifters). Missing on older leagues = on. */
   easterEggs?: boolean;
+  /** Advanced mode: scheme picks, granular roles and scheme fit. Missing on older leagues = standard. */
+  mode?: "standard" | "advanced";
 }
 
 export interface League {
@@ -149,4 +161,8 @@ export interface League {
   teams: Team[];
   draft: DraftState;
   season: SeasonState | null;
+  /** Advanced mode: each team's offensive scheme, front and coverage, by team id. */
+  schemes?: Record<number, TeamScheme>;
+  /** Advanced mode, while picking schemes: when picks close (host clock) and which teams have locked in. */
+  schemePick?: { deadline: number; locked: number[] };
 }

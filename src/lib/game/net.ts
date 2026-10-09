@@ -1,6 +1,7 @@
 "use client";
 
 import type { DataConnection, Peer } from "peerjs";
+import type { TeamScheme } from "./schemes";
 import type { League, LeagueSettings, SlotId } from "./types";
 
 /**
@@ -13,7 +14,8 @@ const PREFIX = "pokefootball-v2-";
 export type GuestMessage =
   | { t: "hello"; clientId: string; name: string }
   | { t: "pick"; clientId: string; playerId: number; slotId: SlotId }
-  | { t: "rename"; clientId: string; teamName: string };
+  | { t: "rename"; clientId: string; teamName: string }
+  | { t: "scheme"; clientId: string; scheme: TeamScheme; lock: boolean };
 
 export type HostMessage =
   | { t: "state"; league: League; now: number } // now = host clock, so guests can sync the pick timer

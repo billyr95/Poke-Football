@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MAX_CHEM } from "@/lib/game/chemistry";
+import { SCHEME_SECONDS } from "@/lib/game/schemes";
 import { GENERATIONS, poolEntries } from "@/lib/game/dex";
 import { MIN_TEAMS, maxTeamsFor } from "@/lib/game/league";
 import { useGame } from "@/lib/game/store";
@@ -197,6 +198,27 @@ export function Lobby() {
           </section>
 
           <section className="space-y-2">
+            <h3 className="text-sm font-semibold">Game mode</h3>
+            <div className="grid grid-cols-2 gap-2">
+              <Toggle on={s.mode !== "advanced"} disabled={!isHost} onClick={() => setSettings({ mode: "standard" })}>
+                <div className="font-medium">Standard</div>
+                <div className="text-xs opacity-75">Nine positions, straight to the draft</div>
+              </Toggle>
+              <Toggle on={s.mode === "advanced"} disabled={!isHost} onClick={() => setSettings({ mode: "advanced" })}>
+                <div className="font-medium">Advanced</div>
+                <div className="text-xs opacity-75">Pick schemes, granular roles, scheme fit</div>
+              </Toggle>
+            </div>
+            {s.mode === "advanced" && (
+              <p className="text-xs text-muted-foreground">
+                Before the draft, everyone gets {SCHEME_SECONDS} seconds to pick an offense, a defensive front and a coverage
+                (anyone who doesn&apos;t keeps the defaults). Ratings then depend on the exact role (X, Z or slot receiver,
+                tackle or guard, edge or interior…) and on how well each Pokémon fits your schemes.
+              </p>
+            )}
+          </section>
+
+          <section className="space-y-2">
             <h3 className="text-sm font-semibold">Chemistry stacking</h3>
             <div className="grid grid-cols-2 gap-2">
               <Toggle on={!s.stackChem} disabled={!isHost} onClick={() => setSettings({ stackChem: false })}>
@@ -240,7 +262,7 @@ export function Lobby() {
 
           {isHost && (
             <Button size="lg" className="w-full" onClick={beginDraft}>
-              Start the draft · {s.teamCount} teams × 22 picks
+              {s.mode === "advanced" ? "Start: pick schemes, then draft" : "Start the draft"} · {s.teamCount} teams × 22 picks
             </Button>
           )}
         </CardContent>

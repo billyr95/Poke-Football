@@ -7,8 +7,35 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { normalizeCode } from "@/lib/game/league";
 import { useGame } from "@/lib/game/store";
+import { cn } from "@/lib/utils";
+import { AllTimeStats } from "./all-time";
 
 export function Home() {
+  const [tab, setTab] = useState<"play" | "stats">("play");
+  return (
+    <div className={cn("mx-auto w-full px-4 py-6", tab === "stats" ? "max-w-5xl" : "max-w-3xl")}>
+      <div className="mb-4 flex justify-center">
+        <div role="tablist" aria-label="Home" className="inline-flex rounded-full border p-1">
+          {([["play", "Play"], ["stats", "All-time stats"]] as const).map(([t, label]) => (
+            <button
+              key={t}
+              type="button"
+              role="tab"
+              aria-selected={tab === t}
+              onClick={() => setTab(t)}
+              className={cn("rounded-full px-4 py-1.5 text-sm font-medium", tab === t ? "bg-foreground text-background" : "hover:bg-muted")}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+      {tab === "play" ? <Play /> : <AllTimeStats />}
+    </div>
+  );
+}
+
+function Play() {
   const { me, host, join, status } = useGame();
   const [name, setName] = useState(me.name);
   const [code, setCode] = useState("");
@@ -16,7 +43,7 @@ export function Home() {
   const nameOk = name.trim().length >= 2;
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-8 px-4 py-10">
+    <div className="space-y-8 py-4">
       <div className="space-y-3 text-center">
         <h1 className="font-heading text-5xl tracking-tight sm:text-6xl">Draft. Play. Win the title.</h1>
         <p className="mx-auto max-w-xl text-muted-foreground">

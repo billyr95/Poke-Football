@@ -9,6 +9,9 @@ import type { LeagueSettings, Player, SlotId, Team } from "./types";
  *  Evolution line   — 2+ from one family anywhere on the roster: +2 each
  *
  * Bonuses add up, capped at +5 per player, and no rating goes above 99.
+ *
+ * Easter egg: shape-shifters count as more types for chemistry. Arceus (Multitype) and Silvally (RKS System)
+ * can be any type, so they count as all of them; Rotom brings its five appliance forms' types along.
  */
 
 export const UNITS: { key: string; label: string; slots: SlotId[] }[] = [
@@ -24,6 +27,21 @@ const QB_MAX = 3;
 const FAMILY_BONUS = 2;
 export const MAX_CHEM = 5;
 
+const ALL_TYPES = [
+  "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground",
+  "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy",
+];
+const SHAPESHIFTERS: Record<number, string[]> = {
+  493: ALL_TYPES, // Arceus
+  773: ALL_TYPES, // Silvally
+  479: ["electric", "ghost", "fire", "water", "ice", "grass", "flying"], // Rotom: Heat, Wash, Frost, Mow, Fan
+};
+
+/** The types a Pokémon counts as for chemistry. */
+export function chemTypes(p: Player, easterEggs = true): string[] {
+  return (easterEggs && SHAPESHIFTERS[p.id]) || p.types;
+}
+
 export interface ChemLink {
   kind: "stack" | "qb" | "family";
   label: string;
@@ -36,8 +54,9 @@ export interface Chemistry {
   links: ChemLink[];
 }
 
-export function chemistry(team: Team, byId: Map<number, Player>, settings?: Pick<LeagueSettings, "stackChem">): Chemistry {
+export function chemistry(team: Team, byId: Map<number, Player>, settings?: Pick<LeagueSettings, "stackChem" | "easterEggs">): Chemistry {
   const stack = settings?.stackChem ?? false;
+  const typesOf = (p: Player) => chemTypes(p, settings?.easterEggs ?? true);
   const at = (slot: SlotId) => {
     const id = team.roster[slot];
     return id != null ? byId.get(id) : undefined;
@@ -50,8 +69,8 @@ export function chemistry(team: Team, byId: Map<number, Player>, settings?: Pick
   for (const unit of UNITS) {
     const players = unit.slots.map(at).filter((p): p is Player => !!p);
     const best = new Map<number, number>();
-    for (const type of new Set(players.flatMap(p => p.types))) {
-      const members = players.filter(p => p.types.includes(type));
+    for (const type of new Set(players.flatMap(typesOf))) {
+      const members = players.filter(p => typesOf(p).includes(type));
       const bonus = STACK_BONUS(members.length);
       if (!bonus) continue;
       links.push({ kind: "stack", label: `${cap(type)} ${unit.label.toLowerCase()}`, members: members.map(p => p.id), bonus });
@@ -65,7 +84,7 @@ export function chemistry(team: Team, byId: Map<number, Player>, settings?: Pick
   if (qb) {
     const targets = (["RB", "WR1", "WR2", "WR3", "TE"] as SlotId[])
       .map(at)
-      .filter((p): p is Player => !!p && p.types.some(t => qb.types.includes(t)));
+      .filter((p): p is Player => !!p && typesOf(p).some(t => typesOf(qb).includes(t)));
     if (targets.length) {
       for (const r of targets) bump(r.id, QB_LINK_BONUS);
       bump(qb.id, Math.min(QB_MAX, targets.length));

@@ -11,6 +11,7 @@ import { Home } from "./home";
 import { HowRatings } from "./how-ratings";
 import { Lobby } from "./lobby";
 import { Review } from "./review";
+import { SchemeSelect } from "./scheme-select";
 import { Season } from "./season";
 
 function Header() {
@@ -91,6 +92,8 @@ function Screen() {
   switch (league.phase) {
     case "lobby":
       return <Lobby />;
+    case "schemes":
+      return <SchemeSelect />;
     case "draft":
       return <DraftRoom />;
     case "review":

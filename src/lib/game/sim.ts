@@ -1,7 +1,8 @@
 import { chemistry, withChem } from "./chemistry";
 import { SLOTS } from "./ratings";
+import { fitBonus, isAdvanced, matchupTweak, ratingContext, slotFit, type SimTweak } from "./schemes";
 import { normal, rngFor, weightedPick, type Rng } from "./rng";
-import { LONG_KEYS, type Game, type GameResult, type League, type LeagueSettings, type Player, type SeasonState, type SlotId, type StatLine, type Team, type TeamLine } from "./types";
+import { LONG_KEYS, type Game, type GameResult, type League, type Player, type SeasonState, type SlotId, type StatLine, type Team, type TeamLine } from "./types";
 
 /** Play-by-play football sim. Each team gets a fixed number of possessions starting at its own 25. */
 
@@ -18,6 +19,7 @@ function standIn(slotId: SlotId): Player {
     base: { hp: 40, atk: 40, def: 40, spa: 40, spd: 40, spe: 40 }, family: -1, evolvesFrom: null, rarity: null, rarityBonus: 0, gen: 0, stage: 1, maturity: 1,
     attrs: { SPD: r, STR: r, AGI: r, AWR: r, CTH: r, THP: r, THA: r, BLK: r, TKL: r, COV: r },
     posOvr: { QB: r, RB: r, WR: r, TE: r, OL: r, DL: r, LB: r, CB: r, S: r },
+    roleOvr: { QB: r, RB: r, X: r, Z: r, SLOT: r, TE: r, T: r, G: r, C: r, DE: r, DT: r, OLB: r, MLB: r, CB: r, FS: r, SS: r },
     pos: SLOTS.find(s => s.id === slotId)!.pos, ovr: r,
   };
 }
@@ -40,14 +42,23 @@ function divine(p: Player): Player {
 const isGod = (p: Player | null | undefined) => !!p && gods.has(p);
 const godOn = (l: Lineup, side: "off" | "def") => SLOTS.filter(s => s.side === side).map(s => l[s.id]).find(isGod) ?? null;
 
-function lineup(team: Team, byId: Map<number, Player>, settings: LeagueSettings): Lineup {
-  const chem = chemistry(team, byId, settings).bonus;
-  const eggs = settings.easterEggs ?? true;
+function lineup(team: Team, byId: Map<number, Player>, league: Pick<League, "settings" | "schemes">): Lineup {
+  const chem = chemistry(team, byId, league.settings).bonus;
+  const eggs = league.settings.easterEggs ?? true;
+  const ctx = ratingContext(league, team);
   return Object.fromEntries(
     SLOTS.map(s => {
       const p = team.roster[s.id] != null ? byId.get(team.roster[s.id]!) : undefined;
       if (!p) return [s.id, standIn(s.id)];
-      const withBonus = withChem(p, chem.get(p.id) ?? 0);
+      let withBonus: Player;
+      if (ctx.advanced) {
+        // Advanced: play at the granular role's rating, and scheme fit lifts or drags everything they do.
+        const bonus = (chem.get(p.id) ?? 0) + (ctx.scheme ? fitBonus(slotFit(p.id, s.pos, s.side, ctx.scheme)) : 0);
+        const adjusted = withChem(p, bonus);
+        withBonus = { ...adjusted, posOvr: { ...adjusted.posOvr, [s.pos]: Math.min(99, p.roleOvr[s.role] + bonus) } };
+      } else {
+        withBonus = withChem(p, chem.get(p.id) ?? 0);
+      }
       return [s.id, eggs && p.id === BIDOOF ? divine(withBonus) : withBonus];
     }),
   ) as Lineup;
@@ -56,15 +67,15 @@ function lineup(team: Team, byId: Map<number, Player>, settings: LeagueSettings)
 const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
 
-function unitScores(o: Lineup, d: Lineup) {
+function unitScores(o: Lineup, d: Lineup, t: Required<SimTweak>) {
   const ol = [o.LT, o.LG, o.C, o.RG, o.RT];
   const dl = [d.DE1, d.DT1, d.DT2, d.DE2];
   const lb = [d.LB1, d.LB2, d.LB3];
   return {
     runBlock: avg(ol.map(p => p.posOvr.OL)) * 0.8 + o.TE.attrs.BLK * 0.2,
     passBlock: avg(ol.map(p => p.attrs.BLK)),
-    runStop: avg(dl.map(p => p.posOvr.DL)) * 0.55 + avg(lb.map(p => p.posOvr.LB)) * 0.45,
-    passRush: avg(dl.map(p => (p.attrs.STR + p.attrs.SPD) / 2)),
+    runStop: avg(dl.map(p => p.posOvr.DL)) * 0.55 + avg(lb.map(p => p.posOvr.LB)) * 0.45 + t.stop,
+    passRush: avg(dl.map(p => (p.attrs.STR + p.attrs.SPD) / 2)) + t.rush,
   };
 }
 
@@ -112,8 +123,8 @@ interface DriveOutcome {
 }
 
 /** One possession, snap by snap. `start` is yards from the offense's own goal line. */
-function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: number): DriveOutcome {
-  const u = unitScores(o, d);
+function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: number, t: Required<SimTweak>): DriveOutcome {
+  const u = unitScores(o, d, t);
   const offGod = godOn(o, "off");
   const defGod = godOn(d, "def");
   let yard = start;
@@ -164,10 +175,10 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
     let ballCarrier: Player | null = null;
     let tackledBy: Player | null = null;
 
-    if (rng() < passBias + qbEdge) {
+    if (rng() < passBias + qbEdge + t.pass) {
       // Pass play.
       const qb = o.QB;
-      let sackP = clamp(0.07 + (u.passRush - u.passBlock) / 300, 0.03, 0.14);
+      let sackP = clamp(0.07 + (u.passRush - u.passBlock) / 300, 0.03, 0.14) * t.sack;
       if (isGod(qb)) sackP = 0; // nobody touches him
       else if (defGod) sackP += 0.16;
       if (rng() < sackP) {
@@ -194,7 +205,7 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
         add(box, qb, "passAtt");
         add(box, rec, "targets");
         team.passAtt++;
-        let intP = clamp(0.028 + (cov.attrs.COV - qb.attrs.THA) / 800, 0.01, 0.06);
+        let intP = clamp(0.028 + (cov.attrs.COV - qb.attrs.THA) / 800, 0.01, 0.06) + t.int;
         if (godCatch) intP = 0;
         else if (isGod(cov)) intP = 0.2;
         if (rng() < intP) {
@@ -216,12 +227,12 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
           team.turnovers++;
           return { points: 0, nextStart: clamp(100 - yard - 12 + ret, 5, 95) };
         }
-        let cmpP = clamp(0.57 + (qb.attrs.THA + rec.attrs.CTH - 2 * cov.attrs.COV) / 300 + (u.passBlock - u.passRush) / 700, 0.4, 0.76);
+        let cmpP = clamp(0.57 + (qb.attrs.THA + rec.attrs.CTH - 2 * cov.attrs.COV) / 300 + (u.passBlock - u.passRush) / 700, 0.4, 0.76) + t.cmp;
         if (godCatch) cmpP = 0.96;
         if (rng() < cmpP) {
-          const air = Math.max(1, normal(rng, 4.6 + (qb.attrs.THP - 70) / 16, 3.5));
+          const air = Math.max(1, normal(rng, 4.6 + (qb.attrs.THP - 70) / 16 + t.air, 3.5));
           const yacRaw = Math.max(0, normal(rng, 2.2 + (rec.attrs.SPD - cov.attrs.SPD) / 12, 2.5));
-          const breakP = godCatch ? 0.3 : clamp(0.025 + (rec.attrs.SPD - cov.attrs.SPD) / 1500, 0.01, 0.05);
+          const breakP = godCatch ? 0.3 : clamp(0.025 + (rec.attrs.SPD - cov.attrs.SPD) / 1500, 0.01, 0.05) * t.big;
           const breakaway = rng() < breakP ? 12 + rng() * 35 : 0;
           gained = Math.min(Math.round(air + yacRaw + breakaway), 100 - yard);
           const yac = Math.max(0, gained - Math.round(air));
@@ -248,11 +259,11 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
     } else {
       // Run play.
       // Wherever Bidoof lines up on offense, the coach finds a way to hand him the ball.
-      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && rng() < 0.6 ? offGod : rng() < 0.88 ? o.RB : o.QB;
+      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && rng() < 0.6 ? offGod : rng() < 1 - t.qbRun ? o.RB : o.QB;
       const skill = isGod(carrier) ? DIVINE : carrier === o.RB ? o.RB.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
-      const mean = 3.8 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16;
+      const mean = 3.8 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16 + t.run;
       gained = Math.round(normal(rng, mean, 3.4));
-      const breakP = isGod(carrier) ? 0.3 : clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04);
+      const breakP = isGod(carrier) ? 0.3 : clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04) * t.big;
       if (rng() < breakP) gained += Math.round(10 + rng() * 40);
       gained = clamp(gained, -5, 100 - yard);
       add(box, carrier, "rushAtt");
@@ -322,7 +333,9 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
 export function simGame(league: League, game: Game, byId: Map<number, Player>): GameResult {
   const rng = rngFor(league.seed, `game-${game.id}`);
   const team = (id: number) => league.teams.find(t => t.id === id)!;
-  const sides = [lineup(team(game.home), byId, league.settings), lineup(team(game.away), byId, league.settings)];
+  const sides = [lineup(team(game.home), byId, league), lineup(team(game.away), byId, league)];
+  const schemeOf = (id: number) => (isAdvanced(league.settings) ? league.schemes?.[id] ?? null : null);
+  const schemes = [schemeOf(game.home), schemeOf(game.away)];
   const names = [team(game.home).name, team(game.away).name];
   const score: [number, number] = [0, 0];
   const box: Box = {};
@@ -331,7 +344,7 @@ export function simGame(league: League, game: Game, byId: Map<number, Player>): 
   let start = 25;
 
   const possess = (i: 0 | 1, label: string) => {
-    const out = drive(rng, sides[i], sides[1 - i], box, teamStats[i], start);
+    const out = drive(rng, sides[i], sides[1 - i], box, teamStats[i], start, matchupTweak(schemes[i], schemes[1 - i]));
     start = out.nextStart;
     if (out.safety) {
       score[1 - i] += 2;

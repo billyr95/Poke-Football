@@ -1,6 +1,8 @@
 "use client";
 
 import { SLOT_BY_ID } from "@/lib/game/ratings";
+import { ratingContext, slotRating } from "@/lib/game/schemes";
+import { useGame } from "@/lib/game/store";
 import type { Player, SlotId, Team } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
 import { MonBadge, RatingChip } from "./bits";
@@ -27,6 +29,8 @@ export function Formation({
   highlight?: Set<SlotId>;
   compact?: boolean;
 }) {
+  const { league } = useGame();
+  const ctx = ratingContext(league, team);
   // Sized off the field's width (container query units), so seven linemen fit across on a phone.
   const size = compact ? "clamp(26px, 8.5cqw, 40px)" : "clamp(28px, 9cqw, 46px)";
   return (
@@ -56,13 +60,13 @@ export function Formation({
               onClick={() => onSlot?.(slot, p)}
               className="group absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 disabled:cursor-default"
               style={{ left: `${x}%`, top: `${y}%` }}
-              title={p ? `${s.label}: ${p.name}` : `${s.label} (open)`}
+              title={p ? `${ctx.advanced ? s.role : s.label}: ${p.name}` : `${ctx.advanced ? s.role : s.label} (open)`}
             >
               {p ? (
                 <>
                   <MonBadge player={p} size={size} className="transition-transform group-enabled:group-hover:scale-110" />
                   <RatingChip
-                    value={p.posOvr[s.pos]}
+                    value={slotRating(p, s, ctx)}
                     bonus={chem?.get(p.id) ?? 0}
                     className="text-[clamp(11px,3.6cqw,16px)]"
                   />
@@ -75,7 +79,7 @@ export function Formation({
                   )}
                   style={{ width: size, height: size, fontSize: "clamp(10px, 3cqw, 13px)" }}
                 >
-                  {s.label}
+                  {ctx.advanced ? s.role : s.label}
                 </span>
               )}
             </button>
