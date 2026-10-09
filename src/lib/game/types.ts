@@ -69,21 +69,44 @@ export interface PickRecord {
 export interface DraftState {
   order: number[]; // team id for every pick, in order
   pick: number; // index into order of the pick on the clock
+  /** When the current pick's timer runs out (host clock, ms since epoch), or null if untimed. */
+  deadline: number | null;
   log: PickRecord[];
   snake: boolean;
 }
 
 export interface StatLine {
-  passAtt: number; passCmp: number; passYds: number; passTd: number; passInt: number;
-  rushAtt: number; rushYds: number; rushTd: number;
-  rec: number; recYds: number; recTd: number;
-  tkl: number; sack: number; defInt: number;
+  // passing
+  passAtt: number; passCmp: number; passYds: number; passTd: number; passInt: number; passLong: number;
+  sacked: number; sackYdsLost: number;
+  // rushing
+  rushAtt: number; rushYds: number; rushTd: number; rushLong: number; fumbles: number; fumblesLost: number;
+  // receiving
+  targets: number; rec: number; recYds: number; recTd: number; recLong: number; yac: number;
+  // defense
+  tkl: number; tfl: number; sack: number; defInt: number; intYds: number; passDef: number; ff: number; fr: number; safety: number;
+}
+
+/** "Long" stats keep the best single play instead of adding up. */
+export const LONG_KEYS = ["passLong", "rushLong", "recLong"] as const;
+
+export interface TeamLine {
+  plays: number; firstDowns: number; totalYds: number;
+  passYds: number; // net of sack yardage, like the NFL
+  rushYds: number; rushAtt: number; passAtt: number;
+  thirdAtt: number; thirdConv: number; fourthAtt: number; fourthConv: number;
+  rzAtt: number; rzTd: number;
+  turnovers: number; sacksAllowed: number;
+  fga: number; fgm: number; fgLong: number; xpa: number; xpm: number;
+  punts: number; puntYds: number;
 }
 
 export interface GameResult {
   score: [number, number]; // [home, away]
   /** Box score keyed by Pokémon id; each player is on exactly one team. */
   stats: Record<number, Partial<StatLine>>;
+  /** Team stats, [home, away]. Missing on games played before team stats existed. */
+  team?: [TeamLine, TeamLine];
   plays: string[]; // scoring summary
 }
 
@@ -107,6 +130,7 @@ export interface LeagueSettings {
   teamCount: number; // humans + AI fill
   gens: number[]; // which generations are in the draft pool
   legendaries: boolean; // include legendary & mythical Pokémon
+  pickSeconds: number | null; // pick timer; null = no timer
   snake: boolean;
   randomOrder: boolean;
 }

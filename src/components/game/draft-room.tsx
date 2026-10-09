@@ -1,18 +1,20 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { chemistry } from "@/lib/game/chemistry";
-import { bestOpenSlot, onClock, openSlots, takenIds } from "@/lib/game/draft";
+import { bestOpenSlot, onClock, openSlots, takenIds, teamRatings } from "@/lib/game/draft";
 import { POS_LIST, POSITIONS, ROSTER_SIZE, SLOT_BY_ID } from "@/lib/game/ratings";
 import { useGame } from "@/lib/game/store";
-import type { Player, Pos, SlotId } from "@/lib/game/types";
+import type { Player, Pos, SlotId, Team } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
 import { MonBadge, RatingChip, TYPE_COLOR, TypePill } from "./bits";
 import { ChemistryList } from "./chemistry-list";
@@ -21,8 +23,32 @@ import { PlayerCard } from "./player-card";
 
 type PosFilter = Pos | "ALL";
 
+/** Countdown to the pick deadline. `offset` converts this browser's clock to the host's. */
+function PickClock({ deadline, offset, total }: { deadline: number; offset: number; total: number }) {
+  const [now, setNow] = useState(() => Date.now() + offset);
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now() + offset), 250);
+    return () => clearInterval(id);
+  }, [offset]);
+  const left = Math.max(0, Math.ceil((deadline - now) / 1000));
+  const urgent = left <= 10;
+  return (
+    <div className="flex items-center gap-2" role="timer" aria-label={`${left} seconds left`}>
+      <span className="h-1.5 w-24 overflow-hidden rounded-full bg-muted">
+        <span
+          className={cn("block h-full rounded-full transition-[width] duration-300", urgent ? "bg-red-500" : "bg-emerald-500")}
+          style={{ width: `${Math.min(100, (left / total) * 100)}%` }}
+        />
+      </span>
+      <span className={cn("w-12 font-heading text-xl tabular-nums", urgent && "text-red-600 dark:text-red-400")}>
+        {Math.floor(left / 60)}:{String(left % 60).padStart(2, "0")}
+      </span>
+    </div>
+  );
+}
+
 export function DraftRoom() {
-  const { league, pool, byId, myTeamId, isHost, pick, autoPick } = useGame();
+  const { league, pool, byId, myTeamId, isHost, pick, autoPick, clockOffset } = useGame();
   const l = league!;
   const team = onClock(l);
   const myTurn = team != null && team.id === myTeamId;
@@ -32,8 +58,8 @@ export function DraftRoom() {
   const q = useDeferredValue(query.trim().toLowerCase());
   const [posFilter, setPosFilter] = useState<PosFilter>("ALL");
   const [typeFilter, setTypeFilter] = useState("all");
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [viewTeamId, setViewTeamId] = useState<number | null>(myTeamId ?? l.teams[0]?.id ?? null);
+  const [modalId, setModalId] = useState<number | null>(null);
+  const [tab, setTab] = useState<string>(myTeam ? "mine" : "feed");
 
   const taken = useMemo(() => takenIds(l), [l]);
   const types = useMemo(() => [...new Set(pool.flatMap(p => p.types))].sort(), [pool]);
@@ -49,25 +75,25 @@ export function DraftRoom() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pool, taken, q, typeFilter, posFilter]);
 
-  // Falls back to the best available player once the selected one gets drafted.
-  const selected = (selectedId != null && !taken.has(selectedId) ? byId.get(selectedId) : undefined) ?? available[0] ?? null;
   const myOpen = useMemo(() => (myTeam ? openSlots(myTeam) : []), [myTeam]);
-  const viewTeam = l.teams.find(t => t.id === viewTeamId) ?? l.teams[0];
-  const viewChem = useMemo(() => chemistry(viewTeam, byId), [viewTeam, byId]);
+  const myChem = useMemo(() => (myTeam ? chemistry(myTeam, byId) : null), [myTeam, byId]);
+  const modalPlayer = modalId != null ? byId.get(modalId) ?? null : null;
+  const modalTakenBy = modalPlayer && taken.has(modalPlayer.id)
+    ? l.teams.find(t => t.id === l.draft.log.find(r => r.playerId === modalPlayer.id)?.teamId)
+    : undefined;
 
   const round = Math.floor(l.draft.pick / l.teams.length) + 1;
   const pickInRound = (l.draft.pick % l.teams.length) + 1;
-  const recent = [...l.draft.log].reverse().slice(0, 12);
 
-  // Where would the selected player go? One button per open position, best spot first.
+  // One "Draft as…" button per open position, best fit first.
   const draftOptions = useMemo(() => {
-    if (!selected || !myTeam) return [];
+    if (!modalPlayer || !myTeam) return [];
     const seen = new Set<Pos>();
     return myOpen
       .filter(s => (seen.has(s.pos) ? false : (seen.add(s.pos), true)))
-      .map(s => ({ slot: s, rating: selected.posOvr[s.pos] }))
+      .map(s => ({ slot: s, rating: modalPlayer.posOvr[s.pos] }))
       .sort((a, b) => b.rating - a.rating);
-  }, [selected, myTeam, myOpen]);
+  }, [modalPlayer, myTeam, myOpen]);
 
   const quickDraft = (p: Player) => {
     const slot = posFilter !== "ALL" ? myOpen.find(s => s.pos === posFilter) ?? bestOpenSlot(myTeam!, p) : bestOpenSlot(myTeam!, p);
@@ -96,6 +122,7 @@ export function DraftRoom() {
           </div>
         )}
         {myTurn && <Badge className="bg-amber-400 text-zinc-950">Your pick</Badge>}
+        {l.draft.deadline != null && <PickClock deadline={l.draft.deadline} offset={clockOffset} total={l.settings.pickSeconds ?? 60} />}
         {!myTurn && team?.managerId == null && <span className="text-sm text-muted-foreground">AI is choosing…</span>}
         <div className="ml-auto flex gap-2">
           {isHost && team?.managerId && (
@@ -106,7 +133,7 @@ export function DraftRoom() {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         {/* Available players */}
         <Card className="min-h-0">
           <CardHeader className="space-y-2 pb-2">
@@ -146,19 +173,16 @@ export function DraftRoom() {
             </div>
           </CardHeader>
           <CardContent className="p-0">
-            <ScrollArea className="h-[60vh] lg:h-[calc(100vh-16rem)]">
+            <ScrollArea className="h-[60vh] lg:h-[calc(100vh-15rem)]">
               <ul className="divide-y">
                 {available.slice(0, 300).map(p => (
                   <li key={p.id}>
                     <div
                       role="button"
                       tabIndex={0}
-                      onClick={() => setSelectedId(p.id)}
-                      onKeyDown={e => e.key === "Enter" && setSelectedId(p.id)}
-                      className={cn(
-                        "flex cursor-pointer items-center gap-3 px-4 py-2 hover:bg-muted/60",
-                        selected?.id === p.id && "bg-muted",
-                      )}
+                      onClick={() => setModalId(p.id)}
+                      onKeyDown={e => e.key === "Enter" && setModalId(p.id)}
+                      className="flex cursor-pointer items-center gap-3 px-4 py-2 hover:bg-muted/60"
                     >
                       <MonBadge player={p} size={34} />
                       <div className="min-w-0 flex-1">
@@ -179,105 +203,192 @@ export function DraftRoom() {
           </CardContent>
         </Card>
 
-        {/* Selected player */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Selected player</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {selected ? (
-              <PlayerCard player={selected} highlightPos={posFilter === "ALL" ? undefined : posFilter}>
-                {myTeam && (
-                  <div className="space-y-2">
-                    {!myTurn && <p className="text-xs text-muted-foreground">You can draft when you&apos;re on the clock.</p>}
-                    <div className="flex flex-wrap gap-2">
-                      {draftOptions.map(({ slot, rating }) => (
-                        <Button
-                          key={slot.pos}
-                          size="sm"
-                          variant={slot.pos === selected.pos ? "default" : "outline"}
-                          disabled={!myTurn}
-                          onClick={() => pick(selected.id, slot.id)}
-                        >
-                          Draft as {slot.pos} · {rating}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </PlayerCard>
-            ) : (
-              <p className="text-sm text-muted-foreground">Pick a player from the list.</p>
-            )}
+        {/* My team / feed / other teams */}
+        <Card className="min-h-0">
+          <CardContent className="pt-4">
+            <Tabs value={tab} onValueChange={v => setTab(String(v))}>
+              <TabsList className="w-full">
+                {myTeam && <TabsTrigger value="mine">My team</TabsTrigger>}
+                <TabsTrigger value="feed">Draft feed ({l.draft.log.length})</TabsTrigger>
+                <TabsTrigger value="teams">Teams</TabsTrigger>
+              </TabsList>
+
+              {myTeam && myChem && (
+                <TabsContent value="mine" className="space-y-3 pt-2">
+                  <TeamHeader team={myTeam} picks={ROSTER_SIZE - myOpen.length} />
+                  <Formation
+                    team={myTeam}
+                    byId={byId}
+                    chem={myChem.bonus}
+                    compact
+                    onSlot={(slot: SlotId, p) => {
+                      if (p) setModalId(p.id);
+                      else setPosFilter(SLOT_BY_ID[slot].pos);
+                    }}
+                  />
+                  <p className="text-xs text-muted-foreground">Tap an open spot to sort the list by that position. Tap a player for details.</p>
+                  <ChemistryList chem={myChem} byId={byId} />
+                </TabsContent>
+              )}
+
+              <TabsContent value="feed" className="pt-2">
+                <DraftFeed onOpen={setModalId} />
+              </TabsContent>
+
+              <TabsContent value="teams" className="pt-2">
+                <OtherTeams onOpen={setModalId} />
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
-
-        {/* Teams */}
-        <div className="space-y-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-              <CardTitle className="font-heading text-xl">Rosters</CardTitle>
-              <Select
-                value={String(viewTeam.id)}
-                onValueChange={v => setViewTeamId(Number(v))}
-                items={l.teams.map(t => ({ value: String(t.id), label: t.id === myTeamId ? `${t.name} (you)` : t.name }))}
-              >
-                <SelectTrigger size="sm" className="max-w-[60%]"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  {l.teams.map(t => (
-                    <SelectItem key={t.id} value={String(t.id)}>
-                      <span className="size-2.5 rounded-full" style={{ background: t.color }} />
-                      {t.name}{t.id === myTeamId ? " (you)" : ""}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Formation
-                team={viewTeam}
-                byId={byId}
-                chem={viewChem.bonus}
-                compact
-                highlight={viewTeam.id === myTeamId && selected ? new Set(myOpen.filter(s => s.pos === selected.pos).map(s => s.id)) : undefined}
-                onSlot={(slot: SlotId, p) => {
-                  if (p) setSelectedId(null);
-                  if (!p && viewTeam.id === myTeamId) setPosFilter(SLOT_BY_ID[slot].pos);
-                }}
-              />
-              {viewTeam.id === myTeamId && (
-                <p className="text-xs text-muted-foreground">Tap an open spot to see the best available players for it.</p>
-              )}
-              <ChemistryList chem={viewChem} byId={byId} />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="font-heading text-xl">Latest picks</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ol className="space-y-1.5 text-sm">
-                {recent.map(r => {
-                  const p = byId.get(r.playerId)!;
-                  const t = l.teams.find(x => x.id === r.teamId)!;
-                  return (
-                    <li key={r.pick} className="flex items-center gap-2">
-                      <span className="w-8 text-xs text-muted-foreground tabular-nums">#{r.pick + 1}</span>
-                      <span className="size-2.5 rounded-full" style={{ background: t.color }} />
-                      <span className="min-w-0 flex-1 truncate">
-                        <b>{p.name}</b> <span className="text-muted-foreground">→ {SLOT_BY_ID[r.slotId].label}, {t.name}</span>
-                      </span>
-                      <RatingChip value={p.posOvr[SLOT_BY_ID[r.slotId].pos]} className="text-sm" />
-                    </li>
-                  );
-                })}
-                {!recent.length && <li className="text-muted-foreground">No picks yet.</li>}
-              </ol>
-            </CardContent>
-          </Card>
-        </div>
       </div>
+
+      {/* Player details */}
+      <Dialog open={!!modalPlayer} onOpenChange={o => !o && setModalId(null)}>
+        <DialogContent className="max-h-[90vh] max-w-lg overflow-y-auto sm:max-w-lg">
+          <DialogTitle className="sr-only">{modalPlayer?.name}</DialogTitle>
+          {modalPlayer && (
+            <PlayerCard player={modalPlayer} highlightPos={posFilter === "ALL" ? undefined : posFilter}>
+              {modalTakenBy ? (
+                <p className="text-sm text-muted-foreground">
+                  Drafted by <b style={{ color: modalTakenBy.color }}>{modalTakenBy.name}</b>.
+                </p>
+              ) : myTeam ? (
+                <div className="space-y-2">
+                  {!myTurn && <p className="text-xs text-muted-foreground">You can draft when you&apos;re on the clock.</p>}
+                  <div className="flex flex-wrap gap-2">
+                    {draftOptions.map(({ slot, rating }) => (
+                      <Button
+                        key={slot.pos}
+                        size="sm"
+                        variant={slot.pos === modalPlayer.pos ? "default" : "outline"}
+                        disabled={!myTurn}
+                        onClick={() => {
+                          pick(modalPlayer.id, slot.id);
+                          setModalId(null);
+                        }}
+                      >
+                        Draft as {slot.pos} · {rating}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </PlayerCard>
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
+function TeamHeader({ team, picks }: { team: Team; picks: number }) {
+  const { byId } = useGame();
+  const r = teamRatings(team, byId);
+  return (
+    <div className="flex items-center gap-2">
+      <span className="size-3 rounded-full" style={{ background: team.color }} />
+      <span className="min-w-0 flex-1 truncate font-heading text-lg">{team.name}</span>
+      <span className="text-xs text-muted-foreground">
+        {picks}/{ROSTER_SIZE} · OFF {r.off} · DEF {r.def}
+      </span>
+    </div>
+  );
+}
+
+/** Every pick so far, newest first, optionally filtered to one team. */
+function DraftFeed({ onOpen }: { onOpen: (id: number) => void }) {
+  const { league, byId, myTeamId } = useGame();
+  const l = league!;
+  const [teamFilter, setTeamFilter] = useState("all");
+  const picks = [...l.draft.log].reverse().filter(r => teamFilter === "all" || String(r.teamId) === teamFilter);
+  const n = l.teams.length;
+  return (
+    <div className="space-y-2">
+      <Select
+        value={teamFilter}
+        onValueChange={v => setTeamFilter(String(v ?? "all"))}
+        items={[{ value: "all", label: "All teams" }, ...l.teams.map(t => ({ value: String(t.id), label: t.name }))]}
+      >
+        <SelectTrigger size="sm" className="w-full"><SelectValue /></SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All teams</SelectItem>
+          {l.teams.map(t => (
+            <SelectItem key={t.id} value={String(t.id)}>
+              <span className="size-2.5 rounded-full" style={{ background: t.color }} />
+              {t.name}{t.id === myTeamId ? " (you)" : ""}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <ScrollArea className="h-[55vh] lg:h-[calc(100vh-19rem)]">
+        <ol className="space-y-1 pr-3">
+          {picks.map(r => {
+            const p = byId.get(r.playerId)!;
+            const t = l.teams.find(x => x.id === r.teamId)!;
+            const slot = SLOT_BY_ID[r.slotId];
+            return (
+              <li key={r.pick}>
+                <button
+                  type="button"
+                  onClick={() => onOpen(p.id)}
+                  className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left hover:bg-muted/60", t.id === myTeamId && "bg-amber-400/10")}
+                >
+                  <span className="w-14 shrink-0 text-[11px] leading-tight text-muted-foreground tabular-nums">
+                    R{Math.floor(r.pick / n) + 1}.{(r.pick % n) + 1}
+                    <br />#{r.pick + 1}
+                  </span>
+                  <MonBadge player={p} size={30} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-medium">{p.name}</span>
+                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <span className="size-2 rounded-full" style={{ background: t.color }} />
+                      <span className="truncate">{t.name}</span> · {slot.label}
+                    </span>
+                  </span>
+                  <RatingChip value={p.posOvr[slot.pos]} className="text-sm" />
+                </button>
+              </li>
+            );
+          })}
+          {!picks.length && <li className="py-8 text-center text-sm text-muted-foreground">No picks yet.</li>}
+        </ol>
+      </ScrollArea>
+    </div>
+  );
+}
+
+/** Browse any team's board mid-draft. */
+function OtherTeams({ onOpen }: { onOpen: (id: number) => void }) {
+  const { league, byId, myTeamId } = useGame();
+  const l = league!;
+  const others = l.teams.filter(t => t.id !== myTeamId);
+  const [viewId, setViewId] = useState<number>(others[0]?.id ?? l.teams[0].id);
+  const view = l.teams.find(t => t.id === viewId) ?? l.teams[0];
+  const chem = useMemo(() => chemistry(view, byId), [view, byId]);
+  const filled = Object.keys(view.roster).length;
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-1.5">
+        {l.teams.map(t => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setViewId(t.id)}
+            className={cn(
+              "flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs",
+              t.id === view.id ? "border-foreground bg-foreground text-background" : "hover:bg-muted",
+            )}
+          >
+            <span className="size-2 rounded-full" style={{ background: t.color }} />
+            {t.name}{t.id === myTeamId ? " (you)" : ""}
+          </button>
+        ))}
+      </div>
+      <TeamHeader team={view} picks={filled} />
+      <p className="-mt-2 text-xs text-muted-foreground">{view.manager ?? "AI"}</p>
+      <Formation team={view} byId={byId} chem={chem.bonus} compact onSlot={(_, p) => p && onOpen(p.id)} />
+      <ChemistryList chem={chem} byId={byId} />
     </div>
   );
 }

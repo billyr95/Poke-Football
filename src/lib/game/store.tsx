@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ratedPool } from "./dex";
-import { aiChoose, makePick, onClock } from "./draft";
+import { aiChoose, makePick, onClock, startClock } from "./draft";
 import {
   addManager, createLobby, loadHostedLeague, loadMe, removeManager, renameTeam, saveHostedLeague, saveMe,
   startDraft, updateSettings, type Me,
@@ -25,6 +25,8 @@ interface GameContext {
   ownerOf: Map<number, number>;
   myTeamId: number | null;
   isHost: boolean;
+  /** Host clock minus this browser's clock, in ms; add it to Date.now() to compare with draft.deadline. */
+  clockOffset: number;
 
   host(name: string): Promise<void>;
   join(code: string, name: string): Promise<void>;
@@ -58,6 +60,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [role, setRole] = useState<"host" | "guest" | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [clockOffset, setClockOffset] = useState(0);
 
   const leagueRef = useRef<League | null>(null);
   const hostLink = useRef<HostLink | null>(null);
@@ -95,7 +98,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       try {
         if (msg.t === "hello") {
           commit(addManager(cur, msg.clientId, msg.name.slice(0, 20)));
-          hostLink.current.send(conn, { t: "state", league: leagueRef.current! });
+          hostLink.current.send(conn, { t: "state", league: leagueRef.current!, now: Date.now() });
         } else if (msg.t === "pick") {
           if (onClock(cur)?.managerId !== msg.clientId) throw new Error("It's not your pick.");
           commit(makePick(cur, msg.playerId, msg.slotId));
@@ -113,7 +116,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
     async (l: League) => {
       setStatus("connecting");
       setRole("host");
-      commit(l);
+      setClockOffset(0);
+      // Coming back mid-draft (e.g. after a refresh): give whoever is on the clock a fresh timer.
+      commit(l.phase === "draft" ? startClock(l) : l);
       hostLink.current = await startHosting(l.code, onGuestMessage, clientId => {
         const cur = leagueRef.current;
         if (cur?.phase === "lobby") commit(removeManager(cur, clientId));
@@ -131,6 +136,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       { t: "hello", clientId: m.clientId, name: m.name },
       msg => {
         if (msg.t === "state") {
+          setClockOffset(msg.now - Date.now());
           leagueRef.current = msg.league;
           setLeagueState(msg.league);
         } else if (msg.t === "error") {
@@ -195,6 +201,20 @@ export function GameProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer);
   }, [role, league, pool, apply]);
 
+  // Host enforces the pick timer: when it runs out, the best available player is drafted for that team.
+  useEffect(() => {
+    const deadline = league?.draft.deadline;
+    if (role !== "host" || league?.phase !== "draft" || deadline == null) return;
+    const timer = setTimeout(() => {
+      apply(l => {
+        if (l.draft.deadline !== deadline) return l; // someone picked in time
+        const choice = aiChoose(l, pool);
+        return choice ? makePick(l, choice.playerId, choice.slotId) : l;
+      });
+    }, Math.max(0, deadline - Date.now()));
+    return () => clearTimeout(timer);
+  }, [role, league, pool, apply]);
+
   const value = useMemo<GameContext>(() => {
     const ownerOf = new Map<number, number>();
     for (const p of league?.draft.log ?? []) ownerOf.set(p.playerId, p.teamId);
@@ -203,7 +223,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     const hostOnly = (fn: (l: League) => League) => () => isHost && apply(fn);
 
     return {
-      me, role, status, error, league, pool, byId, ownerOf, myTeamId, isHost,
+      me, role, status, error, league, pool, byId, ownerOf, myTeamId, isHost, clockOffset,
 
       async host(name) {
         setError(null);
@@ -268,7 +288,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       playNext: hostOnly(l => advance(l, byId)),
       playAll: hostOnly(l => simToEnd(l, byId)),
     };
-  }, [me, role, status, error, league, pool, byId, apply, commit, goHost, goJoin, setMe]);
+  }, [me, role, status, error, league, pool, byId, clockOffset, apply, commit, goHost, goJoin, setMe]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

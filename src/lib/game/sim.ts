@@ -1,7 +1,7 @@
 import { chemistry, withChem } from "./chemistry";
 import { SLOTS } from "./ratings";
 import { normal, rngFor, weightedPick, type Rng } from "./rng";
-import type { Game, GameResult, League, Player, SeasonState, SlotId, StatLine, Team } from "./types";
+import { LONG_KEYS, type Game, type GameResult, type League, type Player, type SeasonState, type SlotId, type StatLine, type Team, type TeamLine } from "./types";
 
 /** Play-by-play football sim. Each team gets a fixed number of possessions starting at its own 25. */
 
@@ -55,6 +55,20 @@ function add(box: Box, p: Player, key: keyof StatLine, n = 1) {
   line[key] = (line[key] ?? 0) + n;
 }
 
+function setLong(box: Box, p: Player, key: (typeof LONG_KEYS)[number], n: number) {
+  if (p.id < 0) return;
+  const line = (box[p.id] ??= {});
+  line[key] = Math.max(line[key] ?? -99, n);
+}
+
+export function emptyTeamLine(): TeamLine {
+  return {
+    plays: 0, firstDowns: 0, totalYds: 0, passYds: 0, rushYds: 0, rushAtt: 0, passAtt: 0,
+    thirdAtt: 0, thirdConv: 0, fourthAtt: 0, fourthConv: 0, rzAtt: 0, rzTd: 0,
+    turnovers: 0, sacksAllowed: 0, fga: 0, fgm: 0, fgLong: 0, xpa: 0, xpm: 0, punts: 0, puntYds: 0,
+  };
+}
+
 function tackler(rng: Rng, d: Lineup, deep: boolean): Player {
   const pool = deep
     ? [d.LB1, d.LB2, d.LB3, d.CB1, d.CB2, d.FS, d.SS]
@@ -62,113 +76,196 @@ function tackler(rng: Rng, d: Lineup, deep: boolean): Player {
   return weightedPick(rng, pool, p => p.attrs.TKL ** 2);
 }
 
+const anyDefender = (d: Lineup) => SLOTS.filter(s => s.side === "def").map(s => d[s.id]);
+
 interface DriveOutcome {
   points: number;
   note?: string;
+  safety?: boolean;
+  /** Where the other team starts: yards from their own goal line. */
+  nextStart: number;
 }
 
-function drive(rng: Rng, o: Lineup, d: Lineup, box: Box): DriveOutcome {
+/** One possession, snap by snap. `start` is yards from the offense's own goal line. */
+function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: number): DriveOutcome {
   const u = unitScores(o, d);
-  let yard = 25; // distance from own goal line
+  let yard = start;
   let down = 1;
   let toGo = 10;
+  let inRedZone = false;
+  const flip = (spot: number) => clamp(Math.round(100 - spot), 1, 99);
 
-  for (let play = 0; play < 25; play++) {
+  for (let play = 0; play < 30; play++) {
+    if (!inRedZone && yard >= 80) {
+      inRedZone = true;
+      team.rzAtt++;
+    }
+
     // Fourth down: kick, punt or go for it.
     if (down === 4) {
       const fgDist = 100 - yard + 17;
-      const goForIt = toGo <= 1 && yard >= 45 && rng() < 0.6;
+      const goForIt = (toGo <= 1 && yard >= 45 && rng() < 0.6) || (toGo <= 3 && yard >= 60 && fgDist > 52 && rng() < 0.5);
       if (!goForIt) {
-        if (fgDist <= 55) {
-          const make = clamp(1.02 - (fgDist - 18) * 0.017, 0.35, 0.98);
-          return rng() < make ? { points: 3, note: `${fgDist}-yd field goal` } : { points: 0 };
+        if (fgDist <= 56) {
+          team.fga++;
+          const make = clamp(1.04 - (fgDist - 18) * 0.011, 0.45, 0.98);
+          if (rng() < make) {
+            team.fgm++;
+            team.fgLong = Math.max(team.fgLong, fgDist);
+            return { points: 3, note: `${fgDist}-yd field goal`, nextStart: 25 };
+          }
+          return { points: 0, nextStart: flip(Math.max(yard - 7, 20)) };
         }
-        return { points: 0 };
+        const punt = Math.round(clamp(normal(rng, 44, 6), 28, 65));
+        team.punts++;
+        team.puntYds += punt;
+        const landing = yard + punt;
+        return { points: 0, nextStart: landing >= 100 ? 20 : flip(landing - Math.round(rng() * 9)) };
       }
     }
 
-    const passBias = toGo >= 8 ? 0.68 : toGo <= 2 ? 0.35 : 0.55;
+    const snapDown = down;
+    if (snapDown === 3) team.thirdAtt++;
+    if (snapDown === 4) team.fourthAtt++;
+    team.plays++;
+
+    const passBias = toGo >= 8 ? 0.64 : toGo <= 2 ? 0.3 : 0.5;
     const qbEdge = (o.QB.posOvr.QB - 70) / 200;
     let gained: number;
     let scorer: Player | null = null;
     let passer: Player | null = null;
+    let ballCarrier: Player | null = null;
+    let tackledBy: Player | null = null;
 
     if (rng() < passBias + qbEdge) {
       // Pass play.
       const qb = o.QB;
       const sackP = clamp(0.07 + (u.passRush - u.passBlock) / 300, 0.03, 0.14);
       if (rng() < sackP) {
-        add(box, weightedPick(rng, [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB3], p => p.attrs.STR + p.attrs.SPD), "sack");
+        const rusher = weightedPick(rng, [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB3], p => p.attrs.STR + p.attrs.SPD);
         gained = -Math.round(4 + rng() * 5);
+        add(box, rusher, "sack");
+        add(box, rusher, "tfl");
+        add(box, rusher, "tkl");
+        add(box, qb, "sacked");
+        add(box, qb, "sackYdsLost", -gained);
+        team.sacksAllowed++;
+        team.passYds += gained;
+        tackledBy = rusher;
       } else {
         const targets: [Player, Player, number][] = [
           [o.WR1, d.CB1, 3], [o.WR2, d.CB2, 2.5], [o.WR3, d.FS, 2], [o.TE, d.SS, 1.6], [o.RB, d.LB2, 1.1],
         ];
         const [rec, cov] = weightedPick(rng, targets, ([r, , w]) => w * (r.attrs.CTH / 70) ** 2);
         add(box, qb, "passAtt");
+        add(box, rec, "targets");
+        team.passAtt++;
         const intP = clamp(0.028 + (cov.attrs.COV - qb.attrs.THA) / 800, 0.01, 0.06);
         if (rng() < intP) {
+          const ret = Math.round(clamp(normal(rng, 8, 10), 0, 60));
           add(box, qb, "passInt");
           add(box, cov, "defInt");
-          return { points: 0 };
+          add(box, cov, "passDef");
+          add(box, cov, "intYds", ret);
+          team.turnovers++;
+          return { points: 0, nextStart: clamp(100 - yard - 12 + ret, 5, 95) };
         }
-        const cmpP = clamp(0.6 + (qb.attrs.THA + rec.attrs.CTH - 2 * cov.attrs.COV) / 300 + (u.passBlock - u.passRush) / 700, 0.4, 0.76);
+        const cmpP = clamp(0.57 + (qb.attrs.THA + rec.attrs.CTH - 2 * cov.attrs.COV) / 300 + (u.passBlock - u.passRush) / 700, 0.4, 0.76);
         if (rng() < cmpP) {
-          const air = Math.max(1, normal(rng, 5 + (qb.attrs.THP - 70) / 16, 3.5));
-          const yac = Math.max(0, normal(rng, 2.2 + (rec.attrs.SPD - cov.attrs.SPD) / 12, 2.5));
+          const air = Math.max(1, normal(rng, 4.6 + (qb.attrs.THP - 70) / 16, 3.5));
+          const yacRaw = Math.max(0, normal(rng, 2.2 + (rec.attrs.SPD - cov.attrs.SPD) / 12, 2.5));
           const breakaway = rng() < clamp(0.025 + (rec.attrs.SPD - cov.attrs.SPD) / 1500, 0.01, 0.05) ? 12 + rng() * 35 : 0;
-          gained = Math.round(air + yac + breakaway);
-          gained = Math.min(gained, 100 - yard);
+          gained = Math.min(Math.round(air + yacRaw + breakaway), 100 - yard);
+          const yac = Math.max(0, gained - Math.round(air));
           add(box, qb, "passCmp");
           add(box, qb, "passYds", gained);
+          setLong(box, qb, "passLong", gained);
           add(box, rec, "rec");
           add(box, rec, "recYds", gained);
-          if (yard + gained < 100) add(box, tackler(rng, d, true), "tkl");
+          add(box, rec, "yac", yac);
+          setLong(box, rec, "recLong", gained);
+          team.passYds += gained;
           scorer = rec;
           passer = qb;
+          ballCarrier = rec;
+          if (yard + gained < 100) {
+            tackledBy = tackler(rng, d, true);
+            add(box, tackledBy, "tkl");
+          }
         } else {
           gained = 0;
+          if (rng() < 0.2) add(box, cov, "passDef");
         }
       }
     } else {
       // Run play.
       const carrier = rng() < 0.88 ? o.RB : o.QB;
       const skill = carrier === o.RB ? o.RB.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
-      const mean = 3.4 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16;
+      const mean = 3.8 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16;
       gained = Math.round(normal(rng, mean, 3.4));
       if (rng() < clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04)) gained += Math.round(10 + rng() * 40);
       gained = clamp(gained, -5, 100 - yard);
       add(box, carrier, "rushAtt");
       add(box, carrier, "rushYds", gained);
-      if (yard + gained < 100) add(box, tackler(rng, d, gained > 8), "tkl");
+      setLong(box, carrier, "rushLong", gained);
+      team.rushAtt++;
+      team.rushYds += gained;
       scorer = carrier;
+      ballCarrier = carrier;
+      if (yard + gained < 100) {
+        tackledBy = tackler(rng, d, gained > 8);
+        add(box, tackledBy, "tkl");
+        if (gained < 0) add(box, tackledBy, "tfl");
+      }
     }
+    team.totalYds += gained;
 
-    // Fumbles are rare; they end the drive.
-    if (gained > 0 && rng() < 0.008) return { points: 0 };
+    // Fumbles: about 1 in 90 touches; the defense recovers a little over half.
+    if (ballCarrier && tackledBy && gained > 0 && rng() < 0.011) {
+      add(box, ballCarrier, "fumbles");
+      add(box, tackledBy, "ff");
+      if (rng() < 0.55) {
+        add(box, ballCarrier, "fumblesLost");
+        add(box, weightedPick(rng, anyDefender(d), p => p.attrs.AWR), "fr");
+        team.turnovers++;
+        return { points: 0, nextStart: flip(yard + gained) };
+      }
+    }
 
     yard += gained;
     if (yard >= 100) {
+      if (snapDown === 3) team.thirdConv++;
+      if (snapDown === 4) team.fourthConv++;
+      team.firstDowns++;
+      if (inRedZone) team.rzTd++;
       if (passer) {
         add(box, passer, "passTd");
         add(box, scorer!, "recTd");
       } else {
         add(box, scorer!, "rushTd");
       }
+      team.xpa++;
       const xp = rng() < 0.94 ? 1 : 0;
+      team.xpm += xp;
       const how = passer ? `${passer.name} ${gained}-yd TD pass to ${scorer!.name}` : `${scorer!.name} ${gained}-yd TD run`;
-      return { points: 6 + xp, note: xp ? how : `${how} (XP missed)` };
+      return { points: 6 + xp, note: xp ? how : `${how} (XP missed)`, nextStart: 25 };
     }
-    if (yard <= 0) return { points: 0, note: "Safety" }; // credited below
+    if (yard <= 0) {
+      if (tackledBy) add(box, tackledBy, "safety");
+      return { points: 0, safety: true, nextStart: 35 }; // free kick after a safety
+    }
     toGo -= gained;
     if (toGo <= 0) {
+      if (snapDown === 3) team.thirdConv++;
+      if (snapDown === 4) team.fourthConv++;
+      team.firstDowns++;
       down = 1;
       toGo = Math.min(10, 100 - yard);
     } else if (++down > 4) {
-      return { points: 0 }; // turnover on downs
+      return { points: 0, nextStart: flip(yard) };
     }
   }
-  return { points: 0 };
+  return { points: 0, nextStart: flip(yard) };
 }
 
 export function simGame(league: League, game: Game, byId: Map<number, Player>): GameResult {
@@ -178,13 +275,16 @@ export function simGame(league: League, game: Game, byId: Map<number, Player>): 
   const names = [team(game.home).name, team(game.away).name];
   const score: [number, number] = [0, 0];
   const box: Box = {};
+  const teamStats: [TeamLine, TeamLine] = [emptyTeamLine(), emptyTeamLine()];
   const plays: string[] = [];
+  let start = 25;
 
   const possess = (i: 0 | 1, label: string) => {
-    const out = drive(rng, sides[i], sides[1 - i], box);
-    if (out.note === "Safety") {
+    const out = drive(rng, sides[i], sides[1 - i], box, teamStats[i], start);
+    start = out.nextStart;
+    if (out.safety) {
       score[1 - i] += 2;
-      plays.push(`${label} · ${names[1 - i]} safety`);
+      plays.push(`${label} · ${names[1 - i]}: safety`);
     } else if (out.points) {
       score[i] += out.points;
       plays.push(`${label} · ${names[i]}: ${out.note}`);
@@ -197,10 +297,12 @@ export function simGame(league: League, game: Game, byId: Map<number, Player>): 
     possess(i, `Q${Math.min(4, Math.floor(n / ((POSSESSIONS * 2) / 4)) + 1)}`);
   }
   for (let r = 0; r < MAX_OT_ROUNDS && score[0] === score[1]; r++) {
+    start = 25;
     possess(0, "OT");
+    start = 25;
     possess(1, "OT");
   }
-  return { score, stats: box, plays };
+  return { score, stats: box, team: teamStats, plays };
 }
 
 // ---- Season ----
@@ -341,36 +443,91 @@ export function simToEnd(league: League, byId: Map<number, Player>): League {
 
 // ---- Season stats & awards ----
 
-export function seasonStats(league: League, includePlayoffs = false) {
-  const totals = new Map<number, StatLine & { gp: number }>();
-  const games = [
+export type SeasonLine = StatLine & { gp: number };
+
+function gamesOf(league: League, includePlayoffs: boolean) {
+  return [
     ...(league.season?.weeks.flat() ?? []),
     ...(includePlayoffs ? league.season?.playoffs.flat() ?? [] : []),
-  ];
-  for (const g of games) {
-    if (!g.result) continue;
-    for (const [id, line] of Object.entries(g.result.stats)) {
+  ].filter(g => g.result);
+}
+
+/** Season totals per player. GP counts every game their team played. */
+export function seasonStats(league: League, includePlayoffs = false) {
+  const teamOf = new Map(league.draft.log.map(p => [p.playerId, p.teamId]));
+  const totals = new Map<number, SeasonLine>();
+  for (const id of teamOf.keys()) totals.set(id, emptyLine());
+  for (const g of gamesOf(league, includePlayoffs)) {
+    for (const [id, t] of totals) {
+      const team = teamOf.get(id);
+      if (team === g.home || team === g.away) t.gp++;
+    }
+    for (const [id, line] of Object.entries(g.result!.stats)) {
       const t = totals.get(+id) ?? emptyLine();
-      for (const [k, v] of Object.entries(line)) t[k as keyof StatLine] += v ?? 0;
-      t.gp++;
+      for (const [k, v] of Object.entries(line) as [keyof StatLine, number][]) {
+        if ((LONG_KEYS as readonly string[]).includes(k)) t[k] = Math.max(t[k], v ?? 0);
+        else t[k] += v ?? 0;
+      }
       totals.set(+id, t);
     }
   }
   return totals;
 }
 
-function emptyLine(): StatLine & { gp: number } {
+export type TeamSeasonLine = TeamLine & { g: number; pf: number; pa: number; takeaways: number; oppYds: number };
+
+/** Season totals per team, including what they allowed. */
+export function teamSeasonStats(league: League, includePlayoffs = false) {
+  const out = new Map<number, TeamSeasonLine>(
+    league.teams.map(t => [t.id, { ...emptyTeamLine(), g: 0, pf: 0, pa: 0, takeaways: 0, oppYds: 0 }]),
+  );
+  for (const g of gamesOf(league, includePlayoffs)) {
+    const r = g.result!;
+    ([[g.home, 0], [g.away, 1]] as const).forEach(([id, i]) => {
+      const t = out.get(id)!;
+      t.g++;
+      t.pf += r.score[i];
+      t.pa += r.score[1 - i];
+      if (!r.team) return;
+      const mine = r.team[i];
+      const theirs = r.team[1 - i];
+      for (const k of Object.keys(mine) as (keyof TeamLine)[]) {
+        if (k === "fgLong") t.fgLong = Math.max(t.fgLong, mine.fgLong);
+        else t[k] += mine[k];
+      }
+      t.takeaways += theirs.turnovers;
+      t.oppYds += theirs.totalYds;
+    });
+  }
+  return out;
+}
+
+/** NFL passer rating (0–158.3). */
+export function passerRating(s: Pick<StatLine, "passAtt" | "passCmp" | "passYds" | "passTd" | "passInt">) {
+  if (!s.passAtt) return 0;
+  const part = (x: number) => Math.max(0, Math.min(2.375, x));
+  const a = part((s.passCmp / s.passAtt - 0.3) * 5);
+  const b = part((s.passYds / s.passAtt - 3) * 0.25);
+  const c = part((s.passTd / s.passAtt) * 20);
+  const d = part(2.375 - (s.passInt / s.passAtt) * 25);
+  return ((a + b + c + d) / 6) * 100;
+}
+
+export function emptyLine(): SeasonLine {
   return {
-    passAtt: 0, passCmp: 0, passYds: 0, passTd: 0, passInt: 0,
-    rushAtt: 0, rushYds: 0, rushTd: 0, rec: 0, recYds: 0, recTd: 0,
-    tkl: 0, sack: 0, defInt: 0, gp: 0,
+    passAtt: 0, passCmp: 0, passYds: 0, passTd: 0, passInt: 0, passLong: 0, sacked: 0, sackYdsLost: 0,
+    rushAtt: 0, rushYds: 0, rushTd: 0, rushLong: 0, fumbles: 0, fumblesLost: 0,
+    targets: 0, rec: 0, recYds: 0, recTd: 0, recLong: 0, yac: 0,
+    tkl: 0, tfl: 0, sack: 0, defInt: 0, intYds: 0, passDef: 0, ff: 0, fr: 0, safety: 0,
+    gp: 0,
   };
 }
 
 export const offenseScore = (s: StatLine) =>
   s.passYds / 25 + s.passTd * 4 - s.passInt * 2 + s.rushYds / 10 + s.rushTd * 6 + s.recYds / 10 + s.recTd * 6;
 
-export const defenseScore = (s: StatLine) => s.tkl + s.sack * 4 + s.defInt * 5;
+export const defenseScore = (s: StatLine) =>
+  s.tkl + s.tfl + s.sack * 4 + s.defInt * 5 + s.passDef * 1.5 + s.ff * 3 + s.fr * 2 + s.safety * 4;
 
 export interface Awards {
   mvp: number | null;

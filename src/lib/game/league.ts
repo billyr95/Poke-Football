@@ -1,5 +1,5 @@
 import { poolEntries } from "./dex";
-import { buildOrder } from "./draft";
+import { buildOrder, startClock } from "./draft";
 import { ROSTER_SIZE } from "./ratings";
 import { mulberry32, shuffle } from "./rng";
 import type { League, LeagueSettings, Team } from "./types";
@@ -41,11 +41,11 @@ export function createLobby(hostId: string, hostName: string): League {
     version: 2,
     code: makeCode(),
     hostId,
-    settings: { teamCount: 4, snake: true, randomOrder: true, gens: [1], legendaries: true },
+    settings: { teamCount: 4, snake: true, randomOrder: true, gens: [1], legendaries: true, pickSeconds: 60 },
     seed,
     phase: "lobby",
     teams: [],
-    draft: { order: [], pick: 0, log: [], snake: true },
+    draft: { order: [], pick: 0, log: [], snake: true, deadline: null },
     season: null,
   };
   return addManager(league, hostId, hostName);
@@ -111,12 +111,18 @@ export function startDraft(league: League): League {
   }
   const ids = teams.map(t => t.id);
   const firstRound = league.settings.randomOrder ? shuffle(rng, ids) : ids;
-  return {
+  return startClock({
     ...league,
     teams,
     phase: "draft",
-    draft: { order: buildOrder(firstRound, ROSTER_SIZE, league.settings.snake), pick: 0, log: [], snake: league.settings.snake },
-  };
+    draft: {
+      order: buildOrder(firstRound, ROSTER_SIZE, league.settings.snake),
+      pick: 0,
+      log: [],
+      snake: league.settings.snake,
+      deadline: null,
+    },
+  });
 }
 
 // ---- Persistence (host keeps the league; everyone keeps their identity) ----

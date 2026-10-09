@@ -70,6 +70,14 @@ export function aiChoose(league: League, players: Player[]): { playerId: number;
   return best && { playerId: best.playerId, slotId: best.slotId };
 }
 
+/** Starts the pick timer for whoever is on the clock now (friends only; AI teams pick on their own). */
+export function startClock(league: League, now = Date.now()): League {
+  const team = league.phase === "draft" ? onClock(league) : null;
+  const secs = league.settings.pickSeconds;
+  const deadline = team?.managerId && secs ? now + secs * 1000 : null;
+  return { ...league, draft: { ...league.draft, deadline } };
+}
+
 export function makePick(league: League, playerId: number, slotId: SlotId): League {
   const team = onClock(league);
   if (!team) throw new Error("The draft is over.");
@@ -79,12 +87,12 @@ export function makePick(league: League, playerId: number, slotId: SlotId): Leag
   const teams = league.teams.map(t => (t.id === team.id ? { ...t, roster: { ...t.roster, [slotId]: playerId } } : t));
   const log = [...league.draft.log, { pick: league.draft.pick, teamId: team.id, playerId, slotId }];
   const pick = league.draft.pick + 1;
-  return {
+  return startClock({
     ...league,
     teams,
     draft: { ...league.draft, log, pick },
     phase: pick >= league.draft.order.length ? "review" : league.phase,
-  };
+  });
 }
 
 // ---- Team strength ----

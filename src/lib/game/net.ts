@@ -16,7 +16,7 @@ export type GuestMessage =
   | { t: "rename"; clientId: string; teamName: string };
 
 export type HostMessage =
-  | { t: "state"; league: League }
+  | { t: "state"; league: League; now: number } // now = host clock, so guests can sync the pick timer
   | { t: "error"; message: string }
   | { t: "kicked"; message: string };
 
@@ -76,7 +76,8 @@ export async function startHosting(
 
   return {
     broadcast(league) {
-      for (const c of conns.keys()) if (c.open) c.send({ t: "state", league } satisfies HostMessage);
+      const msg: HostMessage = { t: "state", league, now: Date.now() };
+      for (const c of conns.keys()) if (c.open) c.send(msg);
     },
     send(conn, msg) {
       if (conn.open) conn.send(msg);

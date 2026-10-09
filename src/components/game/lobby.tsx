@@ -29,6 +29,8 @@ function Toggle({ on, onClick, disabled, children }: { on: boolean; onClick: () 
   );
 }
 
+const PICK_TIMES: [number | null, string][] = [[null, "Off"], [30, "30s"], [60, "60s"], [90, "90s"], [120, "2 min"]];
+
 function RenameForm({ current, onSave }: { current: string; onSave: (name: string) => void }) {
   const [name, setName] = useState(current);
   return (
@@ -190,6 +192,22 @@ export function Lobby() {
               <Toggle on={s.randomOrder} disabled={!isHost} onClick={() => setSettings({ randomOrder: true })}>Random first round</Toggle>
               <Toggle on={!s.randomOrder} disabled={!isHost} onClick={() => setSettings({ randomOrder: false })}>Join order</Toggle>
             </div>
+          </section>
+
+          <section className="space-y-2">
+            <h3 className="text-sm font-semibold">Pick timer</h3>
+            <div className="grid grid-cols-5 gap-2">
+              {PICK_TIMES.map(([secs, label]) => (
+                <Toggle key={label} on={s.pickSeconds === secs} disabled={!isHost} onClick={() => setSettings({ pickSeconds: secs })}>
+                  <div className="text-center font-medium">{label}</div>
+                </Toggle>
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {s.pickSeconds
+                ? "When time runs out, the best available player is drafted for that team automatically."
+                : "No clock: everyone takes as long as they need."}
+            </p>
           </section>
 
           {isHost && (

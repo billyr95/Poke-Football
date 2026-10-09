@@ -8,14 +8,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { chemistry } from "@/lib/game/chemistry";
-import { awards, inPlayoffs, playoffTeamCount, seasonStats, standings } from "@/lib/game/sim";
+import { awards, emptyLine, inPlayoffs, playoffTeamCount, seasonStats, standings, type SeasonLine } from "@/lib/game/sim";
 import { useGame } from "@/lib/game/store";
-import type { Game, Player, StatLine, Team } from "@/lib/game/types";
+import type { Game, Player, StatLine, Team, TeamLine } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
 import { MonBadge } from "./bits";
 import { Formation } from "./formation";
 import { PlayerDialog } from "./player-dialog";
 import { useTeamTable } from "./review";
+import { DEFENSE, PASSING, PlayerName, RECEIVING, RUSHING, SeasonStats, StatTable, type Col } from "./stats-tables";
 
 function roundName(games: number, isLast: boolean) {
   return isLast && games === 1 ? "Championship" : "Semifinals";
@@ -79,6 +80,7 @@ export function Season() {
           <TabsTrigger value="standings">Standings</TabsTrigger>
           <TabsTrigger value="schedule">Schedule</TabsTrigger>
           <TabsTrigger value="leaders">Leaders</TabsTrigger>
+          <TabsTrigger value="stats">Stats</TabsTrigger>
           <TabsTrigger value="teams">Teams</TabsTrigger>
         </TabsList>
 
@@ -147,6 +149,10 @@ export function Season() {
 
         <TabsContent value="leaders">
           <Leaders byId={byId} ownerOf={ownerOf} teamById={teamById} />
+        </TabsContent>
+
+        <TabsContent value="stats">
+          <SeasonStats />
         </TabsContent>
 
         <TabsContent value="teams">
@@ -301,13 +307,35 @@ function TeamsTab() {
   );
 }
 
+const TEAM_ROWS: [string, (t: TeamLine) => string][] = [
+  ["First downs", t => String(t.firstDowns)],
+  ["Total plays", t => String(t.plays)],
+  ["Total yards", t => String(t.totalYds)],
+  ["Yards per play", t => (t.plays ? t.totalYds / t.plays : 0).toFixed(1)],
+  ["Passing (net)", t => String(t.passYds)],
+  ["Pass attempts", t => String(t.passAtt)],
+  ["Rushing", t => `${t.rushAtt}-${t.rushYds}`],
+  ["Third downs", t => `${t.thirdConv}-${t.thirdAtt}`],
+  ["Fourth downs", t => `${t.fourthConv}-${t.fourthAtt}`],
+  ["Red zone (TD-att)", t => `${t.rzTd}-${t.rzAtt}`],
+  ["Sacks allowed", t => String(t.sacksAllowed)],
+  ["Turnovers", t => String(t.turnovers)],
+  ["Field goals", t => `${t.fgm}-${t.fga}`],
+  ["Extra points", t => `${t.xpm}-${t.xpa}`],
+  ["Punts (avg)", t => `${t.punts} (${t.punts ? (t.puntYds / t.punts).toFixed(1) : "0.0"})`],
+];
+
+// The box score drops season-only columns.
+const noGp = <R,>(cols: Col<R>[]) => cols.filter(c => c.key !== "gp" && c.key !== "ypg");
+
 function BoxScore({ game, onClose, teamById, byId, ownerOf }: {
   game: Game | null; onClose: () => void; teamById: Map<number, Team>; byId: Map<number, Player>; ownerOf: Map<number, number>;
 }) {
   const r = game?.result;
+  const [open, setOpen] = useState<Player | null>(null);
   return (
     <Dialog open={!!r} onOpenChange={o => !o && onClose()}>
-      <DialogContent className="max-w-2xl sm:max-w-2xl">
+      <DialogContent className="max-w-4xl sm:max-w-4xl">
         {game && r && (
           <>
             <DialogHeader>
@@ -315,42 +343,78 @@ function BoxScore({ game, onClose, teamById, byId, ownerOf }: {
                 {teamById.get(game.away)!.name} {r.score[1]} at {teamById.get(game.home)!.name} {r.score[0]}
               </DialogTitle>
             </DialogHeader>
-            <div className="max-h-[70vh] space-y-4 overflow-y-auto pr-1 text-sm">
-              <section>
-                <h4 className="mb-1 font-semibold">Scoring</h4>
-                {r.plays.length ? (
-                  <ul className="space-y-0.5 text-muted-foreground">{r.plays.map((p, i) => <li key={i}>{p}</li>)}</ul>
+            <Tabs defaultValue="summary" className="max-h-[75vh] overflow-y-auto pr-1">
+              <TabsList>
+                <TabsTrigger value="summary">Summary</TabsTrigger>
+                <TabsTrigger value="away">{teamById.get(game.away)!.name}</TabsTrigger>
+                <TabsTrigger value="home">{teamById.get(game.home)!.name}</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="summary" className="space-y-4 text-sm">
+                {r.team ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Team stats</TableHead>
+                        <TableHead className="text-right">{teamById.get(game.away)!.name}</TableHead>
+                        <TableHead className="text-right">{teamById.get(game.home)!.name}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {TEAM_ROWS.map(([label, get]) => (
+                        <TableRow key={label}>
+                          <TableCell className="py-1.5 text-muted-foreground">{label}</TableCell>
+                          <TableCell className="py-1.5 text-right tabular-nums">{get(r.team![1])}</TableCell>
+                          <TableCell className="py-1.5 text-right tabular-nums">{get(r.team![0])}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 ) : (
-                  <p className="text-muted-foreground">No points scored.</p>
+                  <p className="text-muted-foreground">Team stats weren&apos;t tracked for this game.</p>
                 )}
-              </section>
-              {[game.away, game.home].map(teamId => {
-                const lines = Object.entries(r.stats).filter(([id]) => ownerOf.get(+id) === teamId).map(([id, s]) => [byId.get(+id)!, s] as const);
-                const fmt = (s: Partial<StatLine>) =>
-                  [
-                    s.passAtt && `${s.passCmp ?? 0}/${s.passAtt}, ${s.passYds ?? 0} yds pass${s.passTd ? `, ${s.passTd} TD` : ""}${s.passInt ? `, ${s.passInt} INT` : ""}`,
-                    s.rushAtt && `${s.rushAtt} car, ${s.rushYds ?? 0} yds${s.rushTd ? `, ${s.rushTd} TD` : ""}`,
-                    s.rec && `${s.rec} rec, ${s.recYds ?? 0} yds${s.recTd ? `, ${s.recTd} TD` : ""}`,
-                    (s.tkl || s.sack || s.defInt) && [s.tkl && `${s.tkl} tkl`, s.sack && `${s.sack} sack`, s.defInt && `${s.defInt} INT`].filter(Boolean).join(", "),
-                  ].filter(Boolean).join(" · ");
+                <section>
+                  <h4 className="mb-1 font-semibold">Scoring</h4>
+                  {r.plays.length ? (
+                    <ul className="space-y-0.5 text-muted-foreground">{r.plays.map((p, i) => <li key={i}>{p}</li>)}</ul>
+                  ) : (
+                    <p className="text-muted-foreground">No points scored.</p>
+                  )}
+                </section>
+              </TabsContent>
+
+              {(["away", "home"] as const).map(side => {
+                const teamId = side === "home" ? game.home : game.away;
+                const rows = Object.entries(r.stats)
+                  .filter(([id]) => ownerOf.get(+id) === teamId)
+                  .map(([id, line]) => ({ p: byId.get(+id)!, s: { ...emptyLine(), ...line, gp: 1 } as SeasonLine }));
+                const table = (cols: Col<SeasonLine>[], filter: (s: SeasonLine) => boolean, sortKey: string, title: string) => {
+                  const list = rows.filter(x => filter(x.s));
+                  if (!list.length) return null;
+                  return (
+                    <section key={title}>
+                      <h4 className="mb-1 font-semibold">{title}</h4>
+                      <StatTable
+                        dense
+                        cols={noGp(cols).map(c => ({ ...c, get: (x: { s: SeasonLine }) => c.get(x.s) }))}
+                        rows={list}
+                        defaultSort={sortKey}
+                        name={x => <PlayerName p={x.p} onOpen={setOpen} />}
+                      />
+                    </section>
+                  );
+                };
                 return (
-                  <section key={teamId}>
-                    <h4 className="mb-1 font-semibold" style={{ color: teamById.get(teamId)!.color }}>{teamById.get(teamId)!.name}</h4>
-                    <ul className="space-y-1">
-                      {lines
-                        .sort((a, b) => (b[1].passYds ?? 0) + (b[1].rushYds ?? 0) + (b[1].recYds ?? 0) + (b[1].tkl ?? 0) * 5 - ((a[1].passYds ?? 0) + (a[1].rushYds ?? 0) + (a[1].recYds ?? 0) + (a[1].tkl ?? 0) * 5))
-                        .map(([p, s]) => (
-                          <li key={p.id} className="flex items-center gap-2">
-                            <MonBadge player={p} size={22} />
-                            <span className="w-28 shrink-0 truncate font-medium">{p.name}</span>
-                            <span className="text-muted-foreground">{fmt(s)}</span>
-                          </li>
-                        ))}
-                    </ul>
-                  </section>
+                  <TabsContent key={side} value={side} className="space-y-4">
+                    {table(PASSING, s => s.passAtt + s.sacked > 0, "yds", "Passing")}
+                    {table(RUSHING, s => s.rushAtt > 0, "yds", "Rushing")}
+                    {table(RECEIVING, s => s.targets > 0, "yds", "Receiving")}
+                    {table(DEFENSE, s => s.tkl + s.sack + s.defInt + s.passDef + s.ff + s.fr > 0, "tkl", "Defense")}
+                  </TabsContent>
                 );
               })}
-            </div>
+            </Tabs>
+            <PlayerDialog player={open} onClose={() => setOpen(null)} />
           </>
         )}
       </DialogContent>
