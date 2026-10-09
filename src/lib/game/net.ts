@@ -92,8 +92,27 @@ export async function startHosting(
       if (id) onGuestLeft(id);
     });
   });
-  // Keep the code registered if the signalling server blips.
-  peer.on("disconnected", () => !peer.destroyed && peer.reconnect());
+  // Keep the code registered: guests can only find us while we're connected to the signalling server.
+  // Connections drop when the tab sleeps or the network blips, and a single reconnect can fail, so keep trying.
+  const keepAlive = () => {
+    if (peer.destroyed || !peer.disconnected) return;
+    try {
+      peer.reconnect();
+    } catch {
+      // still offline; the next tick retries
+    }
+  };
+  peer.on("disconnected", keepAlive);
+  peer.on("error", e => console.warn("Host connection error:", e.type));
+  const retry = setInterval(keepAlive, 5000);
+  const wake = keepScreenAwake();
+  const onVisible = () => {
+    if (document.visibilityState !== "visible") return;
+    keepAlive();
+    wake.renew();
+  };
+  document.addEventListener("visibilitychange", onVisible);
+  window.addEventListener("online", keepAlive);
 
   return {
     broadcast(league) {
@@ -104,7 +123,32 @@ export async function startHosting(
       if (conn.open) conn.send(msg);
     },
     close() {
+      clearInterval(retry);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("online", keepAlive);
+      wake.release();
       peer.destroy();
+    },
+  };
+}
+
+/** Stops the host's screen from sleeping (which would cut off the league). Best effort: not every browser supports it. */
+function keepScreenAwake() {
+  let lock: WakeLockSentinel | null = null;
+  let released = false;
+  const renew = () => {
+    if (released || (lock && !lock.released) || !("wakeLock" in navigator)) return;
+    navigator.wakeLock.request("screen").then(
+      l => (lock = l),
+      () => {},
+    );
+  };
+  renew();
+  return {
+    renew,
+    release() {
+      released = true;
+      lock?.release().catch(() => {});
     },
   };
 }
@@ -120,38 +164,16 @@ export async function joinLeague(
   onMessage: (msg: HostMessage) => void,
   onClosed: () => void,
 ): Promise<GuestLink> {
-  const peer = await newPeer();
-  const conn = peer.connect(PREFIX + code, { reliable: true });
-
-  await new Promise<void>((resolve, reject) => {
-    const fail = (msg: string) => {
-      clearTimeout(timer);
-      reject(new Error(msg));
-    };
-    const BLOCKED =
-      "Found the league, but couldn't connect to the host. One of your networks is blocking direct connections. " +
-      "Try again, or try a different network (e.g. phone hotspot).";
-    const timer = setTimeout(() => fail(BLOCKED), 20000);
-    peer.once("error", e =>
-      fail(e.type === "peer-unavailable" ? "No league found with that code. Check it with your host, and make sure their tab is open." : e.message),
-    );
-    // Fail fast when the browsers can't find any route to each other.
-    const watchIce = () => {
-      const pc = conn.peerConnection;
-      if (!pc) return setTimeout(watchIce, 100);
-      pc.addEventListener("iceconnectionstatechange", () => {
-        if (pc.iceConnectionState === "failed") fail(BLOCKED);
-      });
-    };
-    watchIce();
-    conn.once("open", () => {
-      clearTimeout(timer);
-      resolve();
-    });
-  }).catch(e => {
-    peer.destroy();
-    throw e;
-  });
+  // A first attempt can fail on a network blip or while the host's tab wakes up, so try twice before giving up.
+  let peer: Peer, conn: DataConnection;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      ({ peer, conn } = await connectToHost(code));
+      break;
+    } catch (e) {
+      if (attempt >= 2 || !(e instanceof RetryableError)) throw e;
+    }
+  }
 
   conn.on("data", raw => onMessage(raw as HostMessage));
   conn.on("close", onClosed);
@@ -165,4 +187,51 @@ export async function joinLeague(
       peer.destroy();
     },
   };
+}
+
+class RetryableError extends Error {}
+
+async function connectToHost(code: string): Promise<{ peer: Peer; conn: DataConnection }> {
+  const peer = await newPeer();
+  const conn = peer.connect(PREFIX + code, { reliable: true });
+
+  await new Promise<void>((resolve, reject) => {
+    const fail = (err: Error) => {
+      clearTimeout(timer);
+      reject(err);
+    };
+    const NO_ANSWER =
+      "Found the league, but the host's game isn't responding. Ask your host to keep the PokeFootball tab open " +
+      "and on screen (not minimised or asleep), then try again.";
+    const BLOCKED =
+      "Found the league, but couldn't connect to the host. One of your networks is blocking the connection. " +
+      "Try again, or try a different network (e.g. phone hotspot).";
+    // If the host never answered our offer, their tab is asleep or offline; otherwise the networks couldn't link up.
+    const timer = setTimeout(() => fail(new RetryableError(conn.peerConnection?.remoteDescription ? BLOCKED : NO_ANSWER)), 15000);
+    peer.once("error", e =>
+      fail(
+        e.type === "peer-unavailable"
+          ? new Error("No league found with that code. Check it with your host, and make sure their tab is open.")
+          : new RetryableError(e.message),
+      ),
+    );
+    // Fail fast when the browsers can't find any route to each other.
+    const watchIce = () => {
+      const pc = conn.peerConnection;
+      if (!pc) return setTimeout(watchIce, 100);
+      pc.addEventListener("iceconnectionstatechange", () => {
+        if (pc.iceConnectionState === "failed") fail(new RetryableError(BLOCKED));
+      });
+    };
+    watchIce();
+    conn.once("open", () => {
+      clearTimeout(timer);
+      resolve();
+    });
+  }).catch(e => {
+    peer.destroy();
+    throw e;
+  });
+
+  return { peer, conn };
 }
