@@ -20,6 +20,8 @@ import { MonBadge, RatingChip, TYPE_COLOR, TypePill } from "./bits";
 import { ChemistryList } from "./chemistry-list";
 import { Formation } from "./formation";
 import { PlayerCard } from "./player-card";
+import { MINE_ROW } from "./stats-tables";
+import { TeamMark } from "./team-mark";
 
 /** How the available list is rated: natural position, a specific position, or best fit for my open spots. */
 type PosFilter = Pos | "ALL" | "BEST";
@@ -123,7 +125,7 @@ export function DraftRoom() {
         </div>
         {team && (
           <div className="flex items-center gap-2">
-            <span className="size-3 rounded-full" style={{ background: team.color }} />
+            <TeamMark team={team} size="md" />
             <span className="text-sm">
               On the clock: <b>{team.name}</b>{" "}
               <span className="text-muted-foreground">({team.manager ?? "AI"})</span>
@@ -343,7 +345,7 @@ function TeamHeader({ team, picks }: { team: Team; picks: number }) {
   const r = teamRatings(team, byId);
   return (
     <div className="flex items-center gap-2">
-      <span className="size-3 rounded-full" style={{ background: team.color }} />
+      <TeamMark team={team} size="md" />
       <span className="min-w-0 flex-1 truncate font-heading text-lg">{team.name}</span>
       <span className="text-xs text-muted-foreground">
         {picks}/{ROSTER_SIZE} · OFF {r.off} · DEF {r.def}
@@ -371,7 +373,7 @@ function DraftFeed({ onOpen }: { onOpen: (id: number) => void }) {
           <SelectItem value="all">All teams</SelectItem>
           {l.teams.map(t => (
             <SelectItem key={t.id} value={String(t.id)}>
-              <span className="size-2.5 rounded-full" style={{ background: t.color }} />
+              <TeamMark team={t} size="xs" />
               {t.name}{t.id === myTeamId ? " (you)" : ""}
             </SelectItem>
           ))}
@@ -388,7 +390,7 @@ function DraftFeed({ onOpen }: { onOpen: (id: number) => void }) {
                 <button
                   type="button"
                   onClick={() => onOpen(p.id)}
-                  className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left hover:bg-muted/60", t.id === myTeamId && "bg-amber-400/10")}
+                  className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left hover:bg-muted/60", t.id === myTeamId && MINE_ROW)}
                 >
                   <span className="w-14 shrink-0 text-[11px] leading-tight text-muted-foreground tabular-nums">
                     R{Math.floor(r.pick / n) + 1}.{(r.pick % n) + 1}
@@ -398,7 +400,7 @@ function DraftFeed({ onOpen }: { onOpen: (id: number) => void }) {
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-medium">{p.name}</span>
                     <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <span className="size-2 rounded-full" style={{ background: t.color }} />
+                      <TeamMark team={t} size="xs" />
                       <span className="truncate">{t.name}</span> · {slot.label}
                     </span>
                   </span>
@@ -436,7 +438,7 @@ function OtherTeams({ onOpen }: { onOpen: (id: number) => void }) {
               t.id === view.id ? "border-foreground bg-foreground text-background" : "hover:bg-muted",
             )}
           >
-            <span className="size-2 rounded-full" style={{ background: t.color }} />
+            <TeamMark team={t} size="xs" />
             {t.name}{t.id === myTeamId ? " (you)" : ""}
           </button>
         ))}

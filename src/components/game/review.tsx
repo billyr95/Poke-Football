@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { ChemistryList } from "./chemistry-list";
 import { Formation } from "./formation";
 import { PlayerDialog } from "./player-dialog";
+import { TeamMark } from "./team-mark";
 
 export function useTeamTable() {
   const { league, byId } = useGame();
@@ -49,7 +50,7 @@ export function Review() {
                     className={cn("flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-muted/60", viewId === team.id && "bg-muted")}
                   >
                     <span className="w-5 text-sm text-muted-foreground">{i + 1}</span>
-                    <span className="size-3 rounded-full" style={{ background: team.color }} />
+                    <TeamMark team={team} size="md" />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-medium">{team.name}{team.id === myTeamId && " (you)"}</span>
                       <span className="text-xs text-muted-foreground">{team.manager ?? "AI"} · OFF {r.off} · DEF {r.def}</span>

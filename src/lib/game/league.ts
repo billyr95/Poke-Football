@@ -12,10 +12,57 @@ export function maxTeamsFor(settings: Pick<LeagueSettings, "gens" | "legendaries
   return Math.min(MAX_TEAMS, Math.floor(poolEntries(settings).length / ROSTER_SIZE));
 }
 
+/** 12 colours picked to be easy to tell apart, even small (team badges also carry an abbreviation). */
 export const TEAM_COLORS = [
-  "#2563eb", "#dc2626", "#16a34a", "#d97706", "#7c3aed", "#0891b2",
-  "#db2777", "#65a30d", "#ea580c", "#4f46e5", "#0d9488", "#9333ea",
+  "#1d4ed8", // blue
+  "#dc2626", // red
+  "#15803d", // green
+  "#f59e0b", // gold
+  "#7e22ce", // purple
+  "#0891b2", // cyan
+  "#db2777", // pink
+  "#65a30d", // lime
+  "#ea580c", // orange
+  "#1e293b", // navy
+  "#92400e", // brown
+  "#64748b", // slate
 ];
+
+/**
+ * Scoreboard-style abbreviations, unique within the league:
+ * first letter of the city + first two of the nickname ("Harbor Thunder" → HTH).
+ */
+export function teamAbbrevs(teams: Pick<Team, "id" | "name">[]): Map<number, string> {
+  const words = (name: string) => name.toUpperCase().replace(/[^A-Z0-9 ]/g, "").split(/\s+/).filter(Boolean);
+  // Candidates in order of preference: HTH (Harbor THunder), HAT (HArbor Thunder), HTHU.
+  const candidates = (name: string) => {
+    const w = words(name);
+    if (!w.length) return [];
+    if (w.length === 1) return [w[0].slice(0, 3), w[0].slice(0, 4)];
+    const [city, nick] = [w[0], w[w.length - 1]];
+    return [city[0] + nick.slice(0, 2), city.slice(0, 2) + nick[0], city[0] + nick.slice(0, 3)];
+  };
+  const out = new Map<number, string>();
+  const used = new Set<string>();
+  for (let level = 0; level < 3; level++) {
+    const pending = teams.filter(t => !out.has(t.id));
+    const counts = new Map<string, number>();
+    for (const t of pending) {
+      const c = candidates(t.name)[level];
+      if (c) counts.set(c, (counts.get(c) ?? 0) + 1);
+    }
+    for (const t of pending) {
+      const c = candidates(t.name)[level];
+      if (c && counts.get(c) === 1 && !used.has(c)) {
+        out.set(t.id, c);
+        used.add(c);
+      }
+    }
+  }
+  // Still clashing (e.g. identical names): number them.
+  for (const t of teams) if (!out.has(t.id)) out.set(t.id, `${(candidates(t.name)[0] ?? "T").slice(0, 3)}${t.id + 1}`);
+  return out;
+}
 
 const CITIES = ["Harbor", "Summit", "Riverside", "Ironwood", "Bayview", "Granite", "Lakeshore", "Redrock", "Northgate", "Cedar"];
 const MASCOTS = ["Comets", "Wardens", "Thunder", "Tide", "Rangers", "Stampede", "Owls", "Bolts", "Cyclones", "Knights"];

@@ -16,7 +16,8 @@ import { MonBadge } from "./bits";
 import { Formation } from "./formation";
 import { PlayerDialog } from "./player-dialog";
 import { useTeamTable } from "./review";
-import { DEFENSE, PASSING, PlayerName, RECEIVING, RUSHING, SeasonStats, StatTable, type Col } from "./stats-tables";
+import { DEFENSE, MINE_ROW, PASSING, PlayerName, RECEIVING, RUSHING, SeasonStats, StatTable, YouTag, type Col } from "./stats-tables";
+import { TeamMark } from "./team-mark";
 
 function roundName(games: number, isLast: boolean) {
   return isLast && games === 1 ? "Championship" : "Semifinals";
@@ -104,13 +105,14 @@ export function Season() {
                   {table.map((r, i) => {
                     const t = teamById.get(r.teamId)!;
                     return (
-                      <TableRow key={r.teamId} className={cn(i === seeds - 1 && "border-b-2 border-b-amber-400", t.id === myTeamId && "bg-amber-400/10")}>
+                      <TableRow key={r.teamId} className={cn(i === seeds - 1 && "border-b-2 border-b-amber-400", t.id === myTeamId && MINE_ROW)}>
                         <TableCell className="text-muted-foreground">{i + 1}</TableCell>
                         <TableCell>
                           <span className="flex items-center gap-2">
-                            <span className="size-2.5 rounded-full" style={{ background: t.color }} />
+                            <TeamMark team={t} />
                             <span className="font-medium">{t.name}</span>
                             <span className="text-xs text-muted-foreground">{t.manager ?? "AI"}</span>
+                            {t.id === myTeamId && <YouTag />}
                           </span>
                         </TableCell>
                         <TableCell className="text-right tabular-nums">{r.w}</TableCell>
@@ -213,7 +215,7 @@ function ScoreCard({ game, teamById, onOpen, myTeamId }: { game: Game; teamById:
     >
       {sides.map((t, i) => (
         <div key={t.id} className={cn("flex items-center gap-2 py-0.5", winner === i ? "font-semibold" : scores && "text-muted-foreground")}>
-          <span className="size-2.5 rounded-full" style={{ background: t.color }} />
+          <TeamMark team={t} size="xs" />
           <span className="min-w-0 flex-1 truncate text-sm">{t.name}{i === 1 && <span className="text-xs text-muted-foreground"> (home)</span>}</span>
           <span className="font-heading text-xl tabular-nums">{scores ? scores[i] : ""}</span>
         </div>
@@ -235,7 +237,7 @@ const LEADER_CATS: { key: keyof StatLine; label: string }[] = [
 ];
 
 function Leaders({ byId, ownerOf, teamById }: { byId: Map<number, Player>; ownerOf: Map<number, number>; teamById: Map<number, Team> }) {
-  const { league } = useGame();
+  const { league, myTeamId } = useGame();
   const stats = useMemo(() => seasonStats(league!), [league]);
   const [open, setOpen] = useState<Player | null>(null);
   if (!stats.size) return <p className="py-6 text-center text-sm text-muted-foreground">Play a week to see leaders.</p>;
@@ -251,13 +253,19 @@ function Leaders({ byId, ownerOf, teamById }: { byId: Map<number, Player>; owner
                 {top.map(([id, s]) => {
                   const p = byId.get(id)!;
                   const t = teamById.get(ownerOf.get(id)!);
+                  const mine = t?.id === myTeamId;
                   return (
                     <li key={id}>
-                      <button type="button" className="flex w-full items-center gap-2 text-left text-sm" onClick={() => setOpen(p)}>
+                      <button
+                        type="button"
+                        className={cn("-mx-2 flex w-[calc(100%+1rem)] items-center gap-2 rounded-md px-2 py-1 text-left text-sm", mine && MINE_ROW)}
+                        onClick={() => setOpen(p)}
+                      >
                         <MonBadge player={p} size={24} />
                         <span className="min-w-0 flex-1 truncate">{p.name}</span>
-                        <span className="size-2 rounded-full" style={{ background: t?.color }} />
-                        <span className="font-heading tabular-nums">{s[cat.key]}</span>
+                        {mine && <YouTag />}
+                        {t && <TeamMark team={t} size="xs" />}
+                        <span className="w-10 text-right font-heading tabular-nums">{s[cat.key]}</span>
                       </button>
                     </li>
                   );
@@ -291,7 +299,7 @@ function TeamsTab() {
                   onClick={() => setViewId(team.id)}
                   className={cn("flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-muted/60", viewId === team.id && "bg-muted")}
                 >
-                  <span className="size-3 rounded-full" style={{ background: team.color }} />
+                  <TeamMark team={team} />
                   <span className="min-w-0 flex-1 truncate font-medium">{team.name}</span>
                   <span className="text-xs text-muted-foreground">OFF {r.off} · DEF {r.def}</span>
                   <span className="w-8 text-right font-heading text-xl">{grade}</span>
@@ -333,6 +341,7 @@ function BoxScore({ game, onClose, teamById, byId, ownerOf }: {
 }) {
   const r = game?.result;
   const [open, setOpen] = useState<Player | null>(null);
+  const { myTeamId } = useGame();
   return (
     <Dialog open={!!r} onOpenChange={o => !o && onClose()}>
       <DialogContent className="max-w-4xl sm:max-w-4xl">
@@ -346,8 +355,8 @@ function BoxScore({ game, onClose, teamById, byId, ownerOf }: {
             <Tabs defaultValue="summary" className="max-h-[75vh] overflow-y-auto pr-1">
               <TabsList>
                 <TabsTrigger value="summary">Summary</TabsTrigger>
-                <TabsTrigger value="away">{teamById.get(game.away)!.name}</TabsTrigger>
-                <TabsTrigger value="home">{teamById.get(game.home)!.name}</TabsTrigger>
+                <TabsTrigger value="away"><TeamMark team={teamById.get(game.away)!} size="xs" />{teamById.get(game.away)!.name}</TabsTrigger>
+                <TabsTrigger value="home"><TeamMark team={teamById.get(game.home)!} size="xs" />{teamById.get(game.home)!.name}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="summary" className="space-y-4 text-sm">
@@ -399,7 +408,8 @@ function BoxScore({ game, onClose, teamById, byId, ownerOf }: {
                         cols={noGp(cols).map(c => ({ ...c, get: (x: { s: SeasonLine }) => c.get(x.s) }))}
                         rows={list}
                         defaultSort={sortKey}
-                        name={x => <PlayerName p={x.p} onOpen={setOpen} />}
+                        isMine={() => teamId === myTeamId}
+                        name={x => <PlayerName p={x.p} mine={teamId === myTeamId} onOpen={setOpen} />}
                       />
                     </section>
                   );

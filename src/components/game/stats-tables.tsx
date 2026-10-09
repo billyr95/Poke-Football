@@ -9,6 +9,7 @@ import type { Player, Team } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
 import { MonBadge } from "./bits";
 import { PlayerDialog } from "./player-dialog";
+import { TeamMark } from "./team-mark";
 
 export interface Col<R> {
   key: string;
@@ -110,17 +111,24 @@ export const TEAM_DEFENSE_ST: Col<T>[] = [
   t("pavg", "AVG", "Yards per punt", r => div(r.puntYds, r.punts), 1),
 ];
 
+/** Row style for your own players and team: gold tint plus a gold edge on the left. */
+export const MINE_ROW = "bg-amber-400/15 shadow-[inset_4px_0_0_#f59e0b] hover:bg-amber-400/25";
+/** Sticky name cells need an opaque version of the same tint. */
+const MINE_STICKY = "bg-amber-50 dark:bg-amber-950";
+
 const fmt = (v: number, digits = 0) => (digits ? v.toFixed(digits) : String(Math.round(v)));
 
 /** Sortable stat table; click a column header to sort by it. */
 export function StatTable<R>({
-  cols, rows, name, defaultSort, dense = false,
+  cols, rows, name, defaultSort, dense = false, isMine,
 }: {
   cols: Col<R>[];
   rows: R[];
   name: (r: R) => React.ReactNode;
   defaultSort: string;
   dense?: boolean;
+  /** Highlights rows that belong to you. */
+  isMine?: (r: R) => boolean;
 }) {
   const [sort, setSort] = useState<{ key: string; desc: boolean }>({ key: defaultSort, desc: true });
   const col = cols.find(x => x.key === sort.key) ?? cols[0];
@@ -148,16 +156,19 @@ export function StatTable<R>({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sorted.map((r, i) => (
-            <TableRow key={i}>
-              <TableCell className="sticky left-0 z-10 bg-card py-1.5">{name(r)}</TableCell>
+          {sorted.map((r, i) => {
+            const mine = isMine?.(r) ?? false;
+            return (
+            <TableRow key={i} className={cn(mine && MINE_ROW)}>
+              <TableCell className={cn("sticky left-0 z-10 py-1.5", mine ? MINE_STICKY : "bg-card")}>{name(r)}</TableCell>
               {cols.map(x => (
                 <TableCell key={x.key} className={cn("px-2 py-1.5 text-right tabular-nums", sort.key === x.key && "font-semibold")}>
                   {fmt(x.get(r), x.digits)}
                 </TableCell>
               ))}
             </TableRow>
-          ))}
+            );
+          })}
           {!sorted.length && (
             <TableRow>
               <TableCell colSpan={cols.length + 1} className="py-6 text-center text-muted-foreground">No stats yet.</TableCell>
@@ -169,19 +180,24 @@ export function StatTable<R>({
   );
 }
 
-export function PlayerName({ p, team, onOpen }: { p: Player; team?: Team; onOpen?: (p: Player) => void }) {
+export function PlayerName({ p, team, mine, onOpen }: { p: Player; team?: Team; mine?: boolean; onOpen?: (p: Player) => void }) {
   return (
     <button type="button" className="flex items-center gap-2 text-left" onClick={() => onOpen?.(p)}>
       <MonBadge player={p} size={24} />
       <span className="max-w-32 truncate font-medium">{p.name}</span>
-      {team && <span className="size-2 shrink-0 rounded-full" style={{ background: team.color }} title={team.name} />}
+      {team && <TeamMark team={team} size="xs" />}
+      {mine && <YouTag />}
     </button>
   );
 }
 
+export function YouTag() {
+  return <span className="rounded bg-amber-400 px-1 text-[9px] font-bold tracking-wide text-zinc-950">YOU</span>;
+}
+
 /** The season stats screen: player categories plus team offense and defense. */
 export function SeasonStats() {
-  const { league, byId, ownerOf } = useGame();
+  const { league, byId, ownerOf, myTeamId } = useGame();
   const [withPlayoffs, setWithPlayoffs] = useState(false);
   const [open, setOpen] = useState<Player | null>(null);
   const players = useMemo(() => [...seasonStats(league!, withPlayoffs)].map(([id, s]) => ({ id, s })), [league, withPlayoffs]);
@@ -193,7 +209,10 @@ export function SeasonStats() {
       cols={cols.map(x => ({ ...x, get: (r: { s: P }) => x.get(r.s) }))}
       rows={players.filter(r => filter(r.s))}
       defaultSort={defaultSort}
-      name={r => <PlayerName p={byId.get(r.id)!} team={teamById.get(ownerOf.get(r.id)!)} onOpen={setOpen} />}
+      isMine={r => ownerOf.get(r.id) === myTeamId}
+      name={r => (
+        <PlayerName p={byId.get(r.id)!} team={teamById.get(ownerOf.get(r.id)!)} mine={ownerOf.get(r.id) === myTeamId} onOpen={setOpen} />
+      )}
     />
   );
   const teamTable = (cols: Col<T>[], defaultSort: string) => (
@@ -201,12 +220,14 @@ export function SeasonStats() {
       cols={cols.map(x => ({ ...x, get: (r: { s: T }) => x.get(r.s) }))}
       rows={teams}
       defaultSort={defaultSort}
+      isMine={r => r.id === myTeamId}
       name={r => {
         const tm = teamById.get(r.id)!;
         return (
           <span className="flex items-center gap-2">
-            <span className="size-2.5 rounded-full" style={{ background: tm.color }} />
+            <TeamMark team={tm} />
             <span className="max-w-40 truncate font-medium">{tm.name}</span>
+            {r.id === myTeamId && <YouTag />}
           </span>
         );
       }}
