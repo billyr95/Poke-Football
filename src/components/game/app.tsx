@@ -55,7 +55,7 @@ function Header() {
 }
 
 function Screen() {
-  const { league, status, role, error, clearError } = useGame();
+  const { league, status, role, error, clearError, leave } = useGame();
 
   useEffect(() => {
     if (error) {
@@ -65,16 +65,25 @@ function Screen() {
   }, [error, clearError]);
 
   if (status === "connecting" && !league) {
-    return <p className="py-24 text-center text-muted-foreground">Connecting to the league…</p>;
+    return (
+      <div className="space-y-3 py-24 text-center">
+        <p className="text-muted-foreground">Connecting to the league…</p>
+        <Button variant="ghost" size="sm" onClick={leave}>Cancel</Button>
+      </div>
+    );
   }
   if (status === "lost" && role === "guest") {
     return (
       <div className="mx-auto max-w-md space-y-3 px-4 py-24 text-center">
         <h2 className="font-heading text-3xl">Lost connection to the host</h2>
         <p className="text-muted-foreground">
-          The host&apos;s tab may have closed or refreshed. Reload this page to reconnect once they&apos;re back.
+          The host&apos;s tab may have closed, refreshed or gone to sleep. Try reconnecting once they&apos;re back, or head
+          home to join or host a different league.
         </p>
-        <Button onClick={() => location.reload()}>Reconnect</Button>
+        <div className="flex justify-center gap-2">
+          <Button onClick={() => location.reload()}>Reconnect</Button>
+          <Button variant="outline" onClick={leave}>Back to home</Button>
+        </div>
       </div>
     );
   }

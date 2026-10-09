@@ -65,6 +65,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const leagueRef = useRef<League | null>(null);
   const hostLink = useRef<HostLink | null>(null);
   const guestLink = useRef<GuestLink | null>(null);
+  /** Bumped by leave(), so a join that finishes after the player cancelled gets dropped. */
+  const attempt = useRef(0);
   const setMe = useCallback((m: Me) => {
     saveMe(m);
     setMeState(m);
@@ -131,7 +133,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const goJoin = useCallback(async (code: string, m: Me) => {
     setStatus("connecting");
     setRole("guest");
-    guestLink.current = await joinLeague(
+    const myAttempt = attempt.current;
+    const cancelled = () => attempt.current !== myAttempt;
+    const link = await joinLeague(
       code,
       { t: "hello", clientId: m.clientId, name: m.name },
       msg => {
@@ -142,17 +146,24 @@ export function GameProvider({ children }: { children: ReactNode }) {
         } else if (msg.t === "error") {
           setError(msg.message);
         } else if (msg.t === "kicked") {
+          attempt.current++;
           setError(msg.message);
           guestLink.current?.close();
           guestLink.current = null;
           setMe({ ...m, session: null });
           setRole(null);
           setStatus("idle");
+          leagueRef.current = null;
           setLeagueState(null);
         }
       },
-      () => setStatus("lost"),
-    );
+      () => !cancelled() && setStatus("lost"),
+    ).catch(e => {
+      if (!cancelled()) throw e;
+    });
+    if (!link) return;
+    if (cancelled()) return link.close(); // the player cancelled while we were connecting
+    guestLink.current = link;
     setStatus("connected");
   }, [setMe]);
 
@@ -254,7 +265,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
         }
       },
       leave() {
-        hostLink.current?.close();
+        attempt.current++;
+        if (isHost) hostLink.current?.end("The host closed the league.");
+        else hostLink.current?.close();
         guestLink.current?.close();
         hostLink.current = guestLink.current = null;
         if (isHost) saveHostedLeague(null);

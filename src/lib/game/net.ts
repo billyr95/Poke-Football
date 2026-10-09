@@ -18,7 +18,11 @@ export type GuestMessage =
 export type HostMessage =
   | { t: "state"; league: League; now: number } // now = host clock, so guests can sync the pick timer
   | { t: "error"; message: string }
-  | { t: "kicked"; message: string };
+  | { t: "kicked"; message: string }
+  | { t: "ping" }; // heartbeat, so guests notice when the host vanishes without saying goodbye
+
+const PING_MS = 5000;
+const HOST_SILENT_MS = 20000;
 
 export type { LeagueSettings };
 
@@ -68,6 +72,8 @@ async function newPeer(id?: string): Promise<Peer> {
 export interface HostLink {
   broadcast(league: League): void;
   send(conn: DataConnection, msg: HostMessage): void;
+  /** Tells every guest the league is over (so they go back to the home page), then disconnects. */
+  end(message: string): void;
   close(): void;
 }
 
@@ -105,6 +111,9 @@ export async function startHosting(
   peer.on("disconnected", keepAlive);
   peer.on("error", e => console.warn("Host connection error:", e.type));
   const retry = setInterval(keepAlive, 5000);
+  const ping = setInterval(() => {
+    for (const c of conns.keys()) if (c.open) c.send({ t: "ping" } satisfies HostMessage);
+  }, PING_MS);
   const wake = keepScreenAwake();
   const onVisible = () => {
     if (document.visibilityState !== "visible") return;
@@ -114,7 +123,7 @@ export async function startHosting(
   document.addEventListener("visibilitychange", onVisible);
   window.addEventListener("online", keepAlive);
 
-  return {
+  const link: HostLink = {
     broadcast(league) {
       const msg: HostMessage = { t: "state", league, now: Date.now() };
       for (const c of conns.keys()) if (c.open) c.send(msg);
@@ -122,14 +131,20 @@ export async function startHosting(
     send(conn, msg) {
       if (conn.open) conn.send(msg);
     },
+    end(message) {
+      for (const c of conns.keys()) if (c.open) c.send({ t: "kicked", message } satisfies HostMessage);
+      setTimeout(() => link.close(), 500); // give the goodbye a moment to arrive
+    },
     close() {
       clearInterval(retry);
+      clearInterval(ping);
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("online", keepAlive);
       wake.release();
       peer.destroy();
     },
   };
+  return link;
 }
 
 /** Stops the host's screen from sleeping (which would cut off the league). Best effort: not every browser supports it. */
@@ -175,17 +190,37 @@ export async function joinLeague(
     }
   }
 
-  conn.on("data", raw => onMessage(raw as HostMessage));
-  conn.on("close", onClosed);
+  // A closed tab or dead network doesn't always close the connection, so also give up when the host goes quiet.
+  let lastHeard = Date.now();
+  let closed = false;
+  const close = () => {
+    if (closed) return;
+    closed = true;
+    clearInterval(watchdog);
+    peer.destroy();
+  };
+  const watchdog = setInterval(() => {
+    if (Date.now() - lastHeard < HOST_SILENT_MS) return;
+    close();
+    onClosed();
+  }, 1000);
+  conn.on("data", raw => {
+    lastHeard = Date.now();
+    const msg = raw as HostMessage;
+    if (msg.t !== "ping") onMessage(msg);
+  });
+  conn.on("close", () => {
+    if (closed) return;
+    close();
+    onClosed();
+  });
   conn.send(hello);
 
   return {
     send(msg) {
       if (conn.open) conn.send(msg);
     },
-    close() {
-      peer.destroy();
-    },
+    close,
   };
 }
 
