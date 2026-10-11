@@ -54,6 +54,10 @@ export function SchemeSelect() {
                 disabled={locked}
                 onChange={off => update({ off: off as OffScheme })}
                 personnel={k => OFF_PERSONNEL[SCHEME_PERSONNEL[k as OffScheme]]}
+                sheet={k => {
+                  const per = OFF_PERSONNEL[SCHEME_PERSONNEL[k as OffScheme]];
+                  return { personnel: `${per.label} (${per.detail.replaceAll(" · ", ", ")})`, field: OFFENSES[k as OffScheme].field ?? "" };
+                }}
                 pool={pool}
                 side="off"
               />
@@ -68,6 +72,7 @@ export function SchemeSelect() {
                   const f = FRONT_SHAPE[k as Front];
                   return { label: f.label, detail: `${f.dl.length} DL · ${PACKAGE_NAME[f.db]} (${f.db} DB)` };
                 }}
+                sheet={k => defSheet({ ...scheme, front: k as Front })}
                 pool={pool}
                 side="front"
               />
@@ -79,6 +84,7 @@ export function SchemeSelect() {
                 disabled={locked}
                 onChange={cov => update({ cov: cov as Coverage })}
                 personnel={k => ({ label: "Called from", detail: `${PACKAGE_NAME[COVERAGE_DBS[k as Coverage]]} (${COVERAGE_DBS[k as Coverage]} DB)` })}
+                sheet={k => defSheet({ ...scheme, cov: k as Coverage })}
                 pool={pool}
                 side="cov"
               />
@@ -159,16 +165,18 @@ function Countdown({ deadline, offset }: { deadline: number; offset: number }) {
   );
 }
 
-type Info = { label: string; blurb: string; pros: string; cons: string };
+type Info = { label: string; blurb: string; pros: string; cons: string; formation?: string; alternate?: string };
 
 function SchemeGroup({
-  title, note, options, value, disabled, onChange, personnel, pool, side,
+  title, note, options, value, disabled, onChange, personnel, sheet, pool, side,
 }: {
   title: string;
   note?: string;
   options: Record<string, Info>;
   /** Who this option puts on the field, if it changes personnel. */
   personnel?: (key: string) => { label: string; detail: string };
+  /** The scheme guide's personnel sheet for an option: personnel grouping and who's on the field. */
+  sheet?: (key: string) => { personnel: string; field: string };
   value: string;
   disabled: boolean;
   onChange: (key: string) => void;
@@ -216,12 +224,29 @@ function SchemeGroup({
         </div>
         <div className="grid gap-3 rounded-lg bg-muted/50 p-3 text-sm sm:grid-cols-2">
           <div className="space-y-1">
-            <div className="font-semibold">
-              {info.label}
-              {personnel && <span className="ml-1.5 text-xs font-normal text-muted-foreground">{personnel(value).label}: {personnel(value).detail}</span>}
-            </div>
+            <div className="font-semibold">{info.label}</div>
             <p><span className="text-emerald-700 dark:text-emerald-400">+</span> {info.pros}</p>
             <p><span className="text-red-600 dark:text-red-400">−</span> {info.cons}</p>
+            {sheet && (
+              <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 rounded-md border border-emerald-600/30 bg-emerald-600/5 px-2.5 py-2 text-xs">
+                <dt className="font-semibold">Personnel</dt>
+                <dd>{sheet(value).personnel}</dd>
+                {info.formation && (
+                  <>
+                    <dt className="font-semibold">Base formation</dt>
+                    <dd>{info.formation}</dd>
+                  </>
+                )}
+                <dt className="font-semibold">On the field (11)</dt>
+                <dd>{sheet(value).field}</dd>
+                {info.alternate && (
+                  <>
+                    <dt className="font-semibold">Alternate</dt>
+                    <dd>{info.alternate}</dd>
+                  </>
+                )}
+              </dl>
+            )}
           </div>
           <div>
             <div className="mb-1 text-xs font-semibold text-muted-foreground uppercase">Best fits in this pool</div>
@@ -251,4 +276,19 @@ function defSummary(scheme: TeamScheme) {
   const cb = count(id => ["CB1", "CB2", "NB", "DC"].includes(id));
   const s = count(id => ["FS", "SS", "S3"].includes(id));
   return `${dl} DL · ${lb} LB · ${cb} CB · ${s} S (${d.label})`;
+}
+
+/** Personnel sheet for a defense: package name, and exactly who lines up (front + coverage together). */
+function defSheet(scheme: TeamScheme) {
+  const d = defPersonnel(scheme.front, scheme.cov);
+  const name: Record<string, string> = {
+    DE1: "DE", DE2: "DE", DT1: "DT", DT2: "DT", NT: "NT", LB1: "OLB", LB3: "OLB", LB2: "MIKE", LB4: "ILB",
+    CB1: "CB", CB2: "CB", NB: "Nickel CB", DC: "Dime CB", FS: "FS", SS: "SS", S3: "Spur/Rover",
+  };
+  const parts = new Map<string, number>();
+  for (const id of d.slots) parts.set(name[id], (parts.get(name[id]) ?? 0) + 1);
+  return {
+    personnel: d.label,
+    field: `${defSummary(scheme).split(" (")[0].replaceAll(" · ", ", ")} — ${[...parts].map(([n, c]) => (c > 1 ? `${c} ${n}` : n)).join(", ")}`,
+  };
 }

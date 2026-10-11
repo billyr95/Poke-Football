@@ -12,6 +12,7 @@ import { HowRatings } from "./how-ratings";
 import { Lobby } from "./lobby";
 import { Review } from "./review";
 import { SchemeSelect } from "./scheme-select";
+import { UpdateBanner } from "./update-banner";
 import { Season } from "./season";
 
 function Header() {
@@ -107,6 +108,7 @@ export function App() {
   return (
     <GameProvider>
       <div className="flex min-h-svh flex-col">
+        <UpdateBanner />
         <Header />
         <main className="flex-1">
           <Screen />
