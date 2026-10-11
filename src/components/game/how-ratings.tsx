@@ -101,6 +101,10 @@ export function HowRatings() {
                     fit, unchanged for a 4, and {fitBonus(3)} for each step below that. Offense uses your offensive scheme; linemen
                     use your front; corners and safeties your coverage; linebackers both.
                   </li>
+                  <li>
+                    Schemes set your personnel: your offense decides 11, 10 (four wide), 12 (two tight ends) or 21 (fullback) personnel,
+                    and your front decides base 4–3, 3–4 (nose tackle, four backers), nickel or 3–3–5. You draft those 22 spots.
+                  </li>
                   <li>Schemes change how games play: pass/run mix, throw depth, pressure, and big plays allowed, plus classic counters.</li>
                 </ul>
               </section>

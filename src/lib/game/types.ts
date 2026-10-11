@@ -1,3 +1,4 @@
+import type { TeamPersonnel } from "./personnel";
 import type { TeamScheme } from "./schemes";
 
 export type StatKey = "hp" | "atk" | "def" | "spa" | "spd" | "spe";
@@ -9,12 +10,14 @@ export type Side = "off" | "def";
 
 export type SlotId =
   | "QB" | "RB" | "WR1" | "WR2" | "WR3" | "TE" | "LT" | "LG" | "C" | "RG" | "RT"
-  | "DE1" | "DT1" | "DT2" | "DE2" | "LB1" | "LB2" | "LB3" | "CB1" | "CB2" | "FS" | "SS";
+  | "DE1" | "DT1" | "DT2" | "DE2" | "LB1" | "LB2" | "LB3" | "CB1" | "CB2" | "FS" | "SS"
+  // Advanced-mode personnel: spots only some schemes put on the field.
+  | "FB" | "WR4" | "TE2" | "NT" | "LB4" | "NB" | "S3";
 
 /** Granular roles inside a position, used by advanced mode (e.g. a WR can be an X, a Z or a slot receiver). */
 export type Role =
-  | "QB" | "RB" | "X" | "Z" | "SLOT" | "TE" | "T" | "G" | "C"
-  | "DE" | "DT" | "OLB" | "MLB" | "CB" | "FS" | "SS";
+  | "QB" | "RB" | "FB" | "X" | "Z" | "SLOT" | "TE" | "T" | "G" | "C"
+  | "DE" | "DT" | "NT" | "OLB" | "MLB" | "CB" | "NB" | "FS" | "SS";
 
 export interface Slot {
   id: SlotId;
@@ -163,6 +166,8 @@ export interface League {
   season: SeasonState | null;
   /** Advanced mode: each team's offensive scheme, front and coverage, by team id. */
   schemes?: Record<number, TeamScheme>;
+  /** Advanced mode: the personnel each team's schemes put on the field (set when the draft starts), by team id. */
+  personnel?: Record<number, TeamPersonnel>;
   /** Advanced mode, while picking schemes: when picks close (host clock) and which teams have locked in. */
   schemePick?: { deadline: number; locked: number[] };
 }

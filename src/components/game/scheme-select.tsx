@@ -5,7 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { SLOTS } from "@/lib/game/ratings";
+import { DEF_PERSONNEL, FRONT_PERSONNEL, OFF_PERSONNEL, SCHEME_PERSONNEL } from "@/lib/game/personnel";
+import { ALL_SLOTS } from "@/lib/game/ratings";
 import {
   COVERAGES, DEFAULT_SCHEME, FRONTS, OFFENSES, SCHEME_SECONDS, schemeFit, slotRating,
   type Coverage, type Front, type OffScheme, type TeamScheme,
@@ -52,16 +53,18 @@ export function SchemeSelect() {
                 value={scheme.off}
                 disabled={locked}
                 onChange={off => update({ off: off as OffScheme })}
+                personnel={k => OFF_PERSONNEL[SCHEME_PERSONNEL[k as OffScheme]]}
                 pool={pool}
                 side="off"
               />
               <SchemeGroup
                 title="Defensive front"
-                note="Fit here counts for your linemen, and half for your linebackers."
+                note="The front sets your defensive personnel. Fit here counts for your linemen, and half for your linebackers."
                 options={FRONTS}
                 value={scheme.front}
                 disabled={locked}
                 onChange={front => update({ front: front as Front })}
+                personnel={k => DEF_PERSONNEL[FRONT_PERSONNEL[k as Front]]}
                 pool={pool}
                 side="front"
               />
@@ -89,6 +92,11 @@ export function SchemeSelect() {
                   <div><span className="text-muted-foreground">Offense:</span> <b>{OFFENSES[scheme.off].label}</b></div>
                   <div><span className="text-muted-foreground">Front:</span> <b>{FRONTS[scheme.front].label}</b></div>
                   <div><span className="text-muted-foreground">Coverage:</span> <b>{COVERAGES[scheme.cov].label}</b></div>
+                </div>
+                <div className="rounded-md bg-muted/60 px-2 py-1.5 text-xs">
+                  <div className="font-semibold">You&apos;ll draft</div>
+                  <div>QB · {OFF_PERSONNEL[SCHEME_PERSONNEL[scheme.off]].detail} · 5 OL</div>
+                  <div>{DEF_PERSONNEL[FRONT_PERSONNEL[scheme.front]].detail}</div>
                 </div>
                 {locked ? (
                   <Button variant="outline" className="w-full" onClick={() => setMyScheme(scheme, false)}>
@@ -150,11 +158,13 @@ function Countdown({ deadline, offset }: { deadline: number; offset: number }) {
 type Info = { label: string; blurb: string; pros: string; cons: string };
 
 function SchemeGroup({
-  title, note, options, value, disabled, onChange, pool, side,
+  title, note, options, value, disabled, onChange, personnel, pool, side,
 }: {
   title: string;
   note?: string;
   options: Record<string, Info>;
+  /** Who this option puts on the field, if it changes personnel. */
+  personnel?: (key: string) => { label: string; detail: string };
   value: string;
   disabled: boolean;
   onChange: (key: string) => void;
@@ -164,7 +174,7 @@ function SchemeGroup({
   const info = options[value];
   // Who in this draft pool fits the selected scheme best: fit first, then rating at their best spot on that side.
   const topFits = useMemo(() => {
-    const slots = SLOTS.filter(s => (side === "off" ? s.side === "off" : side === "front" ? s.pos === "DL" || s.pos === "LB" : s.side === "def" && s.pos !== "DL"));
+    const slots = ALL_SLOTS.filter(s => (side === "off" ? s.side === "off" : side === "front" ? s.pos === "DL" || s.pos === "LB" : s.side === "def" && s.pos !== "DL"));
     const ctx = { advanced: true, scheme: null };
     return pool
       .map(p => ({ p, fit: schemeFit(p.id, value as OffScheme), r: Math.max(...slots.map(s => slotRating(p, s, ctx))) }))
@@ -196,12 +206,16 @@ function SchemeGroup({
             >
               <div className="font-medium">{o.label}</div>
               <div className="line-clamp-2 text-xs opacity-75">{o.blurb}</div>
+              {personnel && <div className="mt-1 text-[11px] font-semibold opacity-90">{personnel(key).detail}</div>}
             </button>
           ))}
         </div>
         <div className="grid gap-3 rounded-lg bg-muted/50 p-3 text-sm sm:grid-cols-2">
           <div className="space-y-1">
-            <div className="font-semibold">{info.label}</div>
+            <div className="font-semibold">
+              {info.label}
+              {personnel && <span className="ml-1.5 text-xs font-normal text-muted-foreground">{personnel(value).label}: {personnel(value).detail}</span>}
+            </div>
             <p><span className="text-emerald-700 dark:text-emerald-400">+</span> {info.pros}</p>
             <p><span className="text-red-600 dark:text-red-400">−</span> {info.cons}</p>
           </div>

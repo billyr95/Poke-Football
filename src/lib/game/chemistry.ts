@@ -16,9 +16,9 @@ import type { LeagueSettings, Player, SlotId, Team } from "./types";
 
 export const UNITS: { key: string; label: string; slots: SlotId[] }[] = [
   { key: "line", label: "Offensive line", slots: ["LT", "LG", "C", "RG", "RT"] },
-  { key: "receivers", label: "Receivers", slots: ["RB", "WR1", "WR2", "WR3", "TE"] },
-  { key: "front", label: "Front seven", slots: ["DE1", "DT1", "DT2", "DE2", "LB1", "LB2", "LB3"] },
-  { key: "secondary", label: "Secondary", slots: ["CB1", "CB2", "FS", "SS"] },
+  { key: "receivers", label: "Receivers", slots: ["RB", "FB", "WR1", "WR2", "WR3", "WR4", "TE", "TE2"] },
+  { key: "front", label: "Front seven", slots: ["DE1", "DT1", "NT", "DT2", "DE2", "LB1", "LB2", "LB3", "LB4"] },
+  { key: "secondary", label: "Secondary", slots: ["CB1", "CB2", "NB", "FS", "SS", "S3"] },
 ];
 
 const STACK_BONUS = (n: number) => (n >= 5 ? 4 : n === 4 ? 3 : n === 3 ? 2 : 0);
@@ -82,7 +82,7 @@ export function chemistry(team: Team, byId: Map<number, Player>, settings?: Pick
   // Quarterback connections.
   const qb = at("QB");
   if (qb) {
-    const targets = (["RB", "WR1", "WR2", "WR3", "TE"] as SlotId[])
+    const targets = (["RB", "FB", "WR1", "WR2", "WR3", "WR4", "TE", "TE2"] as SlotId[])
       .map(at)
       .filter((p): p is Player => !!p && typesOf(p).some(t => typesOf(qb).includes(t)));
     if (targets.length) {

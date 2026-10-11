@@ -1,6 +1,7 @@
 import { poolEntries } from "./dex";
 import { buildOrder, startClock } from "./draft";
 import { ROSTER_SIZE } from "./ratings";
+import { personnelFor } from "./personnel";
 import { mulberry32, shuffle } from "./rng";
 import {
   COVERAGES, DEFAULT_SCHEME, FRONTS, OFFENSES, SCHEME_SECONDS, isAdvanced,
@@ -214,7 +215,9 @@ export function finishSchemes(league: League): League {
   if (league.phase !== "schemes") return league;
   const schemes = { ...league.schemes };
   for (const t of league.teams) schemes[t.id] ??= { ...DEFAULT_SCHEME };
-  return startClock({ ...league, schemes, schemePick: undefined, phase: "draft" });
+  // Schemes decide who's on the field, so each team's 22 draft spots are fixed now.
+  const personnel = Object.fromEntries(league.teams.map(t => [t.id, personnelFor(schemes[t.id])]));
+  return startClock({ ...league, schemes, personnel, schemePick: undefined, phase: "draft" });
 }
 
 // ---- Persistence (host keeps the league; everyone keeps their identity) ----

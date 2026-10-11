@@ -1,5 +1,6 @@
 import { chemistry, withChem } from "./chemistry";
-import { SLOTS } from "./ratings";
+import { teamSlots } from "./personnel";
+import { ALL_SLOTS, ROLE_LIST, SLOT_BY_ID } from "./ratings";
 import { fitBonus, isAdvanced, matchupTweak, ratingContext, slotFit, type SimTweak } from "./schemes";
 import { normal, rngFor, weightedPick, type Rng } from "./rng";
 import { LONG_KEYS, type Game, type GameResult, type League, type Player, type SeasonState, type SlotId, type StatLine, type Team, type TeamLine } from "./types";
@@ -9,7 +10,18 @@ import { LONG_KEYS, type Game, type GameResult, type League, type Player, type S
 const POSSESSIONS = 11;
 const MAX_OT_ROUNDS = 3;
 
-type Lineup = Record<SlotId, Player>;
+/** Who's on the field. QB, RB, the five linemen, LB1–2, both corners and both safeties are always there; the rest depends on personnel. */
+type Lineup = Partial<Record<SlotId, Player>> & Record<"QB" | "RB" | "LT" | "LG" | "C" | "RG" | "RT" | "LB1" | "LB2" | "CB1" | "CB2" | "FS" | "SS", Player>;
+
+const present = (l: Lineup, ids: SlotId[]) => ids.map(id => l[id]).filter((p): p is Player => !!p);
+const OL_IDS: SlotId[] = ["LT", "LG", "C", "RG", "RT"];
+const DL_IDS: SlotId[] = ["DE1", "DT1", "NT", "DT2", "DE2"];
+const LB_IDS: SlotId[] = ["LB1", "LB2", "LB3", "LB4"];
+const DB_IDS: SlotId[] = ["CB1", "CB2", "NB", "FS", "SS", "S3"];
+const DEF_IDS = ALL_SLOTS.filter(s => s.side === "def").map(s => s.id);
+/** Pass targets, most-thrown-to first, and who covers them (paired in order). */
+const TARGET_WEIGHT: [SlotId, number][] = [["WR1", 3], ["WR2", 2.5], ["WR3", 2], ["WR4", 1.8], ["TE", 1.6], ["TE2", 1.2], ["RB", 1.1], ["FB", 0.6]];
+const COVER_ORDER: SlotId[] = ["CB1", "CB2", "NB", "FS", "SS", "S3", "LB2", "LB4", "LB1", "LB3"];
 
 // Empty slots (shouldn't happen after a full draft) get a weak stand-in.
 function standIn(slotId: SlotId): Player {
@@ -19,8 +31,8 @@ function standIn(slotId: SlotId): Player {
     base: { hp: 40, atk: 40, def: 40, spa: 40, spd: 40, spe: 40 }, family: -1, evolvesFrom: null, rarity: null, rarityBonus: 0, gen: 0, stage: 1, maturity: 1,
     attrs: { SPD: r, STR: r, AGI: r, AWR: r, CTH: r, THP: r, THA: r, BLK: r, TKL: r, COV: r },
     posOvr: { QB: r, RB: r, WR: r, TE: r, OL: r, DL: r, LB: r, CB: r, S: r },
-    roleOvr: { QB: r, RB: r, X: r, Z: r, SLOT: r, TE: r, T: r, G: r, C: r, DE: r, DT: r, OLB: r, MLB: r, CB: r, FS: r, SS: r },
-    pos: SLOTS.find(s => s.id === slotId)!.pos, ovr: r,
+    roleOvr: Object.fromEntries(ROLE_LIST.map(role => [role, r])) as Player["roleOvr"],
+    pos: SLOT_BY_ID[slotId].pos, ovr: r,
   };
 }
 
@@ -40,14 +52,14 @@ function divine(p: Player): Player {
 }
 
 const isGod = (p: Player | null | undefined) => !!p && gods.has(p);
-const godOn = (l: Lineup, side: "off" | "def") => SLOTS.filter(s => s.side === side).map(s => l[s.id]).find(isGod) ?? null;
+const godOn = (l: Lineup, side: "off" | "def") => ALL_SLOTS.filter(s => s.side === side).map(s => l[s.id]).find(isGod) ?? null;
 
-function lineup(team: Team, byId: Map<number, Player>, league: Pick<League, "settings" | "schemes">): Lineup {
+function lineup(team: Team, byId: Map<number, Player>, league: Pick<League, "settings" | "schemes" | "personnel">): Lineup {
   const chem = chemistry(team, byId, league.settings).bonus;
   const eggs = league.settings.easterEggs ?? true;
   const ctx = ratingContext(league, team);
   return Object.fromEntries(
-    SLOTS.map(s => {
+    teamSlots(league, team).map(s => {
       const p = team.roster[s.id] != null ? byId.get(team.roster[s.id]!) : undefined;
       if (!p) return [s.id, standIn(s.id)];
       let withBonus: Player;
@@ -67,15 +79,24 @@ function lineup(team: Team, byId: Map<number, Player>, league: Pick<League, "set
 const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
 
+/** Pass rushers: the defensive line, plus the outside backers when only three are down (3–4, 3–3–5). */
+function rushers(d: Lineup) {
+  const dl = present(d, DL_IDS);
+  return dl.length >= 4 ? dl : [...dl, ...present(d, ["LB1", "LB3"])];
+}
+
 function unitScores(o: Lineup, d: Lineup, t: Required<SimTweak>) {
-  const ol = [o.LT, o.LG, o.C, o.RG, o.RT];
-  const dl = [d.DE1, d.DT1, d.DT2, d.DE2];
-  const lb = [d.LB1, d.LB2, d.LB3];
+  const ol = present(o, OL_IDS);
+  const dl = present(d, DL_IDS);
+  const lb = present(d, LB_IDS);
+  // Tight ends and fullbacks help the run game; four-wide sets have no extra blocker.
+  const helpers = present(o, ["TE", "TE2", "FB"]);
+  const box = dl.length + lb.length; // 7 in base defenses, 6 in nickel and 3–3–5
   return {
-    runBlock: avg(ol.map(p => p.posOvr.OL)) * 0.8 + o.TE.attrs.BLK * 0.2,
+    runBlock: avg(ol.map(p => p.posOvr.OL)) * 0.8 + (helpers.length ? avg(helpers.map(p => p.attrs.BLK)) : 50) * 0.2,
     passBlock: avg(ol.map(p => p.attrs.BLK)),
-    runStop: avg(dl.map(p => p.posOvr.DL)) * 0.55 + avg(lb.map(p => p.posOvr.LB)) * 0.45 + t.stop,
-    passRush: avg(dl.map(p => (p.attrs.STR + p.attrs.SPD) / 2)) + t.rush,
+    runStop: avg(dl.map(p => p.posOvr.DL)) * 0.55 + avg(lb.map(p => p.posOvr.LB)) * 0.45 + (box - 7) * 2 + t.stop,
+    passRush: avg(rushers(d).map(p => (p.attrs.STR + p.attrs.SPD) / 2)) + t.rush,
   };
 }
 
@@ -102,15 +123,14 @@ export function emptyTeamLine(): TeamLine {
 }
 
 function tackler(rng: Rng, d: Lineup, deep: boolean): Player {
-  const pool = deep
-    ? [d.LB1, d.LB2, d.LB3, d.CB1, d.CB2, d.FS, d.SS]
-    : [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB2, d.LB3, d.SS];
+  const lb = present(d, LB_IDS);
+  const pool = deep ? [...lb, ...present(d, DB_IDS)] : [...present(d, DL_IDS), ...lb, ...present(d, ["SS", "S3"])];
   const god = godOn(d, "def");
   if (god && !pool.includes(god)) pool.push(god); // Bidoof is everywhere at once
   return weightedPick(rng, pool, p => p.attrs.TKL ** 2);
 }
 
-const anyDefender = (d: Lineup) => SLOTS.filter(s => s.side === "def").map(s => d[s.id]);
+const anyDefender = (d: Lineup) => present(d, DEF_IDS);
 
 interface DriveOutcome {
   points: number;
@@ -182,7 +202,7 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
       if (isGod(qb)) sackP = 0; // nobody touches him
       else if (defGod) sackP += 0.16;
       if (rng() < sackP) {
-        const rusher = defGod ?? weightedPick(rng, [d.DE1, d.DT1, d.DT2, d.DE2, d.LB1, d.LB3], p => p.attrs.STR + p.attrs.SPD);
+        const rusher = defGod ?? weightedPick(rng, [...present(d, DL_IDS), ...present(d, ["LB1", "LB3"])], p => p.attrs.STR + p.attrs.SPD);
         gained = -Math.round(4 + rng() * 5);
         add(box, rusher, "sack");
         add(box, rusher, "tfl");
@@ -193,9 +213,8 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
         team.passYds += gained;
         tackledBy = rusher;
       } else {
-        const targets: [Player, Player, number][] = [
-          [o.WR1, d.CB1, 3], [o.WR2, d.CB2, 2.5], [o.WR3, d.FS, 2], [o.TE, d.SS, 1.6], [o.RB, d.LB2, 1.1],
-        ];
+        const covers = present(d, COVER_ORDER);
+        const targets: [Player, Player, number][] = TARGET_WEIGHT.filter(([id]) => o[id]).map(([id, w], i) => [o[id]!, covers[i % covers.length], w]);
         // An offensive lineman Bidoof reports as eligible and runs routes anyway.
         if (offGod && !isGod(qb) && !targets.some(([r]) => r === offGod)) targets.push([offGod, d.LB1, 3]);
         const [rec, defender] = weightedPick(rng, targets, ([r, , w]) => w * (r.attrs.CTH / 70) ** 2);
@@ -259,8 +278,11 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
     } else {
       // Run play.
       // Wherever Bidoof lines up on offense, the coach finds a way to hand him the ball.
-      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && rng() < 0.6 ? offGod : rng() < 1 - t.qbRun ? o.RB : o.QB;
-      const skill = isGod(carrier) ? DIVINE : carrier === o.RB ? o.RB.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
+      // A fullback, when there is one, gets the odd dive.
+      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && rng() < 0.6
+        ? offGod
+        : o.FB && rng() < 0.12 ? o.FB : rng() < 1 - t.qbRun ? o.RB : o.QB;
+      const skill = isGod(carrier) ? DIVINE : carrier === o.RB || carrier === o.FB ? carrier.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
       const mean = 3.8 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16 + t.run;
       gained = Math.round(normal(rng, mean, 3.4));
       const breakP = isGod(carrier) ? 0.3 : clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04) * t.big;

@@ -60,6 +60,7 @@ export const ROLES: Record<Role, {
 }> = {
   QB: { pos: "QB", frame: POSITIONS.QB.frame, weights: POSITIONS.QB.weights, name: POSITIONS.QB.name },
   RB: { pos: "RB", frame: POSITIONS.RB.frame, weights: POSITIONS.RB.weights, name: POSITIONS.RB.name },
+  FB: { name: "Fullback (lead blocker)", pos: "RB", frame: 0.6, weights: { BLK: 0.35, STR: 0.35, SPD: 0.1, CTH: 0.1, AWR: 0.1 } },
   X: { name: "X receiver (outside, contested catches)", pos: "WR", frame: -0.1, weights: { CTH: 0.4, STR: 0.25, SPD: 0.2, AGI: 0.15 } },
   Z: { name: "Z receiver (flanker, deep speed)", pos: "WR", frame: -0.4, weights: { SPD: 0.5, CTH: 0.3, AGI: 0.2 } },
   SLOT: { name: "Slot receiver (quickness)", pos: "WR", frame: -0.7, weights: { AGI: 0.45, CTH: 0.35, AWR: 0.2 } },
@@ -69,9 +70,11 @@ export const ROLES: Record<Role, {
   C: { name: "Center (calls protections)", pos: "OL", frame: 1.1, weights: { BLK: 0.45, AWR: 0.35, STR: 0.2 } },
   DE: { name: "Defensive end (edge rusher)", pos: "DL", frame: 0.6, weights: { SPD: 0.35, STR: 0.3, TKL: 0.35 } },
   DT: { name: "Defensive tackle (interior)", pos: "DL", frame: 1.4, weights: { STR: 0.5, BLK: 0.2, TKL: 0.3 } },
+  NT: { name: "Nose tackle (eats double teams)", pos: "DL", frame: 1.7, weights: { STR: 0.55, BLK: 0.3, TKL: 0.15 } },
   OLB: { name: "Outside linebacker", pos: "LB", frame: 0.3, weights: { SPD: 0.3, TKL: 0.35, STR: 0.2, COV: 0.15 } },
   MLB: { name: "Middle linebacker", pos: "LB", frame: 0.5, weights: { TKL: 0.4, AWR: 0.35, STR: 0.25 } },
   CB: { pos: "CB", frame: POSITIONS.CB.frame, weights: POSITIONS.CB.weights, name: POSITIONS.CB.name },
+  NB: { name: "Nickel back (covers the slot)", pos: "CB", frame: -0.8, weights: { AGI: 0.35, COV: 0.4, SPD: 0.25 } },
   FS: { name: "Free safety (deep range)", pos: "S", frame: -0.4, weights: { COV: 0.4, SPD: 0.3, AWR: 0.3 } },
   SS: { name: "Strong safety (box)", pos: "S", frame: 0.1, weights: { TKL: 0.4, STR: 0.2, COV: 0.25, AWR: 0.15 } },
 };
@@ -111,7 +114,19 @@ export const SLOTS: Slot[] = [
   slot("SS", "S", "SS", "SS"),
 ];
 
-export const SLOT_BY_ID = Object.fromEntries(SLOTS.map(s => [s.id, s])) as Record<SlotId, Slot>;
+/** Spots that only some advanced-mode personnel groupings use. */
+export const EXTRA_SLOTS: Slot[] = [
+  slot("FB", "RB", "FB", "FB"),
+  slot("WR4", "WR", "WR", "SLOT"),
+  slot("TE2", "TE", "TE", "TE"),
+  slot("NT", "DL", "NT", "NT"),
+  slot("LB4", "LB", "ILB", "MLB"),
+  slot("NB", "CB", "NB", "NB"),
+  slot("S3", "S", "S", "SS"),
+];
+export const ALL_SLOTS = [...SLOTS, ...EXTRA_SLOTS];
+
+export const SLOT_BY_ID = Object.fromEntries(ALL_SLOTS.map(s => [s.id, s])) as Record<SlotId, Slot>;
 export const ROSTER_SIZE = SLOTS.length;
 
 export const RATING_MEAN = 70;

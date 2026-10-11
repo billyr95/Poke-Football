@@ -44,8 +44,12 @@ export const ratingText = (r: number) => TIER_TEXT[tier(r)];
 
 /** Text colour for a 1–5 scheme fit. */
 export const FIT_TEXT = [
-  "", "text-red-600 dark:text-red-400", "text-orange-600 dark:text-orange-400", "text-muted-foreground",
-  "text-emerald-600 dark:text-emerald-400", "font-semibold text-emerald-600 dark:text-emerald-400",
+  "",
+  "text-red-600 dark:text-red-400",
+  "text-orange-600 dark:text-orange-400",
+  "text-muted-foreground",
+  "text-emerald-600 dark:text-emerald-400",
+  "font-semibold text-emerald-600 dark:text-emerald-400",
 ];
 
 /** Big-number rating chip, gold for 90+. */
@@ -70,29 +74,34 @@ export function RatingChip({
       )}
       title={bonus > 0 ? `${value} + ${bonus} chemistry` : undefined}
     >
-      <span className="block leading-none [text-box:trim-both_cap_alphabetic]">{shown}</span>
+      <span className="block leading-none [text-box:trim-both_cap_alphabetic]">
+        {shown}
+      </span>
     </span>
   );
 }
 
 /**
- * PokeAPI official artwork.
+ * PokeAPI pixel sprite.
  *
  * `player.id` should be the Pokémon's National Dex number.
  *
  * Example:
- *   1  -> Bulbasaur
- *   25 -> Pikachu
+ *   1   -> Bulbasaur
+ *   25  -> Pikachu
  *   149 -> Dragonite
+ *
+ * Uses PokeAPI's default pixel-art sprite collection
+ * for a consistent visual style across all generations.
  */
 function spriteUrl(p: Pick<Player, "id">) {
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`;
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.id}.png`;
 }
 
 /**
  * A Pokémon's token:
  * - Background uses the Pokémon's type colors
- * - Official PokeAPI artwork sits on top
+ * - Pixel-art PokeAPI sprite sits on top
  * - Falls back to the Dex number if the sprite fails
  * - Shows L/P rarity badge when applicable
  */
@@ -126,7 +135,10 @@ export function MonBadge({
         width: size,
         height: size,
         background: `linear-gradient(135deg, ${a} 0 50%, ${b} 50% 100%)`,
-        fontSize: typeof size === "number" ? Math.max(10, size * 0.32) : `max(10px, calc(${size} * 0.32))`,
+        fontSize:
+          typeof size === "number"
+            ? Math.max(10, size * 0.32)
+            : `max(10px, calc(${size} * 0.32))`,
         textShadow: "0 1px 2px rgb(0 0 0 / 0.55)",
       }}
       aria-hidden
@@ -139,10 +151,12 @@ export function MonBadge({
           loading="lazy"
           draggable={false}
           onError={() => setFailed(src)}
-          className="size-[115%] max-w-none object-contain drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
+          className="size-[115%] max-w-none object-contain [image-rendering:pixelated] drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
         />
       ) : (
-        <span className="block leading-none [text-box:trim-both_cap_alphabetic]">{player.id}</span>
+        <span className="block leading-none [text-box:trim-both_cap_alphabetic]">
+          {player.id}
+        </span>
       )}
 
       {player.rarity && (

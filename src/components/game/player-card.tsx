@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ATTR_LIST, ATTRS, POS_LIST, POSITIONS, RARITY_LABEL, ROLE_LIST, ROLES, SLOTS, heightFt, weightLb } from "@/lib/game/ratings";
+import { ATTR_LIST, ATTRS, POS_LIST, POSITIONS, RARITY_LABEL, ALL_SLOTS, ROLE_LIST, ROLES, heightFt, weightLb } from "@/lib/game/ratings";
 import { COVERAGES, FRONTS, OFFENSES, isAdvanced, ratingContext, schemeFit, scouting, slotRating } from "@/lib/game/schemes";
 import { useGame } from "@/lib/game/store";
 import type { Player, Pos, Role } from "@/lib/game/types";
@@ -94,7 +94,7 @@ export function PlayerCard({
 /** Advanced mode: granular role ratings (with my schemes' fit) and the scheme scouting report. */
 function AdvancedSections({ player, ctx, highlightRole }: { player: Player; ctx: ReturnType<typeof ratingContext>; highlightRole?: Role }) {
   const scout = scouting(player.id);
-  const slotFor = (r: Role) => SLOTS.find(s => s.role === r)!;
+  const slotFor = (r: Role) => ALL_SLOTS.find(s => s.role === r)!;
   return (
     <>
       <section>

@@ -1,5 +1,5 @@
 import { chemistry } from "./chemistry";
-import { SLOTS } from "./ratings";
+import { teamSlots } from "./personnel";
 import { isAdvanced, ratingContext, slotRating, type TeamScheme } from "./schemes";
 import type { Game, League, Player, Role, SlotId, StatLine, TeamLine } from "./types";
 
@@ -65,7 +65,7 @@ function teamReport(league: League, game: Game, side: 0 | 1, byId: Map<number, P
   const mine = r.score[side];
   const theirs = r.score[1 - side];
   const players: PlayerReport[] = [];
-  for (const s of SLOTS) {
+  for (const s of teamSlots(league, team)) {
     const id = team.roster[s.id];
     const p = id != null ? byId.get(id) : undefined;
     if (!p) continue;

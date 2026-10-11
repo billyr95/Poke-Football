@@ -65,7 +65,7 @@ function toOps(g: GameReport): GameOps {
       add(r, "srp", p.rating * p.pts);
     }
     // Combos: teammates on the same side of the ball.
-    const offense = new Set(["QB", "RB", "X", "Z", "SLOT", "TE", "T", "G", "C"]);
+    const offense = new Set(["QB", "RB", "FB", "X", "Z", "SLOT", "TE", "T", "G", "C"]);
     for (const p of t.players) {
       for (const q of t.players) {
         if (p === q || offense.has(p.role) !== offense.has(q.role)) continue;

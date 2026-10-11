@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { chemistry } from "@/lib/game/chemistry";
 import { bestOpenSlot, onClock, openSlots, takenIds, teamRatings } from "@/lib/game/draft";
-import { POS_LIST, POSITIONS, ROLE_LIST, ROLES, ROSTER_SIZE, SLOT_BY_ID, SLOTS } from "@/lib/game/ratings";
+import { POS_LIST, POSITIONS, ROLE_LIST, ROLES, ROSTER_SIZE, SLOT_BY_ID, SLOTS, ALL_SLOTS } from "@/lib/game/ratings";
 import { ratingContext, slotFit, slotRating } from "@/lib/game/schemes";
 import { useGame } from "@/lib/game/store";
 import type { Player, Pos, Role, Slot, SlotId, Team } from "@/lib/game/types";
@@ -27,7 +27,7 @@ import { TeamMark } from "./team-mark";
 /** How the available list is rated: natural position, a specific position or role, or best fit for my open spots. */
 type PosFilter = Pos | `r:${Role}` | "ALL" | "BEST";
 const filterRole = (f: PosFilter): Role | null => (f.startsWith("r:") ? (f.slice(2) as Role) : null);
-const slotForRole = (role: Role) => SLOTS.find(s => s.role === role)!;
+const slotForRole = (role: Role) => ALL_SLOTS.find(s => s.role === role)!;
 
 /** Countdown to the pick deadline. `offset` converts this browser's clock to the host's. */
 function PickClock({ deadline, offset, total }: { deadline: number; offset: number; total: number }) {
@@ -75,14 +75,14 @@ export function DraftRoom() {
   /** One spot per open position (standard) or per open role (advanced). */
   const myOpenKinds = useMemo(() => {
     const seen = new Set<string>();
-    return (myTeam ? openSlots(myTeam) : []).filter(s => {
+    return (myTeam ? openSlots(l, myTeam) : []).filter(s => {
       const k = advanced ? s.role : s.pos;
       return seen.has(k) ? false : (seen.add(k), true);
     });
-  }, [myTeam, advanced]);
+  }, [l, myTeam, advanced]);
   /** Advanced: where a player rates best within their natural position group. */
   const naturalSlot = (p: Player): Slot =>
-    SLOTS.filter(s => s.pos === p.pos).reduce((best, s) => (slotRating(p, s, ctx) > slotRating(p, best, ctx) ? s : best));
+    ALL_SLOTS.filter(s => s.pos === p.pos).reduce((best, s) => (slotRating(p, s, ctx) > slotRating(p, best, ctx) ? s : best));
   /** Best rating among the spots I still need, and which one it is. Advanced mode counts role and scheme fit. */
   const bestFit = (p: Player): { slot: Slot; rating: number } => {
     const options = myOpenKinds.length ? myOpenKinds : [advanced ? naturalSlot(p) : SLOTS.find(s => s.pos === p.pos)!];
@@ -114,7 +114,7 @@ export function DraftRoom() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pool, taken, q, typeFilter, posFilter, myOpenKinds, ctx]);
 
-  const myOpen = useMemo(() => (myTeam ? openSlots(myTeam) : []), [myTeam]);
+  const myOpen = useMemo(() => (myTeam ? openSlots(l, myTeam) : []), [l, myTeam]);
   const myChem = useMemo(() => (myTeam ? chemistry(myTeam, byId, l.settings) : null), [myTeam, byId, l.settings]);
   const modalPlayer = modalId != null ? byId.get(modalId) ?? null : null;
   const modalTakenBy = modalPlayer && taken.has(modalPlayer.id)
@@ -138,7 +138,7 @@ export function DraftRoom() {
       ? myOpen.find(s => s.role === role)
       : posFilter !== "ALL" && posFilter !== "BEST" ? myOpen.find(s => s.pos === posFilter) : undefined;
     const best = posFilter === "BEST" ? myOpen.find(s => s.id === bestFit(p).slot.id) : undefined;
-    const slot = wanted || best || bestOpenSlot(myTeam!, p, ctx);
+    const slot = wanted || best || bestOpenSlot(l, myTeam!, p, ctx);
     if (slot) pick(p.id, slot.id);
   };
 

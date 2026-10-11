@@ -1,5 +1,6 @@
 import { chemistry } from "./chemistry";
-import { POSITIONS, POS_LIST, SLOTS, SLOT_BY_ID } from "./ratings";
+import { teamSlots } from "./personnel";
+import { POSITIONS, POS_LIST, SLOT_BY_ID } from "./ratings";
 import { rngFor } from "./rng";
 import { ratingContext, slotRating, type RatingContext } from "./schemes";
 import type { League, Player, Pos, Slot, SlotId, Team } from "./types";
@@ -13,8 +14,9 @@ export function buildOrder(teamIds: number[], rounds: number, snake: boolean) {
   return order;
 }
 
-export function openSlots(team: Team): Slot[] {
-  return SLOTS.filter(s => team.roster[s.id] == null);
+/** Spots this team still has to fill (its personnel's 22 in advanced mode). */
+export function openSlots(league: Pick<League, "settings" | "personnel"> | null | undefined, team: Team): Slot[] {
+  return teamSlots(league, team).filter(s => team.roster[s.id] == null);
 }
 
 export function takenIds(league: League) {
@@ -29,8 +31,8 @@ export function onClock(league: League): Team | null {
 const STANDARD: RatingContext = { advanced: false, scheme: null };
 
 /** Best open slot for a player on this team, by their rating at that spot. */
-export function bestOpenSlot(team: Team, p: Player, ctx: RatingContext = STANDARD): Slot | null {
-  const open = openSlots(team);
+export function bestOpenSlot(league: Pick<League, "settings" | "personnel">, team: Team, p: Player, ctx: RatingContext = STANDARD): Slot | null {
+  const open = openSlots(league, team);
   if (!open.length) return null;
   return open.reduce((best, s) => (slotRating(p, s, ctx) > slotRating(p, best, ctx) ? s : best));
 }
@@ -47,11 +49,11 @@ export function aiChoose(league: League, players: Player[]): { playerId: number;
   if (!team) return null;
   const taken = takenIds(league);
   const available = players.filter(p => !taken.has(p.id));
-  const open = openSlots(team);
+  const open = openSlots(league, team);
   if (!available.length || !open.length) return null;
 
   const leagueOpen: Record<Pos, number> = Object.fromEntries(POS_LIST.map(p => [p, 0])) as Record<Pos, number>;
-  for (const t of league.teams) for (const s of openSlots(t)) leagueOpen[s.pos]++;
+  for (const t of league.teams) for (const s of openSlots(league, t)) leagueOpen[s.pos]++;
 
   const replacement = {} as Record<Pos, number>;
   for (const pos of POS_LIST) {
@@ -91,6 +93,7 @@ export function makePick(league: League, playerId: number, slotId: SlotId): Leag
   if (!team) throw new Error("The draft is over.");
   if (takenIds(league).has(playerId)) throw new Error("That Pokémon has already been drafted.");
   if (team.roster[slotId] != null) throw new Error(`${SLOT_BY_ID[slotId].label} is already filled.`);
+  if (!teamSlots(league, team).some(s => s.id === slotId)) throw new Error(`${team.name} doesn't play a ${SLOT_BY_ID[slotId].label}.`);
 
   const teams = league.teams.map(t => (t.id === team.id ? { ...t, roster: { ...t.roster, [slotId]: playerId } } : t));
   const log = [...league.draft.log, { pick: league.draft.pick, teamId: team.id, playerId, slotId }];
@@ -119,13 +122,13 @@ const STAR_MULT = 1.6;
 /** Stars count extra: each point above 85 is worth 1.6. */
 const starValue = (r: number) => (r > STAR_LINE ? STAR_LINE + (r - STAR_LINE) * STAR_MULT : r);
 
-export function teamRatings(team: Team, byId: Map<number, Player>, league?: Pick<League, "settings" | "schemes">): TeamRatings {
+export function teamRatings(team: Team, byId: Map<number, Player>, league?: Pick<League, "settings" | "schemes" | "personnel">): TeamRatings {
   const chem = chemistry(team, byId, league?.settings).bonus;
   const ctx = ratingContext(league, team);
   const unit = (side: "off" | "def") => {
     let sum = 0;
     let w = 0;
-    for (const s of SLOTS.filter(s => s.side === side)) {
+    for (const s of teamSlots(league, team).filter(s => s.side === side)) {
       const p = team.roster[s.id] != null ? byId.get(team.roster[s.id]!) : undefined;
       const weight = SLOT_WEIGHT[s.pos];
       sum += starValue(p ? Math.min(99, slotRating(p, s, ctx) + (chem.get(p.id) ?? 0)) : 40) * weight;
