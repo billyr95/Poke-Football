@@ -117,11 +117,13 @@ export const SLOTS: Slot[] = [
 /** Spots that only some advanced-mode personnel groupings use. */
 export const EXTRA_SLOTS: Slot[] = [
   slot("FB", "RB", "FB", "FB"),
+  slot("RB2", "RB", "RB", "RB"),
   slot("WR4", "WR", "WR", "SLOT"),
   slot("TE2", "TE", "TE", "TE"),
   slot("NT", "DL", "NT", "NT"),
   slot("LB4", "LB", "ILB", "MLB"),
   slot("NB", "CB", "NB", "NB"),
+  slot("DC", "CB", "DC", "NB"),
   slot("S3", "S", "S", "SS"),
 ];
 export const ALL_SLOTS = [...SLOTS, ...EXTRA_SLOTS];

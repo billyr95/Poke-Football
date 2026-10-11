@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DEF_PERSONNEL, FRONT_PERSONNEL, OFF_PERSONNEL, SCHEME_PERSONNEL } from "@/lib/game/personnel";
+import { COVERAGE_DBS, FRONT_SHAPE, OFF_PERSONNEL, PACKAGE_NAME, SCHEME_PERSONNEL, defPersonnel } from "@/lib/game/personnel";
 import { ALL_SLOTS } from "@/lib/game/ratings";
 import {
   COVERAGES, DEFAULT_SCHEME, FRONTS, OFFENSES, SCHEME_SECONDS, schemeFit, slotRating,
@@ -59,22 +59,26 @@ export function SchemeSelect() {
               />
               <SchemeGroup
                 title="Defensive front"
-                note="The front sets your defensive personnel. Fit here counts for your linemen, and half for your linebackers."
+                note="The front sets your defensive line. Fit here counts for your linemen, and half for your linebackers."
                 options={FRONTS}
                 value={scheme.front}
                 disabled={locked}
                 onChange={front => update({ front: front as Front })}
-                personnel={k => DEF_PERSONNEL[FRONT_PERSONNEL[k as Front]]}
+                personnel={k => {
+                  const f = FRONT_SHAPE[k as Front];
+                  return { label: f.label, detail: `${f.dl.length} DL · ${PACKAGE_NAME[f.db]} (${f.db} DB)` };
+                }}
                 pool={pool}
                 side="front"
               />
               <SchemeGroup
                 title="Coverage & pressure"
-                note="Fit here counts for your corners and safeties, and half for your linebackers."
+                note="Nickel and dime coverages bring extra defensive backs in place of linebackers. Fit here counts for your corners and safeties, and half for your linebackers."
                 options={COVERAGES}
                 value={scheme.cov}
                 disabled={locked}
                 onChange={cov => update({ cov: cov as Coverage })}
+                personnel={k => ({ label: "Called from", detail: `${PACKAGE_NAME[COVERAGE_DBS[k as Coverage]]} (${COVERAGE_DBS[k as Coverage]} DB)` })}
                 pool={pool}
                 side="cov"
               />
@@ -96,7 +100,7 @@ export function SchemeSelect() {
                 <div className="rounded-md bg-muted/60 px-2 py-1.5 text-xs">
                   <div className="font-semibold">You&apos;ll draft</div>
                   <div>QB · {OFF_PERSONNEL[SCHEME_PERSONNEL[scheme.off]].detail} · 5 OL</div>
-                  <div>{DEF_PERSONNEL[FRONT_PERSONNEL[scheme.front]].detail}</div>
+                  <div>{defSummary(scheme)}</div>
                 </div>
                 {locked ? (
                   <Button variant="outline" className="w-full" onClick={() => setMyScheme(scheme, false)}>
@@ -236,4 +240,15 @@ function SchemeGroup({
       </CardContent>
     </Card>
   );
+}
+
+/** "4 DL · 2 LB · 3 CB · 2 S (4–2–5 Nickel)" */
+function defSummary(scheme: TeamScheme) {
+  const d = defPersonnel(scheme.front, scheme.cov);
+  const count = (pred: (id: string) => boolean) => d.slots.filter(pred).length;
+  const dl = count(id => /^(DE|DT|NT)/.test(id));
+  const lb = count(id => id.startsWith("LB"));
+  const cb = count(id => ["CB1", "CB2", "NB", "DC"].includes(id));
+  const s = count(id => ["FS", "SS", "S3"].includes(id));
+  return `${dl} DL · ${lb} LB · ${cb} CB · ${s} S (${d.label})`;
 }

@@ -42,7 +42,6 @@ const TIER_CHIP = {
 
 export const ratingText = (r: number) => TIER_TEXT[tier(r)];
 
-/** Text colour for a 1–5 scheme fit. */
 export const FIT_TEXT = [
   "",
   "text-red-600 dark:text-red-400",
@@ -52,7 +51,6 @@ export const FIT_TEXT = [
   "font-semibold text-emerald-600 dark:text-emerald-400",
 ];
 
-/** Big-number rating chip, gold for 90+. */
 export function RatingChip({
   value,
   bonus = 0,
@@ -81,48 +79,29 @@ export function RatingChip({
   );
 }
 
-/**
- * PokeAPI pixel sprite.
- *
- * `player.id` should be the Pokémon's National Dex number.
- *
- * Example:
- *   1   -> Bulbasaur
- *   25  -> Pikachu
- *   149 -> Dragonite
- *
- * Uses PokeAPI's default pixel-art sprite collection
- * for a consistent visual style across all generations.
- */
+const SPRITE_BASE =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon";
+
+const MAX_PIXEL_ICON_ID = 898;
+
 function spriteUrl(p: Pick<Player, "id">) {
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.id}.png`;
+  return p.id <= MAX_PIXEL_ICON_ID
+    ? `${SPRITE_BASE}/versions/generation-viii/icons/${p.id}.png`
+    : `${SPRITE_BASE}/${p.id}.png`;
 }
 
-/**
- * A Pokémon's token:
- * - Background uses the Pokémon's type colors
- * - Pixel-art PokeAPI sprite sits on top
- * - Falls back to the Dex number if the sprite fails
- * - Shows L/P rarity badge when applicable
- */
 export function MonBadge({
   player,
   size = 40,
   className,
 }: {
   player: Pick<Player, "id" | "name" | "types" | "rarity">;
-  /** Pixels, or any CSS length (e.g. a clamp() that scales with the field). */
   size?: number | string;
   className?: string;
 }) {
-  const [a, b = a] = player.types.map(
-    (t) => TYPE_COLOR[t] ?? "#888",
-  );
-
+  const [a, b = a] = player.types.map((t) => TYPE_COLOR[t] ?? "#888");
   const src = spriteUrl(player);
-
   const [failed, setFailed] = useState<string | null>(null);
-
   const showImage = failed !== src;
 
   return (
@@ -151,7 +130,7 @@ export function MonBadge({
           loading="lazy"
           draggable={false}
           onError={() => setFailed(src)}
-          className="size-[115%] max-w-none object-contain [image-rendering:pixelated] drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
+          className="size-[90%] max-w-none object-contain [image-rendering:pixelated] drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
         />
       ) : (
         <span className="block leading-none [text-box:trim-both_cap_alphabetic]">
@@ -162,9 +141,7 @@ export function MonBadge({
       {player.rarity && (
         <span
           className="absolute -top-1 -right-1 rounded-full bg-amber-400 px-1 text-[9px] leading-tight text-zinc-950"
-          style={{
-            textShadow: "none",
-          }}
+          style={{ textShadow: "none" }}
         >
           {player.rarity === "pseudo" ? "P" : "L"}
         </span>
@@ -177,34 +154,22 @@ export function TypePill({ type }: { type: string }) {
   return (
     <span
       className="rounded px-1.5 py-px text-[10px] font-semibold tracking-wide text-white uppercase"
-      style={{
-        background: TYPE_COLOR[type] ?? "#888",
-      }}
+      style={{ background: TYPE_COLOR[type] ?? "#888" }}
     >
       {type}
     </span>
   );
 }
 
-export function AttrBar({
-  label,
-  value,
-}: {
-  label: string;
-  value: number;
-}) {
+export function AttrBar({ label, value }: { label: string; value: number }) {
   return (
     <div className="flex items-center gap-3 text-sm">
-      <span className="w-28 shrink-0 text-muted-foreground">
-        {label}
-      </span>
+      <span className="w-28 shrink-0 text-muted-foreground">{label}</span>
 
       <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
         <span
           className="block h-full rounded-full bg-foreground/80"
-          style={{
-            width: `${((value - 40) / 59) * 100}%`,
-          }}
+          style={{ width: `${((value - 40) / 59) * 100}%` }}
         />
       </span>
 

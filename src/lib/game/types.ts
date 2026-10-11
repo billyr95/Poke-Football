@@ -12,7 +12,7 @@ export type SlotId =
   | "QB" | "RB" | "WR1" | "WR2" | "WR3" | "TE" | "LT" | "LG" | "C" | "RG" | "RT"
   | "DE1" | "DT1" | "DT2" | "DE2" | "LB1" | "LB2" | "LB3" | "CB1" | "CB2" | "FS" | "SS"
   // Advanced-mode personnel: spots only some schemes put on the field.
-  | "FB" | "WR4" | "TE2" | "NT" | "LB4" | "NB" | "S3";
+  | "FB" | "RB2" | "WR4" | "TE2" | "NT" | "LB4" | "NB" | "DC" | "S3";
 
 /** Granular roles inside a position, used by advanced mode (e.g. a WR can be an X, a Z or a slot receiver). */
 export type Role =

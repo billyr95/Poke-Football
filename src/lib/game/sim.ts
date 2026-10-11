@@ -10,18 +10,18 @@ import { LONG_KEYS, type Game, type GameResult, type League, type Player, type S
 const POSSESSIONS = 11;
 const MAX_OT_ROUNDS = 3;
 
-/** Who's on the field. QB, RB, the five linemen, LB1–2, both corners and both safeties are always there; the rest depends on personnel. */
-type Lineup = Partial<Record<SlotId, Player>> & Record<"QB" | "RB" | "LT" | "LG" | "C" | "RG" | "RT" | "LB1" | "LB2" | "CB1" | "CB2" | "FS" | "SS", Player>;
+/** Who's on the field. QB, RB, the five linemen, the middle linebacker, both corners and both safeties are always there; the rest depends on personnel. */
+type Lineup = Partial<Record<SlotId, Player>> & Record<"QB" | "RB" | "LT" | "LG" | "C" | "RG" | "RT" | "LB2" | "CB1" | "CB2" | "FS" | "SS", Player>;
 
 const present = (l: Lineup, ids: SlotId[]) => ids.map(id => l[id]).filter((p): p is Player => !!p);
 const OL_IDS: SlotId[] = ["LT", "LG", "C", "RG", "RT"];
 const DL_IDS: SlotId[] = ["DE1", "DT1", "NT", "DT2", "DE2"];
 const LB_IDS: SlotId[] = ["LB1", "LB2", "LB3", "LB4"];
-const DB_IDS: SlotId[] = ["CB1", "CB2", "NB", "FS", "SS", "S3"];
+const DB_IDS: SlotId[] = ["CB1", "CB2", "NB", "DC", "FS", "SS", "S3"];
 const DEF_IDS = ALL_SLOTS.filter(s => s.side === "def").map(s => s.id);
 /** Pass targets, most-thrown-to first, and who covers them (paired in order). */
-const TARGET_WEIGHT: [SlotId, number][] = [["WR1", 3], ["WR2", 2.5], ["WR3", 2], ["WR4", 1.8], ["TE", 1.6], ["TE2", 1.2], ["RB", 1.1], ["FB", 0.6]];
-const COVER_ORDER: SlotId[] = ["CB1", "CB2", "NB", "FS", "SS", "S3", "LB2", "LB4", "LB1", "LB3"];
+const TARGET_WEIGHT: [SlotId, number][] = [["WR1", 3], ["WR2", 2.5], ["WR3", 2], ["WR4", 1.8], ["TE", 1.6], ["TE2", 1.2], ["RB", 1.1], ["RB2", 1], ["FB", 0.6]];
+const COVER_ORDER: SlotId[] = ["CB1", "CB2", "NB", "DC", "FS", "SS", "S3", "LB2", "LB4", "LB1", "LB3"];
 
 // Empty slots (shouldn't happen after a full draft) get a weak stand-in.
 function standIn(slotId: SlotId): Player {
@@ -216,7 +216,7 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
         const covers = present(d, COVER_ORDER);
         const targets: [Player, Player, number][] = TARGET_WEIGHT.filter(([id]) => o[id]).map(([id, w], i) => [o[id]!, covers[i % covers.length], w]);
         // An offensive lineman Bidoof reports as eligible and runs routes anyway.
-        if (offGod && !isGod(qb) && !targets.some(([r]) => r === offGod)) targets.push([offGod, d.LB1, 3]);
+        if (offGod && !isGod(qb) && !targets.some(([r]) => r === offGod)) targets.push([offGod, d.LB2, 3]);
         const [rec, defender] = weightedPick(rng, targets, ([r, , w]) => w * (r.attrs.CTH / 70) ** 2);
         // A defensive Bidoof shadows whoever gets the ball.
         const cov = defGod && !isGod(rec) && !isGod(qb) && rng() < 0.6 ? defGod : defender;
@@ -278,11 +278,12 @@ function drive(rng: Rng, o: Lineup, d: Lineup, box: Box, team: TeamLine, start: 
     } else {
       // Run play.
       // Wherever Bidoof lines up on offense, the coach finds a way to hand him the ball.
-      // A fullback, when there is one, gets the odd dive.
-      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && rng() < 0.6
+      // A fullback, when there is one, gets the odd dive; a second slotback (flexbone) shares the pitches.
+      const carrier = offGod && offGod !== o.RB && offGod !== o.QB && offGod !== o.RB2 && rng() < 0.6
         ? offGod
-        : o.FB && rng() < 0.12 ? o.FB : rng() < 1 - t.qbRun ? o.RB : o.QB;
-      const skill = isGod(carrier) ? DIVINE : carrier === o.RB || carrier === o.FB ? carrier.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
+        : o.FB && rng() < 0.12 ? o.FB : o.RB2 && rng() < 0.4 ? o.RB2 : rng() < 1 - t.qbRun ? o.RB : o.QB;
+      const back = carrier === o.RB || carrier === o.FB || carrier === o.RB2;
+      const skill = isGod(carrier) ? DIVINE : back ? carrier.posOvr.RB : (o.QB.attrs.SPD + o.QB.attrs.AGI) / 2;
       const mean = 3.8 + (u.runBlock - u.runStop) / 8 + (skill - 70) / 16 + t.run;
       gained = Math.round(normal(rng, mean, 3.4));
       const breakP = isGod(carrier) ? 0.3 : clamp(0.02 + (carrier.attrs.SPD - 70) / 2000, 0.008, 0.04) * t.big;

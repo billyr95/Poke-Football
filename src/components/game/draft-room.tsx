@@ -13,7 +13,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { chemistry } from "@/lib/game/chemistry";
 import { bestOpenSlot, onClock, openSlots, takenIds, teamRatings } from "@/lib/game/draft";
 import { POS_LIST, POSITIONS, ROLE_LIST, ROLES, ROSTER_SIZE, SLOT_BY_ID, SLOTS, ALL_SLOTS } from "@/lib/game/ratings";
-import { ratingContext, slotFit, slotRating } from "@/lib/game/schemes";
+import { personnelLabel } from "@/lib/game/personnel";
+import { ratingContext, schemeLabel, slotFit, slotRating } from "@/lib/game/schemes";
 import { useGame } from "@/lib/game/store";
 import type { Player, Pos, Role, Slot, SlotId, Team } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
@@ -399,13 +400,22 @@ function PositionPicker({
 function TeamHeader({ team, picks }: { team: Team; picks: number }) {
   const { byId, league } = useGame();
   const r = teamRatings(team, byId, league ?? undefined);
+  const personnel = personnelLabel(league, team);
+  const scheme = league?.schemes?.[team.id];
   return (
-    <div className="flex items-center gap-2">
-      <TeamMark team={team} size="md" />
-      <span className="min-w-0 flex-1 truncate font-heading text-lg">{team.name}</span>
-      <span className="text-xs text-muted-foreground">
-        {picks}/{ROSTER_SIZE} · OFF {r.off} · DEF {r.def}
-      </span>
+    <div className="space-y-1">
+      <div className="flex items-center gap-2">
+        <TeamMark team={team} size="md" />
+        <span className="min-w-0 flex-1 truncate font-heading text-lg">{team.name}</span>
+        <span className="text-xs text-muted-foreground">
+          {picks}/{ROSTER_SIZE} · OFF {r.off} · DEF {r.def}
+        </span>
+      </div>
+      {personnel && scheme && (
+        <p className="text-xs text-muted-foreground">
+          <b className="text-foreground">{schemeLabel(scheme)}</b> · {personnel.off} · {personnel.def}
+        </p>
+      )}
     </div>
   );
 }
