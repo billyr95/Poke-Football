@@ -2,14 +2,14 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ratedPool } from "./dex";
-import { aiChoose, makePick, onClock, startClock } from "./draft";
+import { aiChoose, bestOpenSlot, makePick, onClock, startClock, takenIds } from "./draft";
 import {
   addManager, allSchemesLocked, chooseScheme, createLobby, finishSchemes, loadHostedLeague, loadMe, removeManager, renameTeam,
   saveHostedLeague, saveMe,
   startDraft, updateSettings, type Me,
 } from "./league";
 import { joinLeague, startHosting, type GuestLink, type GuestMessage, type HostLink } from "./net";
-import type { TeamScheme } from "./schemes";
+import { ratingContext, type TeamScheme } from "./schemes";
 import { advance, simToEnd, startSeason } from "./sim";
 import { newGameReports, sendReports } from "./tracking";
 import type { League, LeagueSettings, Player, SlotId } from "./types";
@@ -35,6 +35,9 @@ interface GameContext {
   join(code: string, name: string): Promise<void>;
   leave(): void;
   clearError(): void;
+  /** My draft queue (dex ids, in order). If my pick timer runs out, the host drafts my top available one. */
+  queue: number[];
+  setQueue(ids: number[]): void;
 
   pick(playerId: number, slotId: SlotId): void;
   renameMyTeam(name: string): void;
@@ -70,6 +73,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const leagueRef = useRef<League | null>(null);
   const hostLink = useRef<HostLink | null>(null);
   const guestLink = useRef<GuestLink | null>(null);
+  /** Host only: every manager's draft queue, by client id. Kept out of the league state so queues stay private. */
+  const queues = useRef(new Map<string, number[]>());
+  const [queue, setQueueState] = useState<number[]>([]);
   /** Bumped by leave(), so a join that finishes after the player cancelled gets dropped. */
   const attempt = useRef(0);
   const setMe = useCallback((m: Me) => {
@@ -111,6 +117,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
           commit(makePick(cur, msg.playerId, msg.slotId));
         } else if (msg.t === "rename") {
           commit(renameTeam(cur, msg.clientId, msg.teamName));
+        } else if (msg.t === "queue") {
+          queues.current.set(msg.clientId, msg.ids.filter(Number.isInteger).slice(0, 100));
+          return;
         } else if (msg.t === "scheme") {
           commit(chooseScheme(cur, msg.clientId, msg.scheme, msg.lock));
         }
@@ -234,12 +243,35 @@ export function GameProvider({ children }: { children: ReactNode }) {
     const timer = setTimeout(() => {
       apply(l => {
         if (l.draft.deadline !== deadline) return l; // someone picked in time
+        // Their top queued Pokémon that's still available, at its best open spot; otherwise best available.
+        const team = onClock(l);
+        const taken = takenIds(l);
+        const queued = team?.managerId ? (queues.current.get(team.managerId) ?? []).map(id => byId.get(id)).find(p => p && !taken.has(p.id)) : undefined;
+        const slot = queued && team ? bestOpenSlot(l, team, queued, ratingContext(l, team)) : null;
+        if (queued && slot) return makePick(l, queued.id, slot.id);
         const choice = aiChoose(l, pool);
         return choice ? makePick(l, choice.playerId, choice.slotId) : l;
       });
     }, Math.max(0, deadline - Date.now()));
     return () => clearTimeout(timer);
-  }, [role, league, pool, apply]);
+  }, [role, league, pool, byId, apply]);
+
+  // Queues live in this browser per league, and guests share theirs with the host whenever they (re)connect.
+  const code = league?.code;
+  useEffect(() => {
+    if (!code) return;
+    let saved: number[] = [];
+    try {
+      saved = JSON.parse(localStorage.getItem(`pf-queue-${code}`) ?? "[]");
+    } catch {
+      /* ignore */
+    }
+    // Loading from this browser's storage (an external system) when the league changes.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setQueueState(saved);
+    if (role === "host") queues.current.set(me.clientId, saved);
+    else if (status === "connected") guestLink.current?.send({ t: "queue", clientId: me.clientId, ids: saved });
+  }, [code, role, status, me.clientId]);
 
   /** Host plays games, then reports the new results to the all-time stats. */
   const playAndReport = useCallback(
@@ -305,6 +337,18 @@ export function GameProvider({ children }: { children: ReactNode }) {
         setMe({ ...me, session: null });
       },
       clearError: () => setError(null),
+      queue,
+      setQueue(ids) {
+        const next = [...new Set(ids)].slice(0, 100);
+        setQueueState(next);
+        try {
+          if (league) localStorage.setItem(`pf-queue-${league.code}`, JSON.stringify(next));
+        } catch {
+          /* ignore */
+        }
+        if (isHost) queues.current.set(me.clientId, next);
+        else guestLink.current?.send({ t: "queue", clientId: me.clientId, ids: next });
+      },
 
       pick(playerId, slotId) {
         if (isHost) {
@@ -332,7 +376,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       playNext: hostPlays(l => advance(l, byId)),
       playAll: hostPlays(l => simToEnd(l, byId)),
     };
-  }, [me, role, status, error, league, pool, byId, clockOffset, apply, commit, goHost, goJoin, setMe, playAndReport]);
+  }, [me, role, status, error, league, pool, byId, clockOffset, apply, commit, goHost, goJoin, setMe, playAndReport, queue]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

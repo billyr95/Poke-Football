@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tier } from "@/lib/game/ratings";
 import type { Player } from "@/lib/game/types";
 import { cn } from "@/lib/utils";
@@ -90,53 +90,118 @@ function spriteUrl(p: Pick<Player, "id">) {
     : `${SPRITE_BASE}/${p.id}.png`;
 }
 
+/**
+ * The sprite sheets put small Pokémon in a big empty canvas (a Gen 8 icon is often 30% Pokémon, 70% air),
+ * so trim each image to its visible pixels once, in the browser, and reuse it everywhere.
+ */
+const trimmed = new Map<string, Promise<string>>();
+
+function trimSprite(src: string): Promise<string> {
+  let job = trimmed.get(src);
+  if (!job) {
+    job = new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        const { naturalWidth: w, naturalHeight: h } = img;
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return resolve(src);
+        ctx.drawImage(img, 0, 0);
+        const alpha = ctx.getImageData(0, 0, w, h).data;
+        let x0 = w, y0 = h, x1 = -1, y1 = -1;
+        for (let y = 0; y < h; y++) {
+          for (let x = 0; x < w; x++) {
+            if (alpha[(y * w + x) * 4 + 3] > 8) {
+              if (x < x0) x0 = x;
+              if (x > x1) x1 = x;
+              if (y < y0) y0 = y;
+              if (y > y1) y1 = y;
+            }
+          }
+        }
+        if (x1 < 0) return resolve(src);
+        // Square crop around the Pokémon so every sprite scales the same way.
+        const side = Math.max(x1 - x0, y1 - y0) + 3;
+        const out = document.createElement("canvas");
+        out.width = out.height = side;
+        out.getContext("2d")!.drawImage(img, x0 - Math.floor((side - (x1 - x0)) / 2), y0 - Math.floor((side - (y1 - y0)) / 2), side, side, 0, 0, side, side);
+        resolve(out.toDataURL());
+      };
+      img.onerror = () => reject(new Error(`sprite ${src}`));
+      img.src = src;
+    });
+    trimmed.set(src, job);
+  }
+  return job;
+}
+
+function useTrimmedSprite(src: string) {
+  const [state, setState] = useState<{ src: string; url: string | null; failed: boolean }>({ src, url: null, failed: false });
+  useEffect(() => {
+    let live = true;
+    trimSprite(src).then(
+      url => live && setState({ src, url, failed: false }),
+      () => live && setState({ src, url: null, failed: true }),
+    );
+    return () => {
+      live = false;
+    };
+  }, [src]);
+  return state.src === src ? state : { src, url: null, failed: false };
+}
+
+/**
+ * A Pokémon's token: a pixel sprite on a circle of its type colours (or just the sprite, `bare`, on the field).
+ * Falls back to the Dex number if the sprite can't load, and shows an L/P rarity badge.
+ */
 export function MonBadge({
   player,
   size = 40,
+  bare = false,
   className,
 }: {
   player: Pick<Player, "id" | "name" | "types" | "rarity">;
   size?: number | string;
+  /** No type-colour circle: just the sprite (used on the field). */
+  bare?: boolean;
   className?: string;
 }) {
   const [a, b = a] = player.types.map((t) => TYPE_COLOR[t] ?? "#888");
-  const src = spriteUrl(player);
-  const [failed, setFailed] = useState<string | null>(null);
-  const showImage = failed !== src;
+  const sprite = useTrimmedSprite(spriteUrl(player));
 
   return (
     <span
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center rounded-full font-heading text-white shadow-sm ring-2 ring-white/70 dark:ring-black/40",
+        "relative inline-flex shrink-0 items-center justify-center font-heading",
+        bare ? "text-white" : "rounded-full text-white shadow-sm ring-2 ring-white/70 dark:ring-black/40",
         className,
       )}
       style={{
         width: size,
         height: size,
-        background: `linear-gradient(135deg, ${a} 0 50%, ${b} 50% 100%)`,
-        fontSize:
-          typeof size === "number"
-            ? Math.max(10, size * 0.32)
-            : `max(10px, calc(${size} * 0.32))`,
+        background: bare ? undefined : `linear-gradient(135deg, ${a} 0 50%, ${b} 50% 100%)`,
+        fontSize: typeof size === "number" ? Math.max(10, size * 0.32) : `max(10px, calc(${size} * 0.32))`,
         textShadow: "0 1px 2px rgb(0 0 0 / 0.55)",
       }}
       aria-hidden
     >
-      {showImage ? (
+      {sprite.url ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={src}
+          src={sprite.url}
           alt=""
-          loading="lazy"
           draggable={false}
-          onError={() => setFailed(src)}
-          className="size-[90%] max-w-none object-contain [image-rendering:pixelated] drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
+          className={cn(
+            "max-w-none object-contain [image-rendering:pixelated]",
+            bare ? "size-full drop-shadow-[0_2px_1px_rgb(0_0_0/0.5)]" : "size-[78%] drop-shadow-[0_1px_1px_rgb(0_0_0/0.35)]",
+          )}
         />
-      ) : (
-        <span className="block leading-none [text-box:trim-both_cap_alphabetic]">
-          {player.id}
-        </span>
-      )}
+      ) : sprite.failed ? (
+        <span className="block leading-none [text-box:trim-both_cap_alphabetic]">{player.id}</span>
+      ) : null}
 
       {player.rarity && (
         <span

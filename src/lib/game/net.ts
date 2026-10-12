@@ -15,7 +15,8 @@ export type GuestMessage =
   | { t: "hello"; clientId: string; name: string }
   | { t: "pick"; clientId: string; playerId: number; slotId: SlotId }
   | { t: "rename"; clientId: string; teamName: string }
-  | { t: "scheme"; clientId: string; scheme: TeamScheme; lock: boolean };
+  | { t: "scheme"; clientId: string; scheme: TeamScheme; lock: boolean }
+  | { t: "queue"; clientId: string; ids: number[] };
 
 export type HostMessage =
   | { t: "state"; league: League; now: number } // now = host clock, so guests can sync the pick timer

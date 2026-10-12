@@ -1,6 +1,6 @@
 "use client";
 
-import { Search } from "lucide-react";
+import { ArrowDown, ArrowUp, Search, SlidersHorizontal, Star, X } from "lucide-react";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -55,7 +55,7 @@ function PickClock({ deadline, offset, total }: { deadline: number; offset: numb
 }
 
 export function DraftRoom() {
-  const { league, pool, byId, myTeamId, isHost, pick, autoPick, clockOffset } = useGame();
+  const { league, pool, byId, myTeamId, isHost, pick, autoPick, clockOffset, queue, setQueue } = useGame();
   const l = league!;
   const team = onClock(l);
   const myTurn = team != null && team.id === myTeamId;
@@ -65,11 +65,19 @@ export function DraftRoom() {
   const q = useDeferredValue(query.trim().toLowerCase());
   const [posFilter, setPosFilter] = useState<PosFilter>("ALL");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [genFilter, setGenFilter] = useState("all");
+  const [rarityFilter, setRarityFilter] = useState<RarityFilter>("all");
+  const [minRating, setMinRating] = useState(0);
+  const [sortBy, setSortBy] = useState<SortBy>("rating");
+  const [showFilters, setShowFilters] = useState(false);
   const [modalId, setModalId] = useState<number | null>(null);
   const [tab, setTab] = useState<string>(myTeam ? "mine" : "feed");
 
   const taken = useMemo(() => takenIds(l), [l]);
   const types = useMemo(() => [...new Set(pool.flatMap(p => p.types))].sort(), [pool]);
+  const gens = useMemo(() => [...new Set(pool.map(p => p.gen))].sort((a, b) => a - b), [pool]);
+  const queued = useMemo(() => new Set(queue), [queue]);
+  const toggleQueue = (id: number) => setQueue(queued.has(id) ? queue.filter(x => x !== id) : [...queue, id]);
 
   const ctx = useMemo(() => ratingContext(l, myTeam), [l, myTeam]);
   const advanced = ctx.advanced;
@@ -105,18 +113,69 @@ export function DraftRoom() {
     const s = shownSlot(p);
     return ctx.scheme ? slotFit(p.id, s.pos, s.side, ctx.scheme) : null;
   };
+  /** Their best spot other than the ones already shown, so you can see what else they could play. */
+  const nextBest = (p: Player, also?: Slot): { label: string; rating: number } => {
+    const skip = new Set([advanced ? shownSlot(p).role : shownSlot(p).pos, ...(also ? [advanced ? also.role : also.pos] : [])]);
+    const options = advanced
+      ? ROLE_LIST.filter(r => !skip.has(r)).map(r => ({ label: r as string, rating: slotRating(p, slotForRole(r), ctx) }))
+      : POS_LIST.filter(pos => !skip.has(pos)).map(pos => ({ label: pos as string, rating: p.posOvr[pos] }));
+    return options.reduce((best, o) => (o.rating > best.rating ? o : best));
+  };
   const available = useMemo(() => {
     const isNum = /^\d+$/.test(q);
-    return pool
+    const list = pool
       .filter(p => !taken.has(p.id))
       .filter(p => (q ? (isNum ? String(p.id).startsWith(q) : p.name.toLowerCase().includes(q)) : true))
       .filter(p => typeFilter === "all" || p.types.includes(typeFilter))
-      .sort((a, b) => rateAt(b) - rateAt(a) || a.id - b.id);
+      .filter(p => genFilter === "all" || String(p.gen) === genFilter)
+      .filter(p => RARITY_FILTERS[rarityFilter].test(p))
+      .filter(p => !minRating || rateAt(p) >= minRating);
+    const by: Record<SortBy, (a: Player, b: Player) => number> = {
+      rating: (a, b) => rateAt(b) - rateAt(a) || a.id - b.id,
+      fit: (a, b) => (shownFit(b) ?? 0) - (shownFit(a) ?? 0) || rateAt(b) - rateAt(a) || a.id - b.id,
+      name: (a, b) => a.name.localeCompare(b.name),
+      dex: (a, b) => a.id - b.id,
+    };
+    return list.sort(by[sortBy]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pool, taken, q, typeFilter, posFilter, myOpenKinds, ctx]);
+  }, [pool, taken, q, typeFilter, genFilter, rarityFilter, minRating, sortBy, posFilter, myOpenKinds, ctx]);
+  const shown = useMemo(() => available.slice(0, 300), [available]);
 
   const myOpen = useMemo(() => (myTeam ? openSlots(l, myTeam) : []), [l, myTeam]);
   const myChem = useMemo(() => (myTeam ? chemistry(myTeam, byId, l.settings) : null), [myTeam, byId, l.settings]);
+  /** For each listed player: where they'd play on my team, the chemistry they'd add, and their next-best spot. */
+  const rowInfo = useMemo(() => {
+    const total = (m: Map<number, number>) => [...m.values()].reduce((a, b) => a + b, 0);
+    const before = myChem ? total(myChem.bonus) : 0;
+    return new Map(shown.map(p => {
+      const fit = myTeam && myOpenKinds.length ? bestFit(p) : null;
+      let chem = 0;
+      if (fit && myTeam) {
+        const withPlayer = { ...myTeam, roster: { ...myTeam.roster, [fit.slot.id]: p.id } };
+        chem = total(chemistry(withPlayer, byId, l.settings).bonus) - before;
+      }
+      // Only call out "where they'd play for you" when it differs from the spot the row is already rated at.
+      const shownKey = advanced ? shownSlot(p).role : shownSlot(p).pos;
+      const fitDiffers = fit != null && (advanced ? fit.slot.role : fit.slot.pos) !== shownKey;
+      return [p.id, { fit: fitDiffers ? fit : null, chem, alt: nextBest(p, fit?.slot) }];
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shown, myTeam, myOpenKinds, myChem, byId, l.settings, ctx, posFilter]);
+  const openCount = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const s of myOpen) {
+      const k = advanced ? `r:${s.role}` : s.pos;
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
+    return counts;
+  }, [myOpen, advanced]);
+  const activeFilters: { label: string; clear: () => void }[] = [
+    ...(typeFilter !== "all" ? [{ label: cap(typeFilter), clear: () => setTypeFilter("all") }] : []),
+    ...(genFilter !== "all" ? [{ label: `Gen ${genFilter}`, clear: () => setGenFilter("all") }] : []),
+    ...(rarityFilter !== "all" ? [{ label: RARITY_FILTERS[rarityFilter].label, clear: () => setRarityFilter("all") }] : []),
+    ...(minRating ? [{ label: `${minRating}+ rating`, clear: () => setMinRating(0) }] : []),
+    ...(sortBy !== "rating" ? [{ label: `Sorted by ${SORTS[sortBy].toLowerCase()}`, clear: () => setSortBy("rating") }] : []),
+  ];
   const modalPlayer = modalId != null ? byId.get(modalId) ?? null : null;
   const modalTakenBy = modalPlayer && taken.has(modalPlayer.id)
     ? l.teams.find(t => t.id === l.draft.log.find(r => r.playerId === modalPlayer.id)?.teamId)
@@ -185,50 +244,92 @@ export function DraftRoom() {
               <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search name or dex number" className="pl-8" />
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <Select
-                value={posFilter}
-                onValueChange={v => setPosFilter((v ?? "ALL") as PosFilter)}
-                items={[
-                  { value: "ALL", label: advanced ? "Natural role" : "Natural position" },
-                  ...(myTeam ? [{ value: "BEST", label: "Best for my team" }] : []),
-                  ...(advanced
-                    ? ROLE_LIST.map(r => ({ value: `r:${r}`, label: `Rate as ${r}` }))
-                    : POS_LIST.map(p => ({ value: p, label: `Rate as ${p}` }))),
-                ]}
-              >
-                <SelectTrigger className="w-full" aria-label="Sort players"><SelectValue /></SelectTrigger>
-                <SelectContent alignItemWithTrigger={false} align="start" className="w-auto min-w-(--anchor-width) max-w-[calc(100vw-2rem)]">
-                  <SelectItem value="ALL">{advanced ? "Natural role" : "Natural position"}</SelectItem>
-                  {myTeam && <SelectItem value="BEST">Best available for my team</SelectItem>}
-                  {advanced
-                    ? ROLE_LIST.map(r => <SelectItem key={r} value={`r:${r}`}>Rate as {r} · {ROLES[r].name}</SelectItem>)
-                    : POS_LIST.map(p => <SelectItem key={p} value={p}>Rate as {p} · {POSITIONS[p].name}</SelectItem>)}
-                </SelectContent>
-              </Select>
-              <Select
-                value={typeFilter}
-                onValueChange={v => setTypeFilter(v ?? "all")}
-                items={[{ value: "all", label: "All types" }, ...types.map(t => ({ value: t, label: t[0].toUpperCase() + t.slice(1) }))]}
-              >
-                <SelectTrigger className="w-full" aria-label="Filter by type"><SelectValue /></SelectTrigger>
-                <SelectContent alignItemWithTrigger={false} align="end" className="w-auto min-w-(--anchor-width) max-w-[calc(100vw-2rem)]">
-                  <SelectItem value="all">All types</SelectItem>
-                  {types.map(t => (
-                    <SelectItem key={t} value={t}>
-                      <span className="size-2.5 rounded-full" style={{ background: TYPE_COLOR[t] }} />
-                      {t[0].toUpperCase() + t.slice(1)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1" role="tablist" aria-label="Rate players at">
+              {[
+                { v: "ALL" as PosFilter, label: "All", title: advanced ? "Natural role" : "Natural position" },
+                ...(myTeam ? [{ v: "BEST" as PosFilter, label: "My needs", title: "Best open spot on my team" }] : []),
+                ...(advanced
+                  ? ROLE_LIST.map(r => ({ v: `r:${r}` as PosFilter, label: r as string, title: ROLES[r].name }))
+                  : POS_LIST.map(pos => ({ v: pos as PosFilter, label: pos as string, title: POSITIONS[pos].name }))),
+              ].map(c => {
+                const need = openCount.get(c.v);
+                return (
+                  <button
+                    key={c.v}
+                    type="button"
+                    role="tab"
+                    aria-selected={posFilter === c.v}
+                    title={c.title}
+                    onClick={() => setPosFilter(c.v)}
+                    className={cn(
+                      "relative shrink-0 rounded-full border px-3 py-1 text-xs font-semibold whitespace-nowrap transition-colors",
+                      posFilter === c.v ? "border-foreground bg-foreground text-background" : "hover:bg-muted",
+                    )}
+                  >
+                    {c.label}
+                    {need ? (
+                      <span className="ml-1 rounded-full bg-amber-400 px-1 text-[10px] text-zinc-950" title={`${need} open on your team`}>
+                        {need}
+                      </span>
+                    ) : null}
+                  </button>
+                );
+              })}
             </div>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Button variant={showFilters ? "secondary" : "outline"} size="sm" onClick={() => setShowFilters(v => !v)} aria-expanded={showFilters}>
+                <SlidersHorizontal /> Filters & sort{activeFilters.length ? ` (${activeFilters.length})` : ""}
+              </Button>
+              {activeFilters.map(f => (
+                <button key={f.label} type="button" onClick={f.clear} className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-xs hover:bg-muted/70">
+                  {f.label} <X className="size-3" aria-label="Remove filter" />
+                </button>
+              ))}
+              {activeFilters.length > 1 && (
+                <button type="button" className="text-xs underline" onClick={() => activeFilters.forEach(f => f.clear())}>Clear all</button>
+              )}
+            </div>
+            {showFilters && (
+              <div className="grid grid-cols-2 gap-2 rounded-lg border bg-muted/30 p-2">
+                <FilterSelect
+                  label="Type"
+                  value={typeFilter}
+                  onChange={setTypeFilter}
+                  options={[["all", "All types"], ...types.map(t => [t, cap(t)] as [string, string])]}
+                />
+                <FilterSelect
+                  label="Generation"
+                  value={genFilter}
+                  onChange={setGenFilter}
+                  options={[["all", "All generations"], ...gens.map(g => [String(g), `Gen ${g}`] as [string, string])]}
+                />
+                <FilterSelect
+                  label="Rarity"
+                  value={rarityFilter}
+                  onChange={v => setRarityFilter(v as RarityFilter)}
+                  options={Object.entries(RARITY_FILTERS).map(([k, f]) => [k, f.label] as [string, string])}
+                />
+                <FilterSelect
+                  label="Minimum rating"
+                  value={String(minRating)}
+                  onChange={v => setMinRating(Number(v))}
+                  options={[["0", "Any rating"], ...[70, 75, 80, 85, 90].map(n => [String(n), `${n}+`] as [string, string])]}
+                />
+                <FilterSelect
+                  label="Sort by"
+                  value={sortBy}
+                  onChange={v => setSortBy(v as SortBy)}
+                  options={(Object.entries(SORTS) as [SortBy, string][]).filter(([k]) => k !== "fit" || ctx.scheme).map(([k, label]) => [k, label] as [string, string])}
+                />
+              </div>
+            )}
           </CardHeader>
           <CardContent className="p-0">
             <ScrollArea className="h-[60vh] lg:h-[calc(100vh-15rem)]">
               {advanced && (
-                <div className="flex items-center gap-3 border-b px-4 py-1.5 text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
-                  <span className="flex-1">Pokémon</span>
+                <div className="flex items-center gap-3 border-b py-1.5 pr-4 pl-2 text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
+                  {myTeam && <span className="w-6" />}
+                  <span className="flex-1 pl-[50px]">Pokémon</span>
                   <span className="w-10 text-center">Role</span>
                   {ctx.scheme && <span className="w-7 text-center" title="Fit with your schemes, 1–5">Fit</span>}
                   <span className="w-8 text-center">Rtg</span>
@@ -236,19 +337,48 @@ export function DraftRoom() {
                 </div>
               )}
               <ul className="divide-y">
-                {available.slice(0, 300).map(p => (
+                {shown.map(p => {
+                  const info = rowInfo.get(p.id);
+                  return (
                   <li key={p.id}>
                     <div
                       role="button"
                       tabIndex={0}
                       onClick={() => setModalId(p.id)}
                       onKeyDown={e => e.key === "Enter" && setModalId(p.id)}
-                      className="flex cursor-pointer items-center gap-3 px-4 py-2 hover:bg-muted/60"
+                      className="flex cursor-pointer items-center gap-3 py-2 pr-4 pl-2 hover:bg-muted/60"
                     >
-                      <MonBadge player={p} size={34} />
+                      {myTeam && (
+                        <button
+                          type="button"
+                          onClick={e => { e.stopPropagation(); toggleQueue(p.id); }}
+                          aria-pressed={queued.has(p.id)}
+                          aria-label={queued.has(p.id) ? `Remove ${p.name} from queue` : `Queue ${p.name}`}
+                          title={queued.has(p.id) ? "In your queue" : "Add to your queue"}
+                          className="rounded p-1 text-muted-foreground hover:text-amber-500"
+                        >
+                          <Star className={cn("size-4", queued.has(p.id) && "fill-amber-400 text-amber-500")} />
+                        </button>
+                      )}
+                      <MonBadge player={p} size={38} />
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-medium">{p.name}</div>
                         <div className="flex gap-1">{p.types.map(t => <TypePill key={t} type={t} />)}</div>
+                        {info && (
+                          <div className="mt-0.5 flex flex-wrap gap-x-2 text-[11px] leading-tight text-muted-foreground">
+                            {info.fit && (
+                              <span title="Where they'd play on your team">
+                                → <b className="text-foreground">{advanced ? info.fit.slot.role : info.fit.slot.pos}</b> {info.fit.rating}
+                              </span>
+                            )}
+                            {info.chem > 0 && (
+                              <span className="font-semibold text-emerald-600 dark:text-emerald-400" title="Chemistry this pick would add across your team">
+                                +{info.chem} chem
+                              </span>
+                            )}
+                            <span title="Their next-best spot">alt {info.alt.label} {info.alt.rating}</span>
+                          </div>
+                        )}
                       </div>
                       <span className={cn("text-center text-xs font-semibold text-muted-foreground", advanced ? "w-10" : "w-6")}>{shownPos(p)}</span>
                       {advanced && ctx.scheme && (
@@ -262,7 +392,8 @@ export function DraftRoom() {
                       )}
                     </div>
                   </li>
-                ))}
+                  );
+                })}
                 {!available.length && <li className="px-4 py-8 text-center text-sm text-muted-foreground">No Pokémon match.</li>}
               </ul>
             </ScrollArea>
@@ -275,7 +406,8 @@ export function DraftRoom() {
             <Tabs value={tab} onValueChange={v => setTab(String(v))}>
               <TabsList className="w-full">
                 {myTeam && <TabsTrigger value="mine">My team</TabsTrigger>}
-                <TabsTrigger value="feed">Draft feed ({l.draft.log.length})</TabsTrigger>
+                {myTeam && <TabsTrigger value="queue">Queue ({queue.filter(id => !taken.has(id)).length})</TabsTrigger>}
+                <TabsTrigger value="feed">Feed ({l.draft.log.length})</TabsTrigger>
                 <TabsTrigger value="teams">Teams</TabsTrigger>
               </TabsList>
 
@@ -294,6 +426,24 @@ export function DraftRoom() {
                   />
                   <p className="text-xs text-muted-foreground">Tap an open spot to sort the list by that position. Tap a player for details.</p>
                   <ChemistryList chem={myChem} byId={byId} />
+                </TabsContent>
+              )}
+
+              {myTeam && (
+                <TabsContent value="queue" className="pt-2">
+                  <QueueList
+                    ids={queue.filter(id => !taken.has(id))}
+                    byId={byId}
+                    rate={p => bestFit(p)}
+                    advanced={advanced}
+                    myTurn={myTurn}
+                    onOpen={setModalId}
+                    onDraft={p => {
+                      const slot = myOpen.find(s => s.id === bestFit(p).slot.id) ?? bestOpenSlot(l, myTeam, p, ctx);
+                      if (slot) pick(p.id, slot.id);
+                    }}
+                    onChange={ids => setQueue([...ids, ...queue.filter(id => taken.has(id))])}
+                  />
                 </TabsContent>
               )}
 
@@ -324,6 +474,11 @@ export function DraftRoom() {
                   Drafted by <b style={{ color: modalTakenBy.color }}>{modalTakenBy.name}</b>.
                 </p>
               ) : myTeam ? (
+                <>
+                <Button variant="outline" size="sm" className="w-full" onClick={() => toggleQueue(modalPlayer.id)}>
+                  <Star className={cn(queued.has(modalPlayer.id) && "fill-amber-400 text-amber-500")} />
+                  {queued.has(modalPlayer.id) ? "In your queue · remove" : "Add to my queue"}
+                </Button>
                 <PositionPicker
                   player={modalPlayer}
                   advanced={advanced}
@@ -334,6 +489,7 @@ export function DraftRoom() {
                     setModalId(null);
                   }}
                 />
+                </>
               ) : null}
             </PlayerCard>
           )}
@@ -514,6 +670,93 @@ function OtherTeams({ onOpen }: { onOpen: (id: number) => void }) {
       <p className="-mt-2 text-xs text-muted-foreground">{view.manager ?? "AI"}</p>
       <Formation team={view} byId={byId} chem={chem.bonus} compact onSlot={(_, p) => p && onOpen(p.id)} />
       <ChemistryList chem={chem} byId={byId} />
+    </div>
+  );
+}
+
+type RarityFilter = "all" | "legend" | "pseudo" | "regular";
+const RARITY_FILTERS: Record<RarityFilter, { label: string; test: (p: Player) => boolean }> = {
+  all: { label: "Any rarity", test: () => true },
+  legend: { label: "Legendary & mythical", test: p => p.rarity === "legendary" || p.rarity === "mythical" },
+  pseudo: { label: "Pseudo-legendary", test: p => p.rarity === "pseudo" },
+  regular: { label: "Non-legendary", test: p => !p.rarity },
+};
+
+type SortBy = "rating" | "fit" | "name" | "dex";
+const SORTS: Record<SortBy, string> = { rating: "Rating", fit: "Scheme fit", name: "Name", dex: "Dex number" };
+
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+
+function FilterSelect({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: [string, string][] }) {
+  return (
+    <label className="space-y-0.5">
+      <span className="text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">{label}</span>
+      <Select value={value} onValueChange={v => onChange(String(v ?? options[0][0]))} items={options.map(([v, l]) => ({ value: v, label: l }))}>
+        <SelectTrigger size="sm" className="w-full" aria-label={label}><SelectValue /></SelectTrigger>
+        <SelectContent alignItemWithTrigger={false} className="w-auto min-w-(--anchor-width) max-w-[calc(100vw-2rem)]">
+          {options.map(([v, l]) => (
+            <SelectItem key={v} value={v}>
+              {label === "Type" && v !== "all" && <span className="size-2.5 rounded-full" style={{ background: TYPE_COLOR[v] }} />}
+              {l}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </label>
+  );
+}
+
+/** My draft queue: reorder, remove, or draft straight from it. The host drafts the top one if my timer runs out. */
+function QueueList({
+  ids, byId, rate, advanced, myTurn, onOpen, onDraft, onChange,
+}: {
+  ids: number[];
+  byId: Map<number, Player>;
+  rate: (p: Player) => { slot: Slot; rating: number };
+  advanced: boolean;
+  myTurn: boolean;
+  onOpen: (id: number) => void;
+  onDraft: (p: Player) => void;
+  onChange: (ids: number[]) => void;
+}) {
+  const move = (i: number, d: number) => {
+    const next = [...ids];
+    [next[i], next[i + d]] = [next[i + d], next[i]];
+    onChange(next);
+  };
+  if (!ids.length) {
+    return (
+      <p className="py-10 text-center text-sm text-muted-foreground">
+        Star Pokémon in the list to queue them. If your pick timer runs out, your top available queued Pokémon is drafted for you.
+      </p>
+    );
+  }
+  return (
+    <div className="space-y-2">
+      <p className="text-xs text-muted-foreground">If your timer runs out, #1 here is drafted for you (at their best open spot).</p>
+      <ol className="space-y-1">
+        {ids.map((id, i) => {
+          const p = byId.get(id);
+          if (!p) return null;
+          const fit = rate(p);
+          return (
+            <li key={id} className="flex items-center gap-2 rounded-md border px-2 py-1.5">
+              <span className="w-5 text-center font-heading text-sm text-muted-foreground tabular-nums">{i + 1}</span>
+              <button type="button" onClick={() => onOpen(id)} className="flex min-w-0 flex-1 items-center gap-2 text-left">
+                <MonBadge player={p} size={32} />
+                <span className="min-w-0">
+                  <span className="block truncate text-sm font-medium">{p.name}</span>
+                  <span className="text-[11px] text-muted-foreground">→ {advanced ? fit.slot.role : fit.slot.pos} {fit.rating}</span>
+                </span>
+              </button>
+              <Button size="icon-xs" variant="ghost" disabled={i === 0} onClick={() => move(i, -1)} aria-label="Move up"><ArrowUp /></Button>
+              <Button size="icon-xs" variant="ghost" disabled={i === ids.length - 1} onClick={() => move(i, 1)} aria-label="Move down"><ArrowDown /></Button>
+              <Button size="icon-xs" variant="ghost" onClick={() => onChange(ids.filter(x => x !== id))} aria-label="Remove from queue"><X /></Button>
+              {myTurn && <Button size="xs" onClick={() => onDraft(p)}>Draft</Button>}
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }

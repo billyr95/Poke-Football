@@ -53,6 +53,8 @@ export function Formation({
   const on = new Set(slots.map(s => s.id));
   // Sized off the field's width (container query units), so seven linemen fit across on a phone.
   const size = compact ? "clamp(26px, 8.5cqw, 40px)" : "clamp(28px, 9cqw, 46px)";
+  // Drafted players show as bare sprites, bigger than the empty-spot circles (the sprites have no frame).
+  const spriteSize = compact ? "clamp(34px, 12cqw, 60px)" : "clamp(36px, 12.5cqw, 66px)";
   return (
     <div className="rounded-2xl border-4 border-emerald-900/80 bg-emerald-800 p-1 shadow-inner dark:border-emerald-950">
       <div
@@ -91,7 +93,7 @@ export function Formation({
             >
               {p ? (
                 <>
-                  <MonBadge player={p} size={size} className="transition-transform group-enabled:group-hover:scale-110" />
+                  <MonBadge player={p} size={spriteSize} bare className="-mb-1 transition-transform group-enabled:group-hover:scale-110" />
                   <RatingChip
                     value={slotRating(p, s, ctx)}
                     bonus={chem?.get(p.id) ?? 0}
